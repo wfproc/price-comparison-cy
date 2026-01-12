@@ -1,0 +1,81 @@
+"""Database models for normalized product data."""
+from sqlalchemy import create_engine, Column, String, Float, Integer, DateTime, Text, Index
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from datetime import datetime
+import config
+
+Base = declarative_base()
+
+class Product(Base):
+    """Normalized product model for price comparison."""
+    __tablename__ = "products"
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    
+    # Product identification
+    store = Column(String(50), nullable=False, index=True)
+    store_product_id = Column(String(255), nullable=False)
+    url = Column(Text, nullable=False)
+    
+    # Product details
+    name = Column(String(500), nullable=False)
+    description = Column(Text)
+    category = Column(String(100), index=True)
+    brand = Column(String(100), index=True)
+    
+    # Pricing
+    price = Column(Float, nullable=False, index=True)
+    currency = Column(String(10), default="EUR")
+    original_price = Column(Float)  # For discounted items
+    discount_percentage = Column(Float)
+    
+    # Additional metadata
+    image_url = Column(Text)
+    availability = Column(String(50))  # "in_stock", "out_of_stock", "pre_order"
+    specifications = Column(Text)  # JSON string of key-value pairs
+    
+    # Timestamps
+    first_seen = Column(DateTime, default=datetime.utcnow)
+    last_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    # Composite index for store + product_id uniqueness
+    __table_args__ = (
+        Index("idx_store_product", "store", "store_product_id", unique=True),
+    )
+    
+    def __repr__(self):
+        return f"<Product(store={self.store}, name={self.name[:50]}, price={self.price})>"
+
+
+class PriceHistory(Base):
+    """Track price changes over time."""
+    __tablename__ = "price_history"
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    product_id = Column(Integer, nullable=False, index=True)
+    price = Column(Float, nullable=False)
+    currency = Column(String(10), default="EUR")
+    timestamp = Column(DateTime, default=datetime.utcnow, index=True)
+    
+    def __repr__(self):
+        return f"<PriceHistory(product_id={self.product_id}, price={self.price}, timestamp={self.timestamp})>"
+
+
+def get_engine():
+    """Get database engine."""
+    return create_engine(config.DATABASE_URL, echo=False)
+
+
+def get_session():
+    """Get database session."""
+    engine = get_engine()
+    Session = sessionmaker(bind=engine)
+    return Session()
+
+
+def init_db():
+    """Initialize database tables."""
+    engine = get_engine()
+    Base.metadata.create_all(engine)
+    print(f"Database initialized at {config.DATABASE_URL}")
