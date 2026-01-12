@@ -56,21 +56,29 @@ class StephanisScraper(BaseScraper):
             link_elem = card_element.find('a', href=True)
             if not link_elem:
                 return None
-            
+
             product_url = urljoin(base_url, link_elem['href'])
-            
+
             # Filter out blocked URLs (checkout, cart, account pages)
             if not self._is_allowed_url(product_url):
                 return None
-            
-            # Extract product name
-            name_elem = card_element.find(['h2', 'h3', 'h4', '.product-title', '.product-name', '[class*="title"]'])
+
+            # Stephanis specific: Check if this is a valid product URL (ends with number)
+            if not product_url.split('/')[-1].isdigit():
+                return None
+
+            # Extract product name - Stephanis uses <li class="spotlight-list-text tile-product-name">
+            name_elem = card_element.find(['li', 'h2', 'h3', 'h4'], class_=lambda x: x and ('product-name' in str(x).lower() or 'tile-product-name' in str(x).lower()))
+            if not name_elem:
+                name_elem = card_element.find(['h2', 'h3', 'h4', '.product-title', '.product-name'])
             if not name_elem:
                 name_elem = link_elem
             name = name_elem.get_text(strip=True) if name_elem else ""
-            
-            # Extract price
-            price_elem = card_element.find(['.price', '.product-price', '[class*="price"]', '[data-price]'])
+
+            # Extract price - Stephanis uses div class="listing-details-heading large-now-price"
+            price_elem = card_element.find('div', class_=lambda x: x and ('now-price' in str(x).lower() or 'price' in str(x).lower()))
+            if not price_elem:
+                price_elem = card_element.find(['.price', '.product-price', '[class*="price"]', '[data-price]'])
             price_text = price_elem.get_text(strip=True) if price_elem else ""
             price = self._extract_price(price_text)
             
@@ -94,15 +102,19 @@ class StephanisScraper(BaseScraper):
             
             # Extract product ID from URL or data attributes
             product_id = ""
-            if 'data-product-id' in card_element.attrs:
+            # Check data-productid attribute on any child element
+            product_id_elem = card_element.find(attrs={'data-productid': True})
+            if product_id_elem:
+                product_id = product_id_elem.get('data-productid', '')
+            elif 'data-product-id' in card_element.attrs:
                 product_id = card_element['data-product-id']
             elif 'data-id' in card_element.attrs:
                 product_id = card_element['data-id']
             else:
-                # Try to extract from URL
-                url_match = re.search(r'/product/(\d+)|/p/(\d+)|id=(\d+)|/item/(\d+)', product_url)
-                if url_match:
-                    product_id = url_match.group(1) or url_match.group(2) or url_match.group(3) or url_match.group(4)
+                # Try to extract from URL - Stephanis uses /products/.../PRODUCTID
+                url_parts = product_url.split('/')
+                if url_parts[-1].isdigit():
+                    product_id = url_parts[-1]
             
             # Extract brand (often in name or separate element)
             brand = ""
@@ -234,10 +246,15 @@ class StephanisScraper(BaseScraper):
             if html:
                 soup = BeautifulSoup(html, 'lxml')
                 
-                # Find product links - look for /product/ or similar patterns
+                # Find product links - Stephanis uses /el/products/category/.../PRODUCTID pattern
+                # Look for links that end with a number (product ID)
                 all_links = soup.find_all('a', href=True)
-                product_links = [link for link in all_links 
-                                if any(term in link.get('href', '').lower() for term in ['/product/', '/p/', '/item/'])]
+                product_links = []
+                for link in all_links:
+                    href = link.get('href', '').lower()
+                    # Stephanis products: /el/products/.../NUMBER or /products/.../NUMBER
+                    if '/products/' in href and href.split('/')[-1].isdigit():
+                        product_links.append(link)
                 
                 # For each product link, get its container
                 for link in product_links:
@@ -279,9 +296,14 @@ class StephanisScraper(BaseScraper):
             if html:
                 soup = BeautifulSoup(html, 'lxml')
                 # Find product links on main page
+                # Stephanis uses /el/products/category/.../PRODUCTID pattern
                 all_links = soup.find_all('a', href=True)
-                product_links = [link for link in all_links 
-                                if any(term in link.get('href', '').lower() for term in ['/product/', '/p/', '/item/', '/products/'])]
+                product_links = []
+                for link in all_links:
+                    href = link.get('href', '').lower()
+                    # Stephanis products: /el/products/.../NUMBER or /products/.../NUMBER
+                    if '/products/' in href and href.split('/')[-1].isdigit():
+                        product_links.append(link)
                 
                 print(f"  Found {len(product_links)} product links on main page")
                 
@@ -300,14 +322,15 @@ class StephanisScraper(BaseScraper):
                     if product and not any(p["url"] == product["url"] for p in all_products):
                         all_products.append(product)
                 
-                # Look for category links
+                # Look for category links - Stephanis uses /el/products/CATEGORY/ pattern
                 print("  Looking for category links...")
                 category_links = []
                 for link in all_links:
                     href = link.get('href', '').lower()
-                    if any(cat in href for cat in ['electronics', 'computers', 'laptops', 'smartphones', 'televisions', 'gaming', 'tablets', 'phones']):
-                        if not any(term in href for term in ['/product/', '/p/', '/item/']):
-                            full_url = urljoin(self.base_url, href) if href.startswith('/') else href
+                    # Look for category pages (not product pages - those end with numbers)
+                    if '/products/' in href and not href.split('/')[-1].isdigit():
+                        if any(cat in href for cat in ['information-technology', 'telecommunications', 'laptops', 'smartphones', 'televisions', 'gaming', 'tablets', 'phones', 'computers']):
+                            full_url = urljoin(self.base_url, link.get('href', ''))
                             if full_url.startswith('http'):
                                 category_links.append(full_url)
                 
@@ -319,9 +342,15 @@ class StephanisScraper(BaseScraper):
                     if cat_html:
                         cat_soup = BeautifulSoup(cat_html, 'lxml')
                         cat_links = cat_soup.find_all('a', href=True)
-                        cat_product_links = [l for l in cat_links 
-                                            if any(term in l.get('href', '').lower() for term in ['/product/', '/p/', '/item/', '/products/'])]
-                        
+                        # Find product links in category (end with number)
+                        cat_product_links = []
+                        for l in cat_links:
+                            href = l.get('href', '').lower()
+                            if '/products/' in href and href.split('/')[-1].isdigit():
+                                cat_product_links.append(l)
+
+                        print(f"    Found {len(cat_product_links)} products in {cat_url.split('/')[-2] if cat_url.split('/')[-1] == '' else cat_url.split('/')[-1]}")
+
                         for link in cat_product_links:
                             container = link.parent
                             if container:
