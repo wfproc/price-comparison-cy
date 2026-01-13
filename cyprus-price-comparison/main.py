@@ -19,7 +19,8 @@ sys.path.insert(0, str(Path(__file__).parent))
 
 from scrapers import PublicScraper, StephanisScraper
 from database import save_products, init_db
-from models import get_session, Product
+from models import get_session, Product, MasterProduct
+from product_matcher import run_product_matching
 import config
 
 
@@ -90,14 +91,27 @@ async def run_scrapers():
     else:
         print("[WARNING] No products found to save.")
     
+    # Run product matching to group products across stores
+    print("\n")
+    print("="*60)
+    print("RUNNING PRODUCT MATCHING")
+    print("="*60)
+    matching_stats = run_product_matching(rematch=False)
+
     # Print summary
     session = get_session()
     try:
         total_products = session.query(Product).count()
+        total_masters = session.query(MasterProduct).count()
         stores = session.query(Product.store).distinct().all()
+        matched_products = session.query(Product).filter(Product.master_product_id.isnot(None)).count()
+
         print(f"\nDatabase Summary:")
         print(f"  Total products: {total_products}")
+        print(f"  Matched products: {matched_products}")
+        print(f"  Master products: {total_masters}")
         print(f"  Stores: {', '.join([s[0] for s in stores])}")
+        print(f"  Average products per master: {total_products / total_masters:.1f}" if total_masters > 0 else "")
     finally:
         session.close()
 

@@ -7,16 +7,43 @@ import config
 
 Base = declarative_base()
 
+class MasterProduct(Base):
+    """Master product record - single source of truth for a product across stores."""
+    __tablename__ = "master_products"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+
+    # Canonical product information
+    canonical_name = Column(String(500), nullable=False)
+    brand = Column(String(100), index=True)
+    model = Column(String(200), index=True)
+    category = Column(String(100), index=True)
+
+    # Normalized search fields (for matching)
+    normalized_name = Column(String(500), nullable=False, index=True)  # Lowercase, no special chars
+    search_tokens = Column(Text)  # Space-separated tokens for matching
+
+    # Metadata
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<MasterProduct(id={self.id}, name={self.canonical_name[:50]})>"
+
+
 class Product(Base):
     """Normalized product model for price comparison."""
     __tablename__ = "products"
-    
+
     id = Column(Integer, primary_key=True, autoincrement=True)
-    
+
     # Product identification
     store = Column(String(50), nullable=False, index=True)
     store_product_id = Column(String(255), nullable=False)
     url = Column(Text, nullable=False)
+
+    # Link to master product (single source of truth)
+    master_product_id = Column(Integer, index=True)  # Foreign key to master_products
     
     # Product details
     name = Column(String(500), nullable=False)
