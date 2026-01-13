@@ -278,12 +278,22 @@ class StephanisScraper(BaseScraper):
         
         return products
     
-    async def scrape_products(self) -> List[Dict]:
-        """Main scraping method."""
+    async def scrape_products(self, preview_mode: bool = False) -> List[Dict]:
+        """
+        Main scraping method.
+
+        Args:
+            preview_mode: If True, only show what would be scraped without actually scraping
+        """
         print(f"\n{'='*60}")
         print(f"Scraping {self.store_name.upper()}")
         print(f"{'='*60}\n")
-        
+
+        if preview_mode:
+            print("[PREVIEW MODE] - Stephanis scraper would run normally")
+            print("(Category filtering not yet implemented for Stephanis)")
+            return []
+
         await self._check_robots_txt()
         await self.init_browser()
         

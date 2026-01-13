@@ -2,6 +2,7 @@
 import asyncio
 import sys
 import os
+import argparse
 from pathlib import Path
 
 # Fix Windows console encoding issues
@@ -24,52 +25,224 @@ from product_matcher import run_product_matching
 import config
 
 
-async def run_scrapers():
-    """Run all scrapers and save results to database."""
+# Common category keywords for Public.cy (based on actual sitemap analysis)
+# These keywords match the actual URL paths in Public.cy's sitemap
+CATEGORY_KEYWORDS = {
+    "smartphones": ["tilefonia", "kinita-smartphones"],  # /root/tilefonia
+    "laptops": ["laptop", "notebooks", "portable-computers"],
+    "tablets": ["tablet", "ipad"],
+    "computers": ["computers-and-software", "perifereiaka", "desktop"],  # /root/computers-and-software
+    "televisions": ["tileoraseis", "tv"],  # tileoraseis = TVs in Greek
+    "gaming": ["gaming", "playstation", "xbox", "nintendo", "board-games"],  # /gaming/
+    "audio": ["ihos", "audio", "headphones", "speakers"],  # ihos = audio/sound in Greek
+    "cameras": ["fotografia", "camera", "photo", "fotografikes"],  # fotografia = photography
+    "accessories": ["aksesoyar", "kiniton"],  # aksesoyar = accessories, kiniton = mobile accessories
+    "appliances": ["oikiakes-syskeyes", "oikiakes-mikrosyskeyes", "thermansi-klimatismos"],  # household appliances
+    "books": ["books", "greek-books", "english"],  # /books/
+    "stationery": ["xartika"],  # xartika = stationery
+    "kids": ["kids-and-toys", "paidika", "hobbies"],  # toys and kids items
+    "home": ["home", "prosopiki-frontida-and-omorfia"],  # home and personal care
+}
+
+
+def get_available_categories():
+    """Return list of available category names."""
+    return sorted(CATEGORY_KEYWORDS.keys())
+
+
+def parse_arguments():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(
+        description="Cyprus Price Comparison Scraper",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  python main.py                           # Interactive mode - choose categories
+  python main.py --all                     # Scrape all categories
+  python main.py --category smartphones    # Scrape only smartphones
+  python main.py -c "smartphones,laptops"  # Scrape multiple categories
+  python main.py -c gaming --preview       # Preview what would be scraped
+  python main.py --public-only             # Only scrape Public.cy
+  python main.py --stephanis-only          # Only scrape Stephanis
+        """
+    )
+
+    parser.add_argument(
+        "-c", "--category",
+        type=str,
+        help="Category to scrape (comma-separated for multiple). Available: " + ", ".join(get_available_categories())
+    )
+
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Scrape all categories (no filtering)"
+    )
+
+    parser.add_argument(
+        "--preview",
+        action="store_true",
+        help="Preview mode - show what would be scraped without actually scraping"
+    )
+
+    parser.add_argument(
+        "--list-categories",
+        action="store_true",
+        help="List all available categories and exit"
+    )
+
+    parser.add_argument(
+        "--public-only",
+        action="store_true",
+        help="Only scrape Public.cy (skip Stephanis)"
+    )
+
+    parser.add_argument(
+        "--stephanis-only",
+        action="store_true",
+        help="Only scrape Stephanis (skip Public.cy)"
+    )
+
+    return parser.parse_args()
+
+
+def interactive_category_selection():
+    """Interactive prompt for category selection."""
+    print("\n" + "="*60)
+    print("CATEGORY SELECTION")
+    print("="*60)
+    print("\nAvailable categories:")
+
+    categories = get_available_categories()
+    for i, cat in enumerate(categories, 1):
+        keywords = ", ".join(CATEGORY_KEYWORDS[cat])
+        print(f"  {i:2}. {cat.capitalize():15} (matches: {keywords})")
+
+    print(f"\n  {len(categories)+1:2}. All categories")
+    print("   0. Exit")
+
+    while True:
+        try:
+            choice = input("\nEnter your choice (number or category name): ").strip().lower()
+
+            # Check if exit
+            if choice == "0" or choice == "exit":
+                print("Exiting...")
+                sys.exit(0)
+
+            # Check if all
+            if choice == str(len(categories)+1) or choice == "all":
+                return None  # None means all categories
+
+            # Check if number
+            try:
+                choice_num = int(choice)
+                if 1 <= choice_num <= len(categories):
+                    return [categories[choice_num - 1]]
+            except ValueError:
+                pass
+
+            # Check if category name
+            if choice in categories:
+                return [choice]
+
+            # Check if comma-separated list
+            if "," in choice:
+                selected = [c.strip() for c in choice.split(",")]
+                valid = [c for c in selected if c in categories]
+                if valid:
+                    return valid
+                else:
+                    print(f"Invalid categories. Please choose from: {', '.join(categories)}")
+                    continue
+
+            print("Invalid choice. Please try again.")
+
+        except KeyboardInterrupt:
+            print("\n\nExiting...")
+            sys.exit(0)
+
+
+async def run_scrapers(categories=None, preview_mode=False, scrape_public=True, scrape_stephanis=True):
+    """
+    Run all scrapers and save results to database.
+
+    Args:
+        categories: List of category names to scrape, or None for all
+        preview_mode: If True, only show what would be scraped without scraping
+        scrape_public: Whether to scrape Public.cy
+        scrape_stephanis: Whether to scrape Stephanis
+    """
     print("="*60)
     print("CYPRUS PRICE COMPARISON PIPELINE")
     print("="*60)
     print(f"Database: {config.DATABASE_URL}")
     print(f"Rate Limit: {config.RATE_LIMIT_PER_DOMAIN} req/sec")
     print(f"Cache: {'Enabled' if config.ENABLE_CACHE else 'Disabled'}")
+
+    if categories:
+        category_names = ", ".join(categories)
+        print(f"Categories: {category_names}")
+    else:
+        print(f"Categories: All")
+
+    if preview_mode:
+        print(f"Mode: PREVIEW ONLY (no actual scraping)")
+
     print("="*60)
     print()
-    
-    # Check if Playwright browsers are installed
-    try:
-        from playwright.async_api import async_playwright
-        playwright = await async_playwright().start()
-        browser = await playwright.chromium.launch(headless=True)
-        await browser.close()
-        await playwright.stop()
-    except Exception as e:
-        print("[ERROR] Playwright browsers are not installed!")
-        print("Please run the following command to install them:")
-        print("  python -m playwright install chromium")
+
+    # Check if Playwright browsers are installed (skip in preview mode)
+    if not preview_mode:
+        try:
+            from playwright.async_api import async_playwright
+            playwright = await async_playwright().start()
+            browser = await playwright.chromium.launch(headless=True)
+            await browser.close()
+            await playwright.stop()
+        except Exception as e:
+            print("[ERROR] Playwright browsers are not installed!")
+            print("Please run the following command to install them:")
+            print("  python -m playwright install chromium")
+            print()
+            print("Or run the setup script:")
+            print("  python setup.py")
+            return
+
+    # Initialize database (skip in preview mode)
+    if not preview_mode:
+        print("Initializing database...")
+        init_db()
         print()
-        print("Or run the setup script:")
-        print("  python setup.py")
+
+    # Initialize scrapers based on flags
+    scrapers = []
+    if scrape_public:
+        public_scraper = PublicScraper()
+        # Pass category filters to Public scraper
+        if categories:
+            public_scraper.set_category_filter(categories, CATEGORY_KEYWORDS)
+        scrapers.append(public_scraper)
+
+    if scrape_stephanis:
+        scrapers.append(StephanisScraper())
+
+    if not scrapers:
+        print("[ERROR] No scrapers selected! Use --public-only or --stephanis-only")
         return
-    
-    # Initialize database
-    print("Initializing database...")
-    init_db()
-    print()
-    
-    # Initialize scrapers
-    scrapers = [
-        PublicScraper(),
-        StephanisScraper(),
-    ]
-    
+
     all_products = []
-    
+
     # Run scrapers sequentially (to respect rate limits)
     for scraper in scrapers:
         try:
-            products = await scraper.scrape_products()
+            products = await scraper.scrape_products(preview_mode=preview_mode)
             all_products.extend(products)
-            print(f"[OK] {scraper.store_name}: {len(products)} products scraped\n")
+
+            if preview_mode:
+                print(f"\n[PREVIEW] {scraper.store_name}: Would scrape ~{len(products)} URLs")
+            else:
+                print(f"[OK] {scraper.store_name}: {len(products)} products scraped\n")
         except Exception as e:
             error_msg = str(e).encode('ascii', 'replace').decode('ascii')
             print(f"[ERROR] Error scraping {scraper.store_name}: {error_msg}\n")
@@ -78,6 +251,14 @@ async def run_scrapers():
                 traceback.print_exc()
             except UnicodeEncodeError:
                 print("[ERROR] (Traceback contains non-ASCII characters)")
+
+    if preview_mode:
+        print("\n" + "="*60)
+        print("PREVIEW COMPLETE - No data was scraped")
+        print("="*60)
+        print(f"Total URLs that would be scraped: {len(all_products)}")
+        print("\nTo actually scrape, run without --preview flag")
+        return
     
     # Save to database
     if all_products:
@@ -118,7 +299,52 @@ async def run_scrapers():
 
 if __name__ == "__main__":
     try:
-        asyncio.run(run_scrapers())
+        # Parse command line arguments
+        args = parse_arguments()
+
+        # Handle --list-categories
+        if args.list_categories:
+            print("\nAvailable categories:")
+            for cat in get_available_categories():
+                keywords = ", ".join(CATEGORY_KEYWORDS[cat])
+                print(f"  - {cat.capitalize():15} (matches: {keywords})")
+            sys.exit(0)
+
+        # Determine which stores to scrape
+        scrape_public = not args.stephanis_only
+        scrape_stephanis = not args.public_only
+
+        # Determine categories to scrape
+        categories = None
+
+        if args.all:
+            # Explicit --all flag: scrape everything
+            categories = None
+        elif args.category:
+            # CLI argument provided
+            category_list = [c.strip() for c in args.category.split(",")]
+            valid_categories = get_available_categories()
+
+            # Validate categories
+            invalid = [c for c in category_list if c not in valid_categories]
+            if invalid:
+                print(f"[ERROR] Invalid categories: {', '.join(invalid)}")
+                print(f"Available categories: {', '.join(valid_categories)}")
+                sys.exit(1)
+
+            categories = category_list
+        else:
+            # No CLI argument: use interactive mode
+            categories = interactive_category_selection()
+
+        # Run scrapers
+        asyncio.run(run_scrapers(
+            categories=categories,
+            preview_mode=args.preview,
+            scrape_public=scrape_public,
+            scrape_stephanis=scrape_stephanis
+        ))
+
     except KeyboardInterrupt:
         print("\n\n[WARNING] Interrupted by user")
         sys.exit(1)

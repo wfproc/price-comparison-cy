@@ -182,10 +182,15 @@ class BaseScraper:
             self.playwright = None
         print(f"[OK] Browser closed for {self.store_name}")
     
-    async def scrape_products(self) -> List[Dict]:
+    async def scrape_products(self, preview_mode: bool = False) -> List[Dict]:
         """
         Main scraping method to be implemented by subclasses.
-        Returns a list of product dictionaries with normalized fields.
+
+        Args:
+            preview_mode: If True, only show what would be scraped without actually scraping
+
+        Returns:
+            A list of product dictionaries with normalized fields.
         """
         raise NotImplementedError("Subclasses must implement scrape_products()")
     
