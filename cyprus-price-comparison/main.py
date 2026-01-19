@@ -106,6 +106,41 @@ Examples:
     return parser.parse_args()
 
 
+def interactive_store_selection():
+    """Interactive prompt for store selection."""
+    print("\n" + "="*60)
+    print("STORE SELECTION")
+    print("="*60)
+    print("\nAvailable stores:")
+    print("   1. Public.cy")
+    print("   2. Stephanis")
+    print("   3. All stores")
+    print("   0. Exit")
+
+    while True:
+        try:
+            choice = input("\nEnter your choice (number or name): ").strip().lower()
+
+            if choice in ["0", "exit"]:
+                print("Exiting...")
+                sys.exit(0)
+
+            if choice in ["1", "public", "public.cy"]:
+                return True, False
+
+            if choice in ["2", "stephanis"]:
+                return False, True
+
+            if choice in ["3", "all"]:
+                return True, True
+
+            print("Invalid choice. Please try again.")
+
+        except KeyboardInterrupt:
+            print("\n\nExiting...")
+            sys.exit(0)
+
+
 def interactive_category_selection():
     """Interactive prompt for category selection."""
     print("\n" + "="*60)
@@ -317,6 +352,8 @@ if __name__ == "__main__":
         # Determine which stores to scrape
         scrape_public = not args.stephanis_only
         scrape_stephanis = not args.public_only
+        if not args.public_only and not args.stephanis_only and not args.category and not args.all:
+            scrape_public, scrape_stephanis = interactive_store_selection()
 
         # Determine categories to scrape
         categories = None

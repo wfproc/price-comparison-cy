@@ -20,6 +20,7 @@ RATE_LIMIT_PER_DOMAIN = float(os.getenv("RATE_LIMIT_PER_DOMAIN", "1.0"))
 HEADLESS = os.getenv("HEADLESS", "true").lower() == "true"
 TIMEOUT = int(os.getenv("TIMEOUT", "30000"))
 ENABLE_CACHE = os.getenv("ENABLE_CACHE", "true").lower() == "true"
+MAX_PRODUCT_DETAIL_FETCH = int(os.getenv("MAX_PRODUCT_DETAIL_FETCH", "0"))
 
 # Target stores
 STORES = {

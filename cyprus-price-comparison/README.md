@@ -115,6 +115,9 @@ python main.py --category smartphones
 # Scrape multiple categories
 python main.py -c "smartphones,laptops,gaming"
 
+# Scrape Public.cy smartphones only
+python main.py --public-only -c smartphones
+
 # Scrape all categories (no filtering)
 python main.py --all
 

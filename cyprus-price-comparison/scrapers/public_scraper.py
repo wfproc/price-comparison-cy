@@ -1,4 +1,4 @@
-"""Scraper for Public Cyprus (public.cy)."""
+﻿"""Scraper for Public Cyprus (public.cy)."""
 import re
 import gzip
 import xml.etree.ElementTree as ET
@@ -80,7 +80,7 @@ class PublicScraper(BaseScraper):
         if not text:
             return None
         # Remove currency symbols and whitespace
-        text = text.replace('€', '').replace('EUR', '').replace(' ', '').strip()
+        text = text.replace('\u20ac', '').replace('EUR', '').replace(' ', '').strip()
         
         # Handle European format (1.234,56) vs US format (1,234.56)
         # If there's a comma followed by 2 digits at the end, it's likely European format
@@ -102,6 +102,12 @@ class PublicScraper(BaseScraper):
             except ValueError:
                 pass
         return None
+
+    def _extract_price_from_element(self, elem) -> Optional[float]:
+        """Extract price from a BeautifulSoup element if present."""
+        if not elem:
+            return None
+        return self._extract_price(elem.get_text(strip=True))
 
     async def _fetch_sitemap_urls(self) -> List[str]:
         """Fetch and parse the sitemap XML.gz file to get all category URLs."""
@@ -191,24 +197,24 @@ class PublicScraper(BaseScraper):
             link_elem = card_element.find('a', href=True)
             if not link_elem:
                 return None
-            
+
             product_url = urljoin(base_url, link_elem['href'])
-            
+
             # Filter out blocked URLs (checkout, cart, account pages)
             if not self._is_allowed_url(product_url):
                 return None
-            
+
             # Extract product name - try multiple strategies
             name = ""
             # Strategy 1: Look for title elements
-            name_elem = card_element.find(['h2', 'h3', 'h4', '.product-title', '.product-name', '[class*="title"]'])
+            name_elem = card_element.select_one('h2, h3, h4, .product-title, .product__title, .product-name, [class*="title"]')
             if name_elem:
                 name = name_elem.get_text(strip=True)
-            
+
             # Strategy 2: Look for text in the link
             if not name:
                 name = link_elem.get_text(strip=True)
-            
+
             # Strategy 3: Extract from URL if it contains product name
             if not name or len(name) < 3:
                 # URL format: /product/category/.../product-name-slug/ID
@@ -218,7 +224,7 @@ class PublicScraper(BaseScraper):
                     name_slug = url_parts[-2] if url_parts[-1].isdigit() else url_parts[-1]
                     # Convert slug to readable name
                     name = name_slug.replace('-', ' ').title()
-            
+
             # Strategy 4: Look for any text in the container
             if not name or len(name) < 3:
                 container_text = card_element.get_text(strip=True)
@@ -226,23 +232,17 @@ class PublicScraper(BaseScraper):
                 lines = [l.strip() for l in container_text.split('\n') if l.strip() and len(l.strip()) > 3]
                 if lines:
                     name = lines[0][:200]  # Limit length
-            
+
             # Extract price - look in multiple places
             price = None
-            price_elem = card_element.find('[class*="product__price"]')
-            if price_elem:
-                price_text = price_elem.get_text(strip=True)
-                price = self._extract_price(price_text)
-            
+            price_elem = card_element.select_one('.product__price--final, [class*="product__price"]')
+            price = self._extract_price_from_element(price_elem)
             # If no price found, search in all text within container
             if not price:
                 container_text = card_element.get_text()
-                # Look for price patterns like "€123.45" or "123,45 €"
                 price_patterns = [
-                    r'€\s*([\d,]+\.?\d*)',
-                    r'([\d,]+\.?\d*)\s*€',
-                    r'EUR\s*([\d,]+\.?\d*)',
-                    r'([\d,]+\.?\d*)\s*EUR'
+                    r'([\d,]+\.?\d*)\s*EUR',
+                    r'EUR\s*([\d,]+\.?\d*)'
                 ]
                 for pattern in price_patterns:
                     match = re.search(pattern, container_text, re.IGNORECASE)
@@ -250,25 +250,22 @@ class PublicScraper(BaseScraper):
                         price = self._extract_price(match.group(1))
                         if price:
                             break
-            
+
             # Extract original price (for discounts)
-            original_price_elem = card_element.find(['.original-price', '.old-price', '[class*="original"]', '[class*="old"]'])
-            original_price = None
-            if original_price_elem:
-                original_price_text = original_price_elem.get_text(strip=True)
-                original_price = self._extract_price(original_price_text)
-            
+            original_price_elem = card_element.select_one('.product__price--initial, .original-price, .old-price, .product__price, [class*="original"], [class*="old"]')
+            original_price = self._extract_price_from_element(original_price_elem)
+
             # Calculate discount percentage
             discount_percentage = None
             if original_price and price:
                 discount_percentage = ((original_price - price) / original_price) * 100
-            
+
             # Extract image
             img_elem = card_element.find('img', src=True)
             image_url = ""
             if img_elem:
                 image_url = urljoin(base_url, img_elem.get('src', ''))
-            
+
             # Extract product ID from URL or data attributes
             product_id = ""
             if 'data-product-id' in card_element.attrs:
@@ -280,7 +277,7 @@ class PublicScraper(BaseScraper):
                 url_match = re.search(r'/product/[^/]+/(\d+)$|/product/(\d+)|/p/(\d+)|id=(\d+)', product_url)
                 if url_match:
                     product_id = url_match.group(1) or url_match.group(2) or url_match.group(3) or url_match.group(4)
-            
+
             # Extract brand (often in name or separate element)
             brand = ""
             brand_elem = card_element.find(['.brand', '[class*="brand"]'])
@@ -291,10 +288,10 @@ class PublicScraper(BaseScraper):
                 name_parts = name.split()
                 if name_parts:
                     brand = name_parts[0]
-            
+
             # Availability
             availability = "unknown"
-            availability_elem = card_element.find(['.availability', '.stock', '[class*="stock"]', '[class*="available"]'])
+            availability_elem = card_element.select_one('.availability, .stock, [class*="stock"], [class*="available"]')
             if availability_elem:
                 availability_text = availability_elem.get_text(strip=True).lower()
                 if 'out' in availability_text or 'unavailable' in availability_text:
@@ -303,15 +300,15 @@ class PublicScraper(BaseScraper):
                     availability = "in_stock"
                 elif 'pre-order' in availability_text or 'preorder' in availability_text:
                     availability = "pre_order"
-            
+
             # Name is required, but price might be on product page
             if not name:
                 return None
-            
+
             # If no price found, set to 0 (will need to fetch product page later)
             if not price:
                 price = 0.0
-            
+
             return {
                 "id": product_id or product_url,
                 "url": product_url,
@@ -330,36 +327,31 @@ class PublicScraper(BaseScraper):
         except Exception as e:
             print(f"[WARNING] Error parsing product card: {e}")
             return None
-    
+
     async def _fetch_product_details(self, product_url: str) -> Optional[Dict]:
         """Fetch price and details from individual product page."""
         try:
             html = await self._fetch_page(product_url)
             if not html:
                 return None
-            
+
             soup = BeautifulSoup(html, 'lxml')
-            
+
             # Extract price from product page
-            price = None
-            price_selectors = ['[class*="product__price"]']
-            
-            for selector in price_selectors:
-                price_elem = soup.select_one(selector)
-                if price_elem:
-                    price_text = price_elem.get_text(strip=True)
-                    price = self._extract_price(price_text)
-                    if price:
-                        break
-            
+            initial_elem = soup.select_one('.product__price--initial')
+            final_elem = soup.select_one('.product__price--final')
+            original_price = self._extract_price_from_element(initial_elem)
+            price = self._extract_price_from_element(final_elem)
+
+            if not price:
+                price_elem = soup.select_one('.product__price')
+                price = self._extract_price_from_element(price_elem)
             # If still no price, search in all text
             if not price:
                 page_text = soup.get_text()
                 price_patterns = [
-                    r'€\s*([\d,]+\.?\d*)',
-                    r'([\d,]+\.?\d*)\s*€',
-                    r'EUR\s*([\d,]+\.?\d*)',
                     r'([\d,]+\.?\d*)\s*EUR',
+                    r'EUR\s*([\d,]+\.?\d*)',
                     r'price["\']?\s*[:=]\s*([\d,]+\.?\d*)',
                 ]
                 for pattern in price_patterns:
@@ -368,7 +360,23 @@ class PublicScraper(BaseScraper):
                         price = self._extract_price(match.group(1))
                         if price and price > 0:  # Valid price
                             break
-            
+
+            # If no price found and cache might be stale, refetch once without cache
+            if not price:
+                html = await self._fetch_page(product_url, use_cache=False)
+                if html:
+                    soup = BeautifulSoup(html, 'lxml')
+                    initial_elem = soup.select_one('.product__price--initial')
+                    final_elem = soup.select_one('.product__price--final')
+                    original_price = self._extract_price_from_element(initial_elem)
+                    price = self._extract_price_from_element(final_elem)
+                    if not price:
+                        price_elem = soup.select_one('.product__price')
+                        price = self._extract_price_from_element(price_elem)
+                    if not original_price:
+                        original_price_elem = soup.select_one('.original-price, .old-price, [class*="original-price"], [class*="old-price"]')
+                        original_price = self._extract_price_from_element(original_price_elem)
+
             # Extract description
             description = ""
             desc_selectors = ['.description', '.product-description', '[class*="description"]', '[itemprop="description"]']
@@ -377,14 +385,12 @@ class PublicScraper(BaseScraper):
                 if desc_elem:
                     description = desc_elem.get_text(strip=True)[:1000]  # Limit length
                     break
-            
-            # Extract original price for discounts
-            original_price = None
-            original_price_elem = soup.select_one('.original-price, .old-price, [class*="original-price"], [class*="old-price"]')
-            if original_price_elem:
-                original_price_text = original_price_elem.get_text(strip=True)
-                original_price = self._extract_price(original_price_text)
-            
+
+            # Extract original price for discounts (fallback if initial not found)
+            if not original_price:
+                original_price_elem = soup.select_one('.original-price, .old-price, [class*="original-price"], [class*="old-price"]')
+                original_price = self._extract_price_from_element(original_price_elem)
+
             return {
                 "price": price,
                 "original_price": original_price,
@@ -393,7 +399,7 @@ class PublicScraper(BaseScraper):
         except Exception as e:
             print(f"[WARNING] Error fetching product details from {product_url}: {e}")
             return None
-    
+
     async def _scrape_root_category_page(self, url: str) -> List[str]:
         """
         Scrape a /root/ category landing page to extract sub-category and listing links.
@@ -474,7 +480,7 @@ class PublicScraper(BaseScraper):
             link_text = link.get_text(strip=True).lower()
 
             # Look for pagination patterns
-            if 'page=' in href or '/page/' in href or link_text in ['next', 'επόμενο', '›', '»']:
+            if 'page=' in href or '/page/' in href or link_text in ['next', 'ÎµÏ€ÏŒÎ¼ÎµÎ½Î¿', 'â€º', 'Â»']:
                 page_url = urljoin(self.base_url, link['href'])
                 if page_url not in self.visited_urls and page_url.startswith(url.split('?')[0]):
                     pagination_links.append(page_url)
@@ -678,8 +684,11 @@ class PublicScraper(BaseScraper):
             products_to_update = [p for p in all_products if p.get("price", 0) == 0]
             print(f"  {len(products_to_update)} products need price information")
 
-            for i, product in enumerate(products_to_update[:50], 1):  # Limit to 50 detail fetches
-                print(f"  [{i}/{min(50, len(products_to_update))}] Fetching price for: {product['name'][:50]}...")
+            max_detail_fetch = config.MAX_PRODUCT_DETAIL_FETCH
+            if max_detail_fetch <= 0:
+                max_detail_fetch = len(products_to_update)
+            for i, product in enumerate(products_to_update[:max_detail_fetch], 1):
+                print(f"  [{i}/{min(max_detail_fetch, len(products_to_update))}] Fetching price for: {product['name'][:50]}...")
                 details = await self._fetch_product_details(product["url"])
                 if details and details.get("price"):
                     product["price"] = details["price"]
@@ -706,3 +715,20 @@ class PublicScraper(BaseScraper):
                 await self.close_browser()
 
         return [self.normalize_product(p) for p in all_products]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
