@@ -8,7 +8,7 @@ from urllib.parse import urljoin, urlparse
 
 class StephanisScraper(BaseScraper):
     """Scraper for Stephanis website."""
-    
+
     def __init__(self):
         super().__init__(
             store_name="stephanis",
@@ -20,6 +20,44 @@ class StephanisScraper(BaseScraper):
             "laptops",
             "gaming"
         ]
+        self.category_filter: Optional[List[str]] = None
+        self.category_keywords: Dict[str, List[str]] = {}
+
+    def set_category_filter(self, categories: List[str], category_keywords: Dict[str, List[str]]):
+        """
+        Set category filter to limit scraping to specific categories.
+
+        Args:
+            categories: List of category names to scrape (e.g., ["smartphones", "laptops"])
+            category_keywords: Dict mapping category names to URL keywords to match
+        """
+        self.category_filter = categories
+        self.category_keywords = category_keywords
+        print(f"[INFO] Stephanis category filter set: {', '.join(categories)}")
+
+    def _matches_category_filter(self, url: str) -> bool:
+        """
+        Check if a URL matches the category filter.
+
+        Args:
+            url: URL to check
+
+        Returns:
+            True if URL matches filter (or no filter set), False otherwise
+        """
+        if not self.category_filter:
+            return True  # No filter, allow all
+
+        url_lower = url.lower()
+
+        # Check if URL contains any keywords for selected categories
+        for category in self.category_filter:
+            keywords = self.category_keywords.get(category, [])
+            for keyword in keywords:
+                if keyword in url_lower:
+                    return True
+
+        return False
     
     def _extract_price(self, text: str) -> Optional[float]:
         """Extract price from text string."""
@@ -289,9 +327,13 @@ class StephanisScraper(BaseScraper):
         print(f"Scraping {self.store_name.upper()}")
         print(f"{'='*60}\n")
 
+        if self.category_filter:
+            print(f"Category Filter: {', '.join(self.category_filter)}")
+
         if preview_mode:
             print("[PREVIEW MODE] - Stephanis scraper would run normally")
-            print("(Category filtering not yet implemented for Stephanis)")
+            if self.category_filter:
+                print(f"Would filter for: {', '.join(self.category_filter)}")
             return []
 
         await self._check_robots_txt()
@@ -339,13 +381,13 @@ class StephanisScraper(BaseScraper):
                     href = link.get('href', '').lower()
                     # Look for category pages (not product pages - those end with numbers)
                     if '/products/' in href and not href.split('/')[-1].isdigit():
-                        if any(cat in href for cat in ['information-technology', 'telecommunications', 'laptops', 'smartphones', 'televisions', 'gaming', 'tablets', 'phones', 'computers']):
+                        if any(cat in href for cat in ['information-technology', 'telecommunications', 'laptops', 'smartphones', 'televisions', 'gaming', 'tablets', 'phones', 'computers', 'mobile']):
                             full_url = urljoin(self.base_url, link.get('href', ''))
-                            if full_url.startswith('http'):
+                            if full_url.startswith('http') and self._matches_category_filter(full_url):
                                 category_links.append(full_url)
-                
+
                 category_links = list(set(category_links))[:10]
-                print(f"  Found {len(category_links)} category pages to scrape")
+                print(f"  Found {len(category_links)} category pages to scrape (after filter)")
                 
                 for cat_url in category_links:
                     cat_html = await self._fetch_page(cat_url)

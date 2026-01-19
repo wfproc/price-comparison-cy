@@ -225,7 +225,11 @@ async def run_scrapers(categories=None, preview_mode=False, scrape_public=True, 
         scrapers.append(public_scraper)
 
     if scrape_stephanis:
-        scrapers.append(StephanisScraper())
+        stephanis_scraper = StephanisScraper()
+        # Pass category filters to Stephanis scraper
+        if categories:
+            stephanis_scraper.set_category_filter(categories, CATEGORY_KEYWORDS)
+        scrapers.append(stephanis_scraper)
 
     if not scrapers:
         print("[ERROR] No scrapers selected! Use --public-only or --stephanis-only")

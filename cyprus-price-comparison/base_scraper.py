@@ -126,21 +126,20 @@ class BaseScraper:
         
         # Fetch page
         try:
-            if self.browser is None:
-                raise RuntimeError("Browser not initialized. Call init_browser() first.")
-            
-            page = await self.browser.new_page()
-            # Set realistic user agent and viewport
-            await page.set_viewport_size({"width": 1920, "height": 1080})
-            await page.set_extra_http_headers({
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-                "Accept-Language": "en-US,en;q=0.9",
-                "Accept-Encoding": "gzip, deflate, br",
-                "Connection": "keep-alive",
-                "Upgrade-Insecure-Requests": "1"
-            })
-            await page.goto(url, wait_until="networkidle", timeout=config.TIMEOUT)
+            if not hasattr(self, 'context') or self.context is None:
+                raise RuntimeError("Browser context not initialized. Call init_browser() first.")
+
+            page = await self.context.new_page()
+
+            # Add random delay to appear more human-like (0.5-1.5 seconds)
+            import random
+            await asyncio.sleep(random.uniform(0.5, 1.5))
+
+            await page.goto(url, wait_until="domcontentloaded", timeout=config.TIMEOUT)
+
+            # Wait a bit for dynamic content to load
+            await asyncio.sleep(random.uniform(1, 2))
+
             html = await page.content()
             await page.close()
             
@@ -160,20 +159,78 @@ class BaseScraper:
             return None
     
     async def init_browser(self):
-        """Initialize Playwright browser with realistic user agent."""
+        """Initialize Playwright browser with realistic user agent and anti-detection measures."""
         self.playwright = await async_playwright().start()
-        self.browser = await self.playwright.chromium.launch(
-            headless=config.HEADLESS,
-            args=[
-                "--disable-blink-features=AutomationControlled",
-                "--disable-dev-shm-usage",
-                "--no-sandbox"
-            ]
+
+        # Try Firefox first (better for bypassing bot detection)
+        try:
+            self.browser = await self.playwright.firefox.launch(
+                headless=config.HEADLESS,
+                firefox_user_prefs={
+                    "dom.webdriver.enabled": False,
+                    "useAutomationExtension": False,
+                    "general.useragent.override": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0"
+                }
+            )
+        except Exception as e:
+            print(f"[INFO] Firefox not available ({e}), falling back to Chromium")
+            self.browser = await self.playwright.chromium.launch(
+                headless=config.HEADLESS,
+                args=[
+                    "--disable-blink-features=AutomationControlled",
+                    "--disable-dev-shm-usage",
+                    "--no-sandbox",
+                    "--disable-web-security",
+                    "--disable-features=IsolateOrigins,site-per-process",
+                    "--disable-site-isolation-trials"
+                ]
+            )
+
+        # Create context with realistic fingerprint
+        self.context = await self.browser.new_context(
+            viewport={'width': 1920, 'height': 1080},
+            user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            locale='en-US',
+            timezone_id='Europe/Athens',
+            permissions=[],
+            extra_http_headers={
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.9,el;q=0.8',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'DNT': '1',
+                'Connection': 'keep-alive',
+                'Upgrade-Insecure-Requests': '1',
+                'Sec-Fetch-Dest': 'document',
+                'Sec-Fetch-Mode': 'navigate',
+                'Sec-Fetch-Site': 'none',
+                'Sec-Fetch-User': '?1',
+                'Cache-Control': 'max-age=0'
+            }
         )
-        print(f"[OK] Browser initialized for {self.store_name}")
+
+        # Add stealth script to hide automation
+        await self.context.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', {
+                get: () => undefined
+            });
+            Object.defineProperty(navigator, 'plugins', {
+                get: () => [1, 2, 3, 4, 5]
+            });
+            Object.defineProperty(navigator, 'languages', {
+                get: () => ['en-US', 'en']
+            });
+            window.chrome = {
+                runtime: {}
+            };
+        """)
+
+        print(f"[OK] Browser initialized for {self.store_name} with anti-detection")
     
     async def close_browser(self):
         """Close browser."""
+        if hasattr(self, 'context') and self.context:
+            await self.context.close()
+            self.context = None
         if self.browser:
             await self.browser.close()
             self.browser = None

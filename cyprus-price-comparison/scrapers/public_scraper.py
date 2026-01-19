@@ -23,6 +23,22 @@ class PublicScraper(BaseScraper):
         self.category_filter: Optional[List[str]] = None
         self.category_keywords: Dict[str, List[str]] = {}
 
+        # Fallback URLs if sitemap is not accessible
+        self.fallback_category_urls = {
+            "smartphones": [
+                "https://www.public.cy/",  # Homepage often has smartphones
+            ],
+            "laptops": [
+                "https://www.public.cy/",
+            ],
+            "gaming": [
+                "https://www.public.cy/",
+            ],
+            "tablets": [
+                "https://www.public.cy/",
+            ],
+        }
+
     def set_category_filter(self, categories: List[str], category_keywords: Dict[str, List[str]]):
         """
         Set category filter to limit scraping to specific categories.
@@ -90,6 +106,8 @@ class PublicScraper(BaseScraper):
     async def _fetch_sitemap_urls(self) -> List[str]:
         """Fetch and parse the sitemap XML.gz file to get all category URLs."""
         urls = []
+
+        # First try with aiohttp (faster)
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.get(self.sitemap_url, timeout=aiohttp.ClientTimeout(total=30)) as response:
@@ -113,10 +131,57 @@ class PublicScraper(BaseScraper):
                             if url:
                                 urls.append(url)
                         print(f"[OK] Loaded {len(urls)} URLs from sitemap")
+                        return urls
                     else:
-                        print(f"[ERROR] Failed to fetch sitemap: status {response.status}")
+                        print(f"[WARNING] Sitemap fetch failed with status {response.status}, will try with browser")
         except Exception as e:
-            print(f"[ERROR] Error fetching sitemap: {e}")
+            print(f"[WARNING] aiohttp sitemap fetch failed: {e}, will try with browser")
+
+        # If aiohttp fails, try with browser (bypasses anti-bot)
+        try:
+            if not self.browser:
+                await self.init_browser()
+
+            print("[INFO] Fetching sitemap using browser...")
+            page = await self.context.new_page()
+
+            # Import config for timeout
+            import config as cfg
+
+            # Fetch sitemap with browser
+            response = await page.goto(self.sitemap_url, timeout=cfg.TIMEOUT, wait_until="domcontentloaded")
+
+            if response and response.status == 200:
+                # Get the raw content
+                content = await page.content()
+
+                # The content will be wrapped in HTML, extract the text
+                soup = BeautifulSoup(content, 'lxml')
+                # Get text content (sitemap XML)
+                xml_text = soup.get_text()
+
+                # Try to parse as XML
+                try:
+                    root = ET.fromstring(xml_text.encode('utf-8'))
+                    # XML namespace for sitemap
+                    ns = {'sm': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+                    # Extract all <loc> elements
+                    for loc in root.findall('.//sm:loc', ns):
+                        url = loc.text
+                        if url:
+                            urls.append(url)
+                    print(f"[OK] Loaded {len(urls)} URLs from sitemap using browser")
+                except Exception as parse_error:
+                    print(f"[WARNING] Could not parse sitemap XML: {parse_error}")
+            else:
+                status = response.status if response else "no response"
+                print(f"[WARNING] Browser sitemap fetch failed with status {status}")
+
+            await page.close()
+
+        except Exception as e:
+            print(f"[WARNING] Browser sitemap fetch failed: {e}")
+
         return urls
 
     def _parse_product_card(self, card_element, base_url: str) -> Optional[Dict]:
@@ -447,6 +512,7 @@ class PublicScraper(BaseScraper):
 
         await self._check_robots_txt()
 
+        # Initialize browser early if not in preview mode (needed for sitemap fetch)
         if not preview_mode:
             await self.init_browser()
 
@@ -458,8 +524,47 @@ class PublicScraper(BaseScraper):
             sitemap_urls = await self._fetch_sitemap_urls()
 
             if not sitemap_urls:
-                print("[WARNING] No URLs found in sitemap, falling back to homepage scraping")
-                sitemap_urls = [self.base_url]
+                print("[WARNING] No URLs found in sitemap, using fallback strategy")
+
+                # Use fallback: scrape homepage to discover product links
+                if not preview_mode:
+                    homepage_html = await self._fetch_page(self.base_url)
+                    if homepage_html:
+                        soup = BeautifulSoup(homepage_html, 'lxml')
+                        all_links = soup.find_all('a', href=True)
+
+                        discovered_urls = []
+                        for link in all_links:
+                            href = link.get('href', '')
+                            full_url = urljoin(self.base_url, href)
+
+                            # Look for product category links and product pages
+                            url_lower = full_url.lower()
+                            if any(pattern in url_lower for pattern in ['/root/', '/cat/', '/category/', '/products/', '/product/']):
+                                discovered_urls.append(full_url)
+
+                            # Also look for category keywords in URLs
+                            if self.category_filter:
+                                for category in self.category_filter:
+                                    keywords = self.category_keywords.get(category, [])
+                                    for keyword in keywords:
+                                        if keyword in url_lower:
+                                            discovered_urls.append(full_url)
+
+                        sitemap_urls = list(set(discovered_urls))
+                        print(f"  Discovered {len(sitemap_urls)} URLs from homepage")
+
+                        # Debug: show some discovered URLs
+                        if sitemap_urls:
+                            print(f"  Example discovered URLs:")
+                            for url in sitemap_urls[:10]:
+                                print(f"    - {url}")
+                    else:
+                        sitemap_urls = [self.base_url]
+                else:
+                    # Preview mode: just use homepage as placeholder
+                    sitemap_urls = [self.base_url]
+                    print(f"  Preview mode: Would discover URLs from homepage")
 
             # Step 2: Filter and organize URLs
             print("\nStep 2: Organizing and filtering URLs...")
@@ -471,8 +576,33 @@ class PublicScraper(BaseScraper):
 
             # Apply category filter
             if self.category_filter:
-                root_urls = [url for url in root_urls if self._matches_category_filter(url)]
-                cat_urls = [url for url in cat_urls if self._matches_category_filter(url)]
+                print(f"\n  Applying filter for keywords: {self.category_keywords}")
+
+                # Debug: show some examples before filtering
+                if root_urls:
+                    print(f"  Example /root/ URLs before filter:")
+                    for url in root_urls[:5]:
+                        print(f"    - {url}")
+
+                root_urls_filtered = []
+                for url in root_urls:
+                    if self._matches_category_filter(url):
+                        root_urls_filtered.append(url)
+
+                cat_urls_filtered = []
+                for url in cat_urls:
+                    if self._matches_category_filter(url):
+                        cat_urls_filtered.append(url)
+
+                # Debug: show matching URLs
+                if root_urls_filtered:
+                    print(f"\n  Matched /root/ URLs:")
+                    for url in root_urls_filtered[:10]:
+                        print(f"    - {url}")
+
+                root_urls = root_urls_filtered
+                cat_urls = cat_urls_filtered
+
                 print(f"\n  After category filter:")
                 print(f"  - {len(root_urls)} /root/ pages match")
                 print(f"  - {len(cat_urls)} /cat/ pages match")
