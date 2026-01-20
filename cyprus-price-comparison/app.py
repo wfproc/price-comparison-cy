@@ -288,6 +288,8 @@ def api_stats():
 
 
 if __name__ == '__main__':
+    import os
+
     print("\n" + "="*60)
     print("CYPRUS PRICE COMPARISON WEB APP")
     print("="*60)
@@ -296,4 +298,17 @@ if __name__ == '__main__':
     print("\nPress Ctrl+C to stop the server")
     print("="*60 + "\n")
 
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Use environment variable for debug mode (default: False for security)
+    # Set FLASK_DEBUG=1 for development, but NEVER in production
+    debug_mode = os.getenv('FLASK_DEBUG', 'false').lower() in ('1', 'true', 'yes')
+
+    # Only bind to 0.0.0.0 if explicitly requested (production use)
+    # Default to 127.0.0.1 (localhost only) for security
+    host = os.getenv('FLASK_HOST', '127.0.0.1')
+
+    if debug_mode:
+        print("[WARNING] Debug mode is enabled! This is UNSAFE for production.")
+    if host == '0.0.0.0':
+        print(f"[WARNING] Binding to {host} - server is accessible from network!")
+
+    app.run(debug=debug_mode, host=host, port=5000)

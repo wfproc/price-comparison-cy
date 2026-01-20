@@ -25,9 +25,9 @@ from product_matcher import run_product_matching
 import config
 
 
-# Common category keywords for Public.cy (based on actual sitemap analysis)
+# Category keywords for Public.cy (based on actual sitemap analysis)
 # These keywords match the actual URL paths in Public.cy's sitemap
-CATEGORY_KEYWORDS = {
+PUBLIC_CATEGORY_KEYWORDS = {
     "smartphones": ["tilefonia", "kinita-smartphones"],  # /root/tilefonia
     "laptops": ["laptop", "notebooks", "portable-computers"],
     "tablets": ["tablet", "ipad"],
@@ -44,10 +44,25 @@ CATEGORY_KEYWORDS = {
     "home": ["home", "prosopiki-frontida-and-omorfia"],  # home and personal care
 }
 
+# Category keywords for Stephanis (based on their URL structure)
+# Stephanis uses /el/products/{category}/{subcategory}/ pattern
+STEPHANIS_CATEGORY_KEYWORDS = {
+    "smartphones": ["telecommunications/mobile-phones", "mobile-phone", "smartphone"],
+    "laptops": ["information-technology/laptops", "laptop", "notebook"],
+    "tablets": ["information-technology/tablets", "tablet", "ipad"],
+    "computers": ["information-technology/computers", "desktop", "pc"],
+    "televisions": ["image-and-sound/televisions", "tv", "television"],
+    "gaming": ["gaming/gaming-consoles", "gaming/", "playstation", "xbox", "nintendo"],
+    "audio": ["image-and-sound/sound", "audio", "headphones", "speakers"],
+    "cameras": ["image-and-sound/photography", "camera", "photo"],
+    "accessories": ["telecommunications/mobile-phone-accessories", "accessory", "accessories"],
+    "appliances": ["home-appliances", "appliances"],
+}
+
 
 def get_available_categories():
     """Return list of available category names."""
-    return sorted(CATEGORY_KEYWORDS.keys())
+    return sorted(PUBLIC_CATEGORY_KEYWORDS.keys())
 
 
 def parse_arguments():
@@ -150,7 +165,7 @@ def interactive_category_selection():
 
     categories = get_available_categories()
     for i, cat in enumerate(categories, 1):
-        keywords = ", ".join(CATEGORY_KEYWORDS[cat])
+        keywords = ", ".join(PUBLIC_CATEGORY_KEYWORDS.get(cat, STEPHANIS_CATEGORY_KEYWORDS.get(cat, [])))
         print(f"  {i:2}. {cat.capitalize():15} (matches: {keywords})")
 
     print(f"\n  {len(categories)+1:2}. All categories")
@@ -254,16 +269,16 @@ async def run_scrapers(categories=None, preview_mode=False, scrape_public=True, 
     scrapers = []
     if scrape_public:
         public_scraper = PublicScraper()
-        # Pass category filters to Public scraper
+        # Pass category filters to Public scraper with Public-specific keywords
         if categories:
-            public_scraper.set_category_filter(categories, CATEGORY_KEYWORDS)
+            public_scraper.set_category_filter(categories, PUBLIC_CATEGORY_KEYWORDS)
         scrapers.append(public_scraper)
 
     if scrape_stephanis:
         stephanis_scraper = StephanisScraper()
-        # Pass category filters to Stephanis scraper
+        # Pass category filters to Stephanis scraper with Stephanis-specific keywords
         if categories:
-            stephanis_scraper.set_category_filter(categories, CATEGORY_KEYWORDS)
+            stephanis_scraper.set_category_filter(categories, STEPHANIS_CATEGORY_KEYWORDS)
         scrapers.append(stephanis_scraper)
 
     if not scrapers:
@@ -345,7 +360,7 @@ if __name__ == "__main__":
         if args.list_categories:
             print("\nAvailable categories:")
             for cat in get_available_categories():
-                keywords = ", ".join(CATEGORY_KEYWORDS[cat])
+                keywords = ", ".join(PUBLIC_CATEGORY_KEYWORDS.get(cat, STEPHANIS_CATEGORY_KEYWORDS.get(cat, [])))
                 print(f"  - {cat.capitalize():15} (matches: {keywords})")
             sys.exit(0)
 

@@ -116,12 +116,13 @@ class StephanisScraper(BaseScraper):
             # Extract price - Stephanis uses div class="listing-details-heading large-now-price"
             price_elem = card_element.find('div', class_=lambda x: x and ('now-price' in str(x).lower() or 'price' in str(x).lower()))
             if not price_elem:
-                price_elem = card_element.find(['.price', '.product-price', '[class*="price"]', '[data-price]'])
+                # Use select_one for CSS selectors
+                price_elem = card_element.select_one('.price, .product-price, [class*="price"], [data-price]')
             price_text = price_elem.get_text(strip=True) if price_elem else ""
             price = self._extract_price(price_text)
-            
-            # Extract original price (for discounts)
-            original_price_elem = card_element.find(['.original-price', '.old-price', '[class*="original"]', '[class*="old"]'])
+
+            # Extract original price (for discounts) - use select_one for CSS selectors
+            original_price_elem = card_element.select_one('.original-price, .old-price, [class*="original"], [class*="old"]')
             original_price = None
             if original_price_elem:
                 original_price_text = original_price_elem.get_text(strip=True)
@@ -154,9 +155,9 @@ class StephanisScraper(BaseScraper):
                 if url_parts[-1].isdigit():
                     product_id = url_parts[-1]
             
-            # Extract brand (often in name or separate element)
+            # Extract brand (often in name or separate element) - use select_one for CSS selectors
             brand = ""
-            brand_elem = card_element.find(['.brand', '[class*="brand"]'])
+            brand_elem = card_element.select_one('.brand, [class*="brand"]')
             if brand_elem:
                 brand = brand_elem.get_text(strip=True)
             else:
@@ -164,10 +165,10 @@ class StephanisScraper(BaseScraper):
                 name_parts = name.split()
                 if name_parts:
                     brand = name_parts[0]
-            
-            # Availability
+
+            # Availability - use select_one for CSS selectors
             availability = "unknown"
-            availability_elem = card_element.find(['.availability', '.stock', '[class*="stock"]', '[class*="available"]'])
+            availability_elem = card_element.select_one('.availability, .stock, [class*="stock"], [class*="available"]')
             if availability_elem:
                 availability_text = availability_elem.get_text(strip=True).lower()
                 if 'out' in availability_text or 'unavailable' in availability_text:
@@ -410,8 +411,12 @@ class StephanisScraper(BaseScraper):
                                 if product and not any(p["url"] == product["url"] for p in all_products):
                                     all_products.append(product)
             
-            # Try scraping by category
+            # Try scraping by category (only if no category filter, or category matches filter)
             for category in self.categories:
+                # Skip if category filter is set and this category doesn't match
+                if self.category_filter and category not in self.category_filter:
+                    continue
+
                 print(f"Scraping category: {category}")
                 category_products = await self._scrape_category(category)
                 for product in category_products:

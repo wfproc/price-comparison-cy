@@ -278,9 +278,9 @@ class PublicScraper(BaseScraper):
                 if url_match:
                     product_id = url_match.group(1) or url_match.group(2) or url_match.group(3) or url_match.group(4)
 
-            # Extract brand (often in name or separate element)
+            # Extract brand (often in name or separate element) - use select_one for CSS selectors
             brand = ""
-            brand_elem = card_element.find(['.brand', '[class*="brand"]'])
+            brand_elem = card_element.select_one('.brand, [class*="brand"]')
             if brand_elem:
                 brand = brand_elem.get_text(strip=True)
             else:

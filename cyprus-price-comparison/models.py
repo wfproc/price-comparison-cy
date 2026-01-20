@@ -1,7 +1,7 @@
 """Database models for normalized product data."""
-from sqlalchemy import create_engine, Column, String, Float, Integer, DateTime, Text, Index
+from sqlalchemy import create_engine, Column, String, Float, Integer, DateTime, Text, Index, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime
 import config
 
@@ -27,6 +27,9 @@ class MasterProduct(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    # Relationship to products
+    products = relationship("Product", back_populates="master_product", cascade="all, delete-orphan")
+
     def __repr__(self):
         return f"<MasterProduct(id={self.id}, name={self.canonical_name[:50]})>"
 
@@ -42,8 +45,8 @@ class Product(Base):
     store_product_id = Column(String(255), nullable=False)
     url = Column(Text, nullable=False)
 
-    # Link to master product (single source of truth)
-    master_product_id = Column(Integer, index=True)  # Foreign key to master_products
+    # Link to master product (single source of truth) with foreign key constraint
+    master_product_id = Column(Integer, ForeignKey('master_products.id', ondelete='SET NULL'), index=True)
     
     # Product details
     name = Column(String(500), nullable=False)
@@ -65,12 +68,18 @@ class Product(Base):
     # Timestamps
     first_seen = Column(DateTime, default=datetime.utcnow)
     last_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
+
+    # Relationship to master product
+    master_product = relationship("MasterProduct", back_populates="products")
+
+    # Relationship to price history
+    price_history = relationship("PriceHistory", back_populates="product", cascade="all, delete-orphan")
+
     # Composite index for store + product_id uniqueness
     __table_args__ = (
         Index("idx_store_product", "store", "store_product_id", unique=True),
     )
-    
+
     def __repr__(self):
         return f"<Product(store={self.store}, name={self.name[:50]}, price={self.price})>"
 
@@ -78,13 +87,16 @@ class Product(Base):
 class PriceHistory(Base):
     """Track price changes over time."""
     __tablename__ = "price_history"
-    
+
     id = Column(Integer, primary_key=True, autoincrement=True)
-    product_id = Column(Integer, nullable=False, index=True)
+    product_id = Column(Integer, ForeignKey('products.id', ondelete='CASCADE'), nullable=False, index=True)
     price = Column(Float, nullable=False)
     currency = Column(String(10), default="EUR")
     timestamp = Column(DateTime, default=datetime.utcnow, index=True)
-    
+
+    # Relationship to product
+    product = relationship("Product", back_populates="price_history")
+
     def __repr__(self):
         return f"<PriceHistory(product_id={self.product_id}, price={self.price}, timestamp={self.timestamp})>"
 
