@@ -90,7 +90,6 @@ def search_products(query: str, limit: int = 20) -> List[Dict]:
         return results
 
     finally:
-        matcher.close()  # Close ProductMatcher session to prevent leak
         session.close()
 
 
@@ -183,7 +182,6 @@ def get_best_deals(store: str = None, limit: int = 10) -> List[Dict]:
         return results
 
     finally:
-        matcher.close()  # Close ProductMatcher session to prevent leak
         session.close()
 
 

@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from base_scraper import BaseScraper
 from urllib.parse import urljoin, urlparse
 import aiohttp
+import config
 
 
 class PublicScraper(BaseScraper):
