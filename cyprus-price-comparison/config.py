@@ -21,6 +21,7 @@ HEADLESS = os.getenv("HEADLESS", "true").lower() == "true"
 TIMEOUT = int(os.getenv("TIMEOUT", "30000"))
 ENABLE_CACHE = os.getenv("ENABLE_CACHE", "true").lower() == "true"
 MAX_PRODUCT_DETAIL_FETCH = int(os.getenv("MAX_PRODUCT_DETAIL_FETCH", "0"))
+MAX_CATEGORY_PAGES = int(os.getenv("MAX_CATEGORY_PAGES", "0"))
 
 # Target stores
 STORES = {

@@ -3,7 +3,8 @@ import re
 from typing import Dict, List, Optional
 from bs4 import BeautifulSoup
 from base_scraper import BaseScraper
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, parse_qs, urlencode, urlunparse
+import config
 
 
 class StephanisScraper(BaseScraper):
@@ -86,6 +87,67 @@ class StephanisScraper(BaseScraper):
             except ValueError:
                 pass
         return None
+
+    def _build_paginated_urls(self, base_url: str, soup: BeautifulSoup) -> List[str]:
+        """Build a list of paginated URLs from a category page."""
+        page_numbers: List[int] = []
+        pagination_hrefs: List[str] = []
+
+        for link in soup.select('a[href*="page="]'):
+            href = link.get('href')
+            if not href:
+                continue
+            match = re.search(r'page=(\d+)', href)
+            if match:
+                page_numbers.append(int(match.group(1)))
+                pagination_hrefs.append(href)
+
+        if not page_numbers:
+            return [base_url]
+
+        max_page = max(page_numbers)
+        if max_page <= 1:
+            return [base_url]
+
+        if config.MAX_CATEGORY_PAGES > 0:
+            max_page = min(max_page, config.MAX_CATEGORY_PAGES)
+
+        # Use the first pagination link to keep existing query params like recordsPerPage/sortBy.
+        sample_href = pagination_hrefs[0]
+        parsed = urlparse(urljoin(base_url, sample_href))
+        query = parse_qs(parsed.query)
+
+        paged_urls = [base_url]
+        for page_num in range(2, max_page + 1):
+            query["page"] = [str(page_num)]
+            paged_query = urlencode(query, doseq=True)
+            paged = parsed._replace(query=paged_query)
+            paged_urls.append(urlunparse(paged))
+
+        return paged_urls
+
+    def _extract_products_from_soup(self, soup: BeautifulSoup, base_url: str) -> List[Dict]:
+        """Extract products from a listing page soup."""
+        products: List[Dict] = []
+        all_links = soup.find_all('a', href=True)
+
+        for link in all_links:
+            href = link.get('href', '').lower()
+            if '/products/' in href and href.split('/')[-1].isdigit():
+                container = link.parent
+                product = None
+
+                if container:
+                    product = self._parse_product_card(container, base_url)
+                if not product and container and container.parent:
+                    product = self._parse_product_card(container.parent, base_url)
+                if not product and container and container.parent and container.parent.parent:
+                    product = self._parse_product_card(container.parent.parent, base_url)
+
+                if product and not any(p["url"] == product["url"] for p in products):
+                    products.append(product)
+
+        return products
     
     def _parse_product_card(self, card_element, base_url: str) -> Optional[Dict]:
         """Parse a product card element into a product dictionary."""
@@ -284,31 +346,19 @@ class StephanisScraper(BaseScraper):
             html = await self._fetch_page(category_url)
             if html:
                 soup = BeautifulSoup(html, 'lxml')
-                
-                # Find product links - Stephanis uses /el/products/category/.../PRODUCTID pattern
-                # Look for links that end with a number (product ID)
-                all_links = soup.find_all('a', href=True)
-                product_links = []
-                for link in all_links:
-                    href = link.get('href', '').lower()
-                    # Stephanis products: /el/products/.../NUMBER or /products/.../NUMBER
-                    if '/products/' in href and href.split('/')[-1].isdigit():
-                        product_links.append(link)
-                
-                # For each product link, get its container
-                for link in product_links:
-                    container = link.parent
-                    if container is None:
+
+                paged_urls = self._build_paginated_urls(category_url, soup)
+                print(f"  Found {len(paged_urls)} page(s) for category listing")
+
+                for page_url in paged_urls:
+                    print(f"  Fetching page: {page_url}")
+                    page_html = html if page_url == category_url else await self._fetch_page(page_url)
+                    if not page_html:
                         continue
-                    
-                    # If parent is just a wrapper, try grandparent
-                    if container.name in ['div', 'span'] and len(container.get('class', [])) == 0:
-                        container = container.parent
-                    
-                    product = self._parse_product_card(container, self.base_url)
-                    if product:
+                    page_soup = BeautifulSoup(page_html, 'lxml')
+                    page_products = self._extract_products_from_soup(page_soup, self.base_url)
+                    for product in page_products:
                         product["category"] = category
-                        # Avoid duplicates
                         if not any(p["url"] == product["url"] for p in products):
                             products.append(product)
                 
@@ -394,20 +444,17 @@ class StephanisScraper(BaseScraper):
                     cat_html = await self._fetch_page(cat_url)
                     if cat_html:
                         cat_soup = BeautifulSoup(cat_html, 'lxml')
-                        cat_links = cat_soup.find_all('a', href=True)
-                        # Find product links in category (end with number)
-                        cat_product_links = []
-                        for l in cat_links:
-                            href = l.get('href', '').lower()
-                            if '/products/' in href and href.split('/')[-1].isdigit():
-                                cat_product_links.append(l)
+                        paged_urls = self._build_paginated_urls(cat_url, cat_soup)
+                        print(f"    Found {len(paged_urls)} page(s) in {cat_url}")
 
-                        print(f"    Found {len(cat_product_links)} products in {cat_url.split('/')[-2] if cat_url.split('/')[-1] == '' else cat_url.split('/')[-1]}")
-
-                        for link in cat_product_links:
-                            container = link.parent
-                            if container:
-                                product = self._parse_product_card(container, self.base_url)
+                        for page_url in paged_urls:
+                            print(f"    Fetching page: {page_url}")
+                            page_html = cat_html if page_url == cat_url else await self._fetch_page(page_url)
+                            if not page_html:
+                                continue
+                            page_soup = BeautifulSoup(page_html, 'lxml')
+                            page_products = self._extract_products_from_soup(page_soup, self.base_url)
+                            for product in page_products:
                                 if product and not any(p["url"] == product["url"] for p in all_products):
                                     all_products.append(product)
             

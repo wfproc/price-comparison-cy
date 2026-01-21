@@ -1,5 +1,5 @@
 """Database models for normalized product data."""
-from sqlalchemy import create_engine, Column, String, Float, Integer, DateTime, Text, Index, ForeignKey
+from sqlalchemy import create_engine, Column, String, Float, Integer, DateTime, Text, Index, ForeignKey, inspect, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime
@@ -27,11 +27,33 @@ class MasterProduct(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    # Relationship to products
+    # Relationship to variants and products
+    variants = relationship("MasterProductVariant", back_populates="master_product", cascade="all, delete-orphan")
     products = relationship("Product", back_populates="master_product", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"<MasterProduct(id={self.id}, name={self.canonical_name[:50]})>"
+
+class MasterProductVariant(Base):
+    """Variant record for a master product (e.g., storage capacity)."""
+    __tablename__ = "master_product_variants"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    master_product_id = Column(Integer, ForeignKey('master_products.id', ondelete='CASCADE'), index=True)
+    capacity = Column(String(50), index=True)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    master_product = relationship("MasterProduct", back_populates="variants")
+    products = relationship("Product", back_populates="variant", cascade="all, delete-orphan")
+
+    __table_args__ = (
+        Index("idx_variant_master_capacity", "master_product_id", "capacity", unique=True),
+    )
+
+    def __repr__(self):
+        return f"<MasterProductVariant(id={self.id}, master_id={self.master_product_id}, capacity={self.capacity})>"
 
 
 class Product(Base):
@@ -47,6 +69,7 @@ class Product(Base):
 
     # Link to master product (single source of truth) with foreign key constraint
     master_product_id = Column(Integer, ForeignKey('master_products.id', ondelete='SET NULL'), index=True)
+    variant_id = Column(Integer, ForeignKey('master_product_variants.id', ondelete='SET NULL'), index=True)
     
     # Product details
     name = Column(String(500), nullable=False)
@@ -69,8 +92,9 @@ class Product(Base):
     first_seen = Column(DateTime, default=datetime.utcnow)
     last_updated = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    # Relationship to master product
+    # Relationship to master product and variant
     master_product = relationship("MasterProduct", back_populates="products")
+    variant = relationship("MasterProductVariant", back_populates="products")
 
     # Relationship to price history
     price_history = relationship("PriceHistory", back_populates="product", cascade="all, delete-orphan")
@@ -117,4 +141,14 @@ def init_db():
     """Initialize database tables."""
     engine = get_engine()
     Base.metadata.create_all(engine)
+    try:
+        inspector = inspect(engine)
+        if "products" in inspector.get_table_names():
+            columns = [col["name"] for col in inspector.get_columns("products")]
+            if "variant_id" not in columns:
+                with engine.begin() as conn:
+                    conn.execute(text("ALTER TABLE products ADD COLUMN variant_id INTEGER"))
+                print("[OK] Added missing column: products.variant_id")
+    except Exception as e:
+        print(f"[WARNING] Schema check failed: {e}")
     print(f"Database initialized at {config.DATABASE_URL}")

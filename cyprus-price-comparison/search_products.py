@@ -1,7 +1,13 @@
 """Search for products across stores using the master product grouping."""
-from typing import List, Dict
-from models import Product, MasterProduct, get_session
+from typing import List, Dict, Optional
+from models import Product, MasterProduct, MasterProductVariant, get_session
 from product_matcher import ProductMatcher
+
+
+def _format_capacity(capacity: Optional[str]) -> str:
+    if not capacity or capacity == "unknown":
+        return ""
+    return capacity.upper()
 
 
 def search_products(query: str, limit: int = 20) -> List[Dict]:
@@ -17,16 +23,20 @@ def search_products(query: str, limit: int = 20) -> List[Dict]:
     matcher = ProductMatcher()
 
     try:
-        # Normalize the search query
-        normalized_query = matcher.normalize_text(query)
-        tokens = matcher.extract_tokens(query)
+        # Normalize the search query (base model) and extract capacity if present
+        normalized_query = matcher.normalize_text_base(query)
+        tokens = matcher.extract_base_tokens(query)
+        capacity_query = matcher.extract_capacity(query)
 
         results = []
 
         # Search master products
-        masters = session.query(MasterProduct).filter(
-            MasterProduct.normalized_name.like(f"%{normalized_query}%")
-        ).limit(limit).all()
+        masters_query = session.query(MasterProduct)
+        if normalized_query:
+            masters_query = masters_query.filter(
+                MasterProduct.normalized_name.like(f"%{normalized_query}%")
+            )
+        masters = masters_query.limit(limit).all()
 
         # If no direct match, try token-based search
         if not masters and tokens:
@@ -45,47 +55,106 @@ def search_products(query: str, limit: int = 20) -> List[Dict]:
 
         # For each master product, get all store variants
         for master in masters:
-            products = session.query(Product).filter(
-                Product.master_product_id == master.id
-            ).all()
+            variants_query = session.query(MasterProductVariant).filter(
+                MasterProductVariant.master_product_id == master.id
+            )
+            if capacity_query:
+                variants_query = variants_query.filter(
+                    MasterProductVariant.capacity == capacity_query
+                )
+            variants = variants_query.all()
 
-            if not products:
+            if not variants:
+                products = session.query(Product).filter(
+                    Product.master_product_id == master.id
+                ).all()
+                if not products:
+                    continue
+                prices = [p.price for p in products if p.price > 0]
+                cheapest_price = min(prices) if prices else 0
+                most_expensive = max(prices) if prices else 0
+
+                result = {
+                    'variant_id': None,
+                    'master_id': master.id,
+                    'name': master.canonical_name,
+                    'capacity': None,
+                    'brand': master.brand,
+                    'model': master.model,
+                    'category': master.category,
+                    'cheapest_price': cheapest_price,
+                    'most_expensive': most_expensive,
+                    'price_difference': most_expensive - cheapest_price if prices else 0,
+                    'store_count': len(products),
+                    'stores': []
+                }
+
+                for product in products:
+                    result['stores'].append({
+                        'store': product.store,
+                        'price': product.price,
+                        'url': product.url,
+                        'name': product.name,
+                        'availability': product.availability,
+                        'original_price': product.original_price,
+                        'discount_percentage': product.discount_percentage
+                    })
+
+                result['stores'].sort(key=lambda x: x['price'])
+                results.append(result)
                 continue
 
-            # Find cheapest price
-            prices = [p.price for p in products if p.price > 0]
-            cheapest_price = min(prices) if prices else 0
-            most_expensive = max(prices) if prices else 0
+            for variant in variants:
+                products = session.query(Product).filter(
+                    Product.variant_id == variant.id
+                ).all()
 
-            result = {
-                'master_id': master.id,
-                'name': master.canonical_name,
-                'brand': master.brand,
-                'model': master.model,
-                'category': master.category,
-                'cheapest_price': cheapest_price,
-                'most_expensive': most_expensive,
-                'price_difference': most_expensive - cheapest_price if prices else 0,
-                'store_count': len(products),
-                'stores': []
-            }
+                if not products:
+                    continue
 
-            # Add store-specific information
-            for product in products:
-                result['stores'].append({
-                    'store': product.store,
-                    'price': product.price,
-                    'url': product.url,
-                    'name': product.name,
-                    'availability': product.availability,
-                    'original_price': product.original_price,
-                    'discount_percentage': product.discount_percentage
-                })
+                prices = [p.price for p in products if p.price > 0]
+                cheapest_price = min(prices) if prices else 0
+                most_expensive = max(prices) if prices else 0
 
-            # Sort stores by price
-            result['stores'].sort(key=lambda x: x['price'])
+                capacity_display = _format_capacity(variant.capacity)
+                display_name = master.canonical_name
+                if capacity_display:
+                    display_name = f"{display_name} {capacity_display}"
 
-            results.append(result)
+                result = {
+                    'variant_id': variant.id,
+                    'master_id': master.id,
+                    'name': display_name,
+                    'capacity': variant.capacity,
+                    'brand': master.brand,
+                    'model': master.model,
+                    'category': master.category,
+                    'cheapest_price': cheapest_price,
+                    'most_expensive': most_expensive,
+                    'price_difference': most_expensive - cheapest_price if prices else 0,
+                    'store_count': len(products),
+                    'stores': []
+                }
+
+                for product in products:
+                    result['stores'].append({
+                        'store': product.store,
+                        'price': product.price,
+                        'url': product.url,
+                        'name': product.name,
+                        'availability': product.availability,
+                        'original_price': product.original_price,
+                        'discount_percentage': product.discount_percentage
+                    })
+
+                result['stores'].sort(key=lambda x: x['price'])
+                results.append(result)
+
+                if len(results) >= limit:
+                    break
+
+            if len(results) >= limit:
+                break
 
         return results
 
@@ -186,7 +255,7 @@ def get_best_deals(store: str = None, limit: int = 10) -> List[Dict]:
 
 
 def get_product_by_master_id(master_id: int) -> Dict:
-    """Get all store variants for a specific master product."""
+    """Get all variants for a specific master product."""
     session = get_session()
 
     try:
@@ -195,13 +264,83 @@ def get_product_by_master_id(master_id: int) -> Dict:
         if not master:
             return None
 
-        products = session.query(Product).filter(
-            Product.master_product_id == master_id
-        ).all()
-
         result = {
             'master_id': master.id,
             'name': master.canonical_name,
+            'brand': master.brand,
+            'model': master.model,
+            'stores': []
+        }
+
+        variants = session.query(MasterProductVariant).filter(
+            MasterProductVariant.master_product_id == master_id
+        ).all()
+
+        if not variants:
+            products = session.query(Product).filter(
+                Product.master_product_id == master_id
+            ).all()
+            for product in products:
+                result['stores'].append({
+                    'store': product.store,
+                    'price': product.price,
+                    'url': product.url,
+                    'name': product.name
+                })
+            return result
+
+        result['variants'] = []
+        for variant in variants:
+            products = session.query(Product).filter(
+                Product.variant_id == variant.id
+            ).all()
+            if not products:
+                continue
+            result['variants'].append({
+                'variant_id': variant.id,
+                'capacity': variant.capacity,
+                'stores': [{
+                    'store': product.store,
+                    'price': product.price,
+                    'url': product.url,
+                    'name': product.name
+                } for product in products]
+            })
+
+        return result
+
+    finally:
+        session.close()
+
+
+def get_product_by_variant_id(variant_id: int) -> Dict:
+    """Get all store listings for a specific variant."""
+    session = get_session()
+
+    try:
+        variant = session.query(MasterProductVariant).filter(
+            MasterProductVariant.id == variant_id
+        ).first()
+
+        if not variant:
+            return None
+
+        master = session.query(MasterProduct).filter(
+            MasterProduct.id == variant.master_product_id
+        ).first()
+
+        if not master:
+            return None
+
+        products = session.query(Product).filter(
+            Product.variant_id == variant_id
+        ).all()
+
+        result = {
+            'variant_id': variant.id,
+            'master_id': master.id,
+            'name': master.canonical_name,
+            'capacity': variant.capacity,
             'brand': master.brand,
             'model': master.model,
             'stores': []

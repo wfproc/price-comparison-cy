@@ -6,8 +6,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 
 from flask import Flask, render_template, request, jsonify
-from models import Product, MasterProduct, get_session
-from search_products import search_products, get_best_deals, get_product_by_master_id
+from models import Product, MasterProduct, MasterProductVariant, get_session
+from search_products import search_products, get_best_deals, get_product_by_master_id, get_product_by_variant_id
 from product_matcher import ProductMatcher
 from sqlalchemy import func, desc
 
@@ -71,7 +71,7 @@ def search():
 
 @app.route('/product/<int:master_id>')
 def product_detail(master_id):
-    """Product detail page showing all store variants."""
+    """Product detail page showing all variants for a master product."""
     session = get_session()
     try:
         master = session.query(MasterProduct).filter(
@@ -82,21 +82,122 @@ def product_detail(master_id):
             return render_template('error.html',
                                  error='Product not found'), 404
 
+        variants = session.query(MasterProductVariant).filter(
+            MasterProductVariant.master_product_id == master_id
+        ).all()
+
+        if not variants:
+            products = session.query(Product).filter(
+                Product.master_product_id == master_id
+            ).all()
+
+            if not products:
+                return render_template('error.html',
+                                     error='No store listings found'), 404
+
+            # Calculate price statistics
+            prices = [p.price for p in products if p.price > 0]
+            cheapest_price = min(prices) if prices else 0
+            most_expensive = max(prices) if prices else 0
+            avg_price = sum(prices) / len(prices) if prices else 0
+
+            stores_data = []
+            for product in products:
+                stores_data.append({
+                    'store': product.store,
+                    'name': product.name,
+                    'price': product.price,
+                    'original_price': product.original_price,
+                    'discount_percentage': product.discount_percentage,
+                    'availability': product.availability,
+                    'url': product.url,
+                    'image_url': product.image_url
+                })
+
+            stores_data.sort(key=lambda x: x['price'])
+
+            product_data = {
+                'master_id': master.id,
+                'canonical_name': master.canonical_name,
+                'brand': master.brand,
+                'model': master.model,
+                'category': master.category,
+                'cheapest_price': cheapest_price,
+                'most_expensive': most_expensive,
+                'avg_price': avg_price,
+                'price_difference': most_expensive - cheapest_price,
+                'stores': stores_data
+            }
+
+            return render_template('product.html', product=product_data)
+
+        variants_data = []
+        for variant in variants:
+            products = session.query(Product).filter(
+                Product.variant_id == variant.id
+            ).all()
+            if not products:
+                continue
+            prices = [p.price for p in products if p.price > 0]
+            cheapest_price = min(prices) if prices else 0
+            most_expensive = max(prices) if prices else 0
+            variants_data.append({
+                'variant_id': variant.id,
+                'capacity': variant.capacity,
+                'cheapest_price': cheapest_price,
+                'most_expensive': most_expensive,
+                'store_count': len(products),
+                'image_url': products[0].image_url if products else None
+            })
+
+        product_data = {
+            'master_id': master.id,
+            'canonical_name': master.canonical_name,
+            'brand': master.brand,
+            'model': master.model,
+            'category': master.category,
+            'variants': variants_data
+        }
+
+        return render_template('product.html', product=product_data)
+    finally:
+        session.close()
+
+
+@app.route('/variant/<int:variant_id>')
+def variant_detail(variant_id):
+    """Variant detail page showing store comparisons."""
+    session = get_session()
+    try:
+        variant = session.query(MasterProductVariant).filter(
+            MasterProductVariant.id == variant_id
+        ).first()
+
+        if not variant:
+            return render_template('error.html',
+                                 error='Variant not found'), 404
+
+        master = session.query(MasterProduct).filter(
+            MasterProduct.id == variant.master_product_id
+        ).first()
+
+        if not master:
+            return render_template('error.html',
+                                 error='Product not found'), 404
+
         products = session.query(Product).filter(
-            Product.master_product_id == master_id
+            Product.variant_id == variant_id
         ).all()
 
         if not products:
             return render_template('error.html',
                                  error='No store listings found'), 404
 
-        # Calculate price statistics
         prices = [p.price for p in products if p.price > 0]
         cheapest_price = min(prices) if prices else 0
         most_expensive = max(prices) if prices else 0
         avg_price = sum(prices) / len(prices) if prices else 0
 
-        # Prepare store data
         stores_data = []
         for product in products:
             stores_data.append({
@@ -110,15 +211,16 @@ def product_detail(master_id):
                 'image_url': product.image_url
             })
 
-        # Sort by price
         stores_data.sort(key=lambda x: x['price'])
 
         product_data = {
+            'variant_id': variant.id,
             'master_id': master.id,
             'canonical_name': master.canonical_name,
             'brand': master.brand,
             'model': master.model,
             'category': master.category,
+            'capacity': variant.capacity,
             'cheapest_price': cheapest_price,
             'most_expensive': most_expensive,
             'avg_price': avg_price,
@@ -243,11 +345,22 @@ def api_search():
 
 @app.route('/api/product/<int:master_id>')
 def api_product(master_id):
-    """API endpoint for product details."""
+    """API endpoint for product details (master + variants)."""
     product = get_product_by_master_id(master_id)
 
     if not product:
         return jsonify({'error': 'Product not found'}), 404
+
+    return jsonify(product)
+
+
+@app.route('/api/variant/<int:variant_id>')
+def api_variant(variant_id):
+    """API endpoint for variant details."""
+    product = get_product_by_variant_id(variant_id)
+
+    if not product:
+        return jsonify({'error': 'Variant not found'}), 404
 
     return jsonify(product)
 

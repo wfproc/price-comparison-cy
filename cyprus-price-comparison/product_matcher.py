@@ -2,7 +2,7 @@
 import re
 from typing import List, Dict, Optional, Tuple
 from difflib import SequenceMatcher
-from models import Product, MasterProduct, get_session
+from models import Product, MasterProduct, MasterProductVariant, get_session
 
 
 class ProductMatcher:
@@ -32,6 +32,14 @@ class ProductMatcher:
         (r'(\d+)\'', r'\1inch'),        # 6.5' -> 6.5inch
     ]
 
+    CAPACITY_PATTERN = r'\b\d+(?:gb|tb|mb)\b'
+
+    COLOR_WORDS = [
+        'black', 'white', 'silver', 'gold', 'blue', 'red', 'green', 'yellow',
+        'pink', 'purple', 'gray', 'grey', 'orange', 'titanium', 'bronze',
+        'midnight', 'starlight', 'sierra', 'graphite', 'rose', 'space', 'natural'
+    ]
+
     def __init__(self):
         self.session = get_session()
 
@@ -54,6 +62,31 @@ class ProductMatcher:
         text = ' '.join(text.split())
 
         return text
+
+    def normalize_text_base(self, text: str) -> str:
+        """Normalize text for master matching by removing capacity and color tokens."""
+        normalized = self.normalize_text(text)
+        normalized = re.sub(self.CAPACITY_PATTERN, '', normalized)
+        tokens = [t for t in normalized.split() if t not in self.COLOR_WORDS]
+        return ' '.join(tokens)
+
+    def extract_base_tokens(self, text: str) -> List[str]:
+        """Extract tokens for master matching (ignores capacity/color)."""
+        normalized = self.normalize_text_base(text)
+        tokens = normalized.split()
+        tokens = [t for t in tokens if t not in self.STOP_WORDS]
+        return tokens
+
+    def build_base_name(self, name: str) -> str:
+        """Build a display-friendly base name by removing capacity and color."""
+        if not name:
+            return ""
+        base = re.sub(r'\b\d+\s*(?:gb|tb|mb)\b', '', name, flags=re.IGNORECASE)
+        color = self.extract_color(base)
+        if color:
+            base = re.sub(r'\b' + re.escape(color) + r'\b', '', base, flags=re.IGNORECASE)
+        base = re.sub(r'\s+', ' ', base).strip()
+        return base or name
 
     def extract_tokens(self, text: str) -> List[str]:
         """Extract meaningful tokens from text, removing stop words."""
@@ -149,6 +182,12 @@ class ProductMatcher:
         # Use SequenceMatcher for fuzzy matching
         return SequenceMatcher(None, norm1, norm2).ratio()
 
+    def calculate_similarity_base(self, text1: str, text2: str) -> float:
+        """Calculate similarity score using base normalization (ignores capacity/color)."""
+        norm1 = self.normalize_text_base(text1)
+        norm2 = self.normalize_text_base(text2)
+        return SequenceMatcher(None, norm1, norm2).ratio()
+
     def calculate_token_overlap(self, tokens1: List[str], tokens2: List[str]) -> float:
         """Calculate token overlap ratio (Jaccard similarity)."""
         if not tokens1 or not tokens2:
@@ -176,10 +215,10 @@ class ProductMatcher:
             return False
 
         # Calculate various similarity scores
-        name_similarity = self.calculate_similarity(product1.name, product2.name)
+        name_similarity = self.calculate_similarity_base(product1.name, product2.name)
 
-        tokens1 = self.extract_tokens(product1.name)
-        tokens2 = self.extract_tokens(product2.name)
+        tokens1 = self.extract_base_tokens(product1.name)
+        tokens2 = self.extract_base_tokens(product2.name)
         token_overlap = self.calculate_token_overlap(tokens1, tokens2)
 
         # Check for matching capacity
@@ -216,9 +255,9 @@ class ProductMatcher:
                 if master.brand.lower() != product.brand.lower():
                     continue
 
-            # Calculate similarity
-            name_sim = self.calculate_similarity(product.name, master.canonical_name)
-            tokens_product = self.extract_tokens(product.name)
+            # Calculate similarity using base normalization
+            name_sim = self.calculate_similarity_base(product.name, master.canonical_name)
+            tokens_product = self.extract_base_tokens(product.name)
             tokens_master = master.search_tokens.split() if master.search_tokens else []
             token_overlap = self.calculate_token_overlap(tokens_product, tokens_master)
 
@@ -238,20 +277,43 @@ class ProductMatcher:
         """Create a new master product from a product."""
         brand = product.brand or self.extract_brand(product.name)
         model = self.extract_model(product.name, brand)
+        base_name = self.build_base_name(product.name)
 
         master = MasterProduct(
-            canonical_name=product.name,  # Use first product's name as canonical
+            canonical_name=base_name,
             brand=brand,
             model=model,
             category=product.category,
-            normalized_name=self.normalize_text(product.name),
-            search_tokens=' '.join(self.extract_tokens(product.name))
+            normalized_name=self.normalize_text_base(base_name),
+            search_tokens=' '.join(self.extract_base_tokens(base_name))
         )
 
         self.session.add(master)
         self.session.flush()  # Get the ID
 
         return master
+
+    def get_or_create_variant(self, master: MasterProduct, product: Product) -> MasterProductVariant:
+        """Get or create a variant under a master product based on capacity."""
+        capacity = self.extract_capacity(product.name)
+        if not capacity:
+            capacity = "unknown"
+
+        variant = self.session.query(MasterProductVariant).filter(
+            MasterProductVariant.master_product_id == master.id,
+            MasterProductVariant.capacity == capacity
+        ).first()
+
+        if variant:
+            return variant
+
+        variant = MasterProductVariant(
+            master_product_id=master.id,
+            capacity=capacity
+        )
+        self.session.add(variant)
+        self.session.flush()
+        return variant
 
     def match_products(self, batch_size: int = 100) -> Dict[str, int]:
         """
@@ -266,9 +328,9 @@ class ProductMatcher:
             'already_matched': 0
         }
 
-        # Get all unmatched products
+        # Get unmatched products or products missing variant assignment
         products = self.session.query(Product).filter(
-            Product.master_product_id.is_(None)
+            (Product.master_product_id.is_(None)) | (Product.variant_id.is_(None))
         ).all()
 
         stats['total_products'] = len(products)
@@ -278,18 +340,30 @@ class ProductMatcher:
             if (i + 1) % 10 == 0:
                 print(f"  Progress: {i + 1}/{len(products)}")
 
-            # Try to find matching master product
-            master = self.find_matching_master_product(product)
+            master = None
+            if product.master_product_id:
+                master = self.session.query(MasterProduct).get(product.master_product_id)
+                if master:
+                    stats['already_matched'] += 1
+                else:
+                    product.master_product_id = None
 
-            if master:
-                # Link to existing master product
-                product.master_product_id = master.id
-                stats['matched_to_existing'] += 1
-            else:
-                # Create new master product
-                master = self.create_master_product(product)
-                product.master_product_id = master.id
-                stats['new_master_created'] += 1
+            if not master:
+                # Try to find matching master product
+                master = self.find_matching_master_product(product)
+
+                if master:
+                    # Link to existing master product
+                    product.master_product_id = master.id
+                    stats['matched_to_existing'] += 1
+                else:
+                    # Create new master product
+                    master = self.create_master_product(product)
+                    product.master_product_id = master.id
+                    stats['new_master_created'] += 1
+
+            variant = self.get_or_create_variant(master, product)
+            product.variant_id = variant.id
 
             # Commit in batches
             if (i + 1) % batch_size == 0:
@@ -308,10 +382,11 @@ class ProductMatcher:
         """
         print("\n[WARNING] Clearing all existing matches...")
 
-        # Clear all master_product_id links
-        self.session.query(Product).update({Product.master_product_id: None})
+        # Clear all master_product_id and variant_id links
+        self.session.query(Product).update({Product.master_product_id: None, Product.variant_id: None})
 
-        # Delete all master products
+        # Delete all master products and variants
+        self.session.query(MasterProductVariant).delete()
         self.session.query(MasterProduct).delete()
         self.session.commit()
 
