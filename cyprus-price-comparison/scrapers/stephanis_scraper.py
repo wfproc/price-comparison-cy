@@ -393,39 +393,50 @@ class StephanisScraper(BaseScraper):
         all_products = []
         
         try:
-            # First, scrape main page thoroughly
-            print("Scraping main page...")
-            html = await self._fetch_page(self.base_url, use_cache=False)
+            # First, scrape main page thoroughly (but only if no category filter is set)
+            # When category filter is active, we only scrape from category pages
+            if not self.category_filter:
+                print("Scraping main page...")
+                html = await self._fetch_page(self.base_url, use_cache=False)
+                if html:
+                    soup = BeautifulSoup(html, 'lxml')
+                    # Find product links on main page
+                    # Stephanis uses /el/products/category/.../PRODUCTID pattern
+                    all_links = soup.find_all('a', href=True)
+                    product_links = []
+                    for link in all_links:
+                        href = link.get('href', '').lower()
+                        # Stephanis products: /el/products/.../NUMBER or /products/.../NUMBER
+                        if '/products/' in href and href.split('/')[-1].isdigit():
+                            product_links.append(link)
+
+                    print(f"  Found {len(product_links)} product links on main page")
+
+                    for link in product_links:
+                        container = link.parent
+                        product = None
+
+                        # Try multiple container levels
+                        if container:
+                            product = self._parse_product_card(container, self.base_url)
+                        if not product and container and container.parent:
+                            product = self._parse_product_card(container.parent, self.base_url)
+                        if not product and container and container.parent and container.parent.parent:
+                            product = self._parse_product_card(container.parent.parent, self.base_url)
+
+                        if product and not any(p["url"] == product["url"] for p in all_products):
+                            all_products.append(product)
+            else:
+                print("Skipping main page scraping (category filter active)")
+                html = await self._fetch_page(self.base_url, use_cache=False)
+                if html:
+                    soup = BeautifulSoup(html, 'lxml')
+                    all_links = soup.find_all('a', href=True)
+                else:
+                    all_links = []
+
+            # Look for category links - Stephanis uses /el/products/CATEGORY/ pattern
             if html:
-                soup = BeautifulSoup(html, 'lxml')
-                # Find product links on main page
-                # Stephanis uses /el/products/category/.../PRODUCTID pattern
-                all_links = soup.find_all('a', href=True)
-                product_links = []
-                for link in all_links:
-                    href = link.get('href', '').lower()
-                    # Stephanis products: /el/products/.../NUMBER or /products/.../NUMBER
-                    if '/products/' in href and href.split('/')[-1].isdigit():
-                        product_links.append(link)
-                
-                print(f"  Found {len(product_links)} product links on main page")
-                
-                for link in product_links:
-                    container = link.parent
-                    product = None
-                    
-                    # Try multiple container levels
-                    if container:
-                        product = self._parse_product_card(container, self.base_url)
-                    if not product and container and container.parent:
-                        product = self._parse_product_card(container.parent, self.base_url)
-                    if not product and container and container.parent and container.parent.parent:
-                        product = self._parse_product_card(container.parent.parent, self.base_url)
-                    
-                    if product and not any(p["url"] == product["url"] for p in all_products):
-                        all_products.append(product)
-                
-                # Look for category links - Stephanis uses /el/products/CATEGORY/ pattern
                 print("  Looking for category links...")
                 category_links = []
                 for link in all_links:
@@ -439,7 +450,7 @@ class StephanisScraper(BaseScraper):
 
                 category_links = list(set(category_links))[:10]
                 print(f"  Found {len(category_links)} category pages to scrape (after filter)")
-                
+
                 for cat_url in category_links:
                     cat_html = await self._fetch_page(cat_url)
                     if cat_html:

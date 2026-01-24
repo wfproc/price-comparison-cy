@@ -1,0 +1,1157 @@
+============================================================
+CYPRUS PRICE COMPARISON PIPELINE
+============================================================
+Database: sqlite:///products.db
+Rate Limit: 1.0 req/sec
+Cache: Enabled
+Categories: laptops
+============================================================
+
+Initializing database...
+Database initialized at sqlite:///products.db
+
+[INFO] Category filter set: laptops
+[INFO] Stephanis category filter set: laptops
+
+============================================================
+Scraping PUBLIC
+============================================================
+
+Category Filter: laptops
+[WARNING] robots.txt not found for www.public.cy (status 403)
+[OK] Browser initialized for public with anti-detection
+Step 1: Fetching sitemap...
+[WARNING] Sitemap fetch failed with status 403, will try with browser
+[INFO] Fetching sitemap using browser...
+[WARNING] Could not parse sitemap XML: not well-formed (invalid token): line 3, column 6
+[WARNING] No URLs found in sitemap, using fallback strategy
+[OK] Using cached: https://www.public.cy/
+  Discovered 1142 URLs from homepage
+  Example discovered URLs:
+    - https://www.public.cy/cat/gaming/handheld-consoles
+    - https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/printers
+    - https://www.public.cy/product/prosopiki-frontida-and-omorfia/mallia/pistolakia/laifen-se-lf03se-sesouar-mallion-1500-w-mob/1906170
+    - https://www.public.cy/cat/fotografia/photo-brands/fujifilm
+    - https://www.public.cy/cat/sxolika/sxolikes-tsantes/tsantes-dimotikou
+    - https://www.public.cy/cat/ihos/hxeia/multiroom-speakers-
+    - https://www.public.cy/root/oikiakes-syskeyes/dishwasher/pluntira-piatwn-brands
+    - https://www.public.cy/root/books
+    - https://www.public.cy/cat/tileoraseis/tileoraseis/f/kataskeyasths:kydos
+    - https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/desktops
+
+Step 2: Organizing and filtering URLs...
+  Found 155 /root/ category pages (before filter)
+  Found 975 /cat/ listing pages (before filter)
+
+  Applying filter for keywords: {'smartphones': ['tilefonia', 'kinita-smartphones'], 'laptops': ['laptop', 'notebooks', 'portable-computers'], 'tablets': ['tablet', 'ipad'], 'computers': ['computers-and-software', 'perifereiaka', 'desktop'], 'televisions': ['tileoraseis', 'tv'], 'gaming': ['gaming', 'playstation', 'xbox', 'nintendo', 'board-games'], 'audio': ['ihos', 'audio', 'headphones', 'speakers'], 'cameras': ['fotografia', 'camera', 'photo', 'fotografikes'], 'accessories': ['aksesoyar', 'kiniton'], 'appliances': ['oikiakes-syskeyes', 'oikiakes-mikrosyskeyes', 'thermansi-klimatismos'], 'books': ['books', 'greek-books', 'english'], 'stationery': ['xartika'], 'kids': ['kids-and-toys', 'paidika', 'hobbies'], 'home': ['home', 'prosopiki-frontida-and-omorfia']}
+  Example /root/ URLs before filter:
+    - https://www.public.cy/root/oikiakes-syskeyes/dishwasher/pluntira-piatwn-brands
+    - https://www.public.cy/root/books
+    - https://www.public.cy/root/fotografia/aksesoyar-fotografikon
+    - https://www.public.cy/root/music/films
+    - https://www.public.cy/root/gaming/playstation
+
+  Matched /root/ URLs:
+    - https://www.public.cy/root/computers-and-software/laptop-accessories
+
+  After category filter:
+  - 1 /root/ pages match
+  - 27 /cat/ pages match
+
+Step 3: Processing 28 URLs from queue...
+
+[1/200] Processing: https://www.public.cy/root/computers-and-software/laptop-accessories
+  Type: Category Landing Page (/root/)
+[OK] Fetched: https://www.public.cy/root/computers-and-software/laptop-accessories
+  Discovered 1403 sub-pages
+  Total products so far: 0
+
+[2/200] Processing: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/printers
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/printers
+  Found 0 product links on https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/printers
+  Extracted 0 products
+  Total products so far: 0
+
+[3/200] Processing: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/desktops
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/desktops
+  Found 0 product links on https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/desktops
+  Extracted 0 products
+  Total products so far: 0
+
+[4/200] Processing: https://www.public.cy/cat/ekptoseis/ypologistes/laptops
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/ekptoseis/ypologistes/laptops
+  Found 72 product links on https://www.public.cy/cat/ekptoseis/ypologistes/laptops
+  Extracted 36 products
+  Total products so far: 36
+
+[5/200] Processing: https://www.public.cy/cat/dora/technologia/laptops
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/dora/technologia/laptops
+  Found 0 product links on https://www.public.cy/cat/dora/technologia/laptops
+  Extracted 0 products
+  Total products so far: 36
+
+[6/200] Processing: https://www.public.cy/cat/computers-and-software/laptops/f/kataskeyasths:hp
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops/f/kataskeyasths:hp
+  Found 0 product links on https://www.public.cy/cat/computers-and-software/laptops/f/kataskeyasths:hp
+  Extracted 0 products
+  Total products so far: 36
+
+[7/200] Processing: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/proionta-diktuou
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/proionta-diktuou
+  Found 0 product links on https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/proionta-diktuou
+  Extracted 0 products
+  Total products so far: 36
+
+[8/200] Processing: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/laptops
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/laptops
+  Found 0 product links on https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/laptops
+  Extracted 0 products
+  Total products so far: 36
+
+[9/200] Processing: https://www.public.cy/cat/computers-and-software/laptop-accessories/aytokollita
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptop-accessories/aytokollita
+  Found 0 product links on https://www.public.cy/cat/computers-and-software/laptop-accessories/aytokollita
+  Extracted 0 products
+  Total products so far: 36
+
+[10/200] Processing: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka
+  Found 6 product links on https://www.public.cy/cat/prosfores/laptop-and-perifereiaka
+  Extracted 3 products
+  Total products so far: 39
+
+[11/200] Processing: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/monitors
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/monitors
+  Found 0 product links on https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/monitors
+  Extracted 0 products
+  Total products so far: 39
+
+[12/200] Processing: https://www.public.cy/cat/computers-and-software/laptops/f/seira:surface
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops/f/seira:surface
+  Found 30 product links on https://www.public.cy/cat/computers-and-software/laptops/f/seira:surface
+  Extracted 15 products
+  Total products so far: 54
+
+[13/200] Processing: https://www.public.cy/cat/computers-and-software/laptops/f/leitoyrgiko-systhma:microsoft-windows-home~microsoft-windows-pro~microsoft-windows-s
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops/f/leitoyrgiko-systhma:microsoft-windows-home~microsoft-windows-pro~microsoft-windows-s
+  Found 0 product links on https://www.public.cy/cat/computers-and-software/laptops/f/leitoyrgiko-systhma:microsoft-windows-home~microsoft-windows-pro~microsoft-windows-s
+  Extracted 0 products
+  Total products so far: 54
+
+[14/200] Processing: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/perifereiaka
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/perifereiaka
+  Found 0 product links on https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/perifereiaka
+  Extracted 0 products
+  Total products so far: 54
+
+[15/200] Processing: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/aksesouar-laptop
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/aksesouar-laptop
+  Found 0 product links on https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/aksesouar-laptop
+  Extracted 0 products
+  Total products so far: 54
+
+[16/200] Processing: https://www.public.cy/cat/computers-and-software/laptop-accessories/fortistes
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptop-accessories/fortistes
+  Found 0 product links on https://www.public.cy/cat/computers-and-software/laptop-accessories/fortistes
+  Extracted 0 products
+  Total products so far: 54
+
+[17/200] Processing: https://www.public.cy/cat/computers-and-software/laptop-accessories/laptop-netbook-cases
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptop-accessories/laptop-netbook-cases
+  Found 0 product links on https://www.public.cy/cat/computers-and-software/laptop-accessories/laptop-netbook-cases
+  Extracted 0 products
+  Total products so far: 54
+
+[18/200] Processing: https://www.public.cy/cat/computers-and-software/laptops/f/proteinomenh-xrhsh:gaming
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops/f/proteinomenh-xrhsh:gaming
+  Found 0 product links on https://www.public.cy/cat/computers-and-software/laptops/f/proteinomenh-xrhsh:gaming
+  Extracted 0 products
+  Total products so far: 54
+
+[19/200] Processing: https://www.public.cy/cat/computers-and-software/laptops/f/kataskeyasths:dell
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops/f/kataskeyasths:dell
+  Found 0 product links on https://www.public.cy/cat/computers-and-software/laptops/f/kataskeyasths:dell
+  Extracted 0 products
+  Total products so far: 54
+
+[20/200] Processing: https://www.public.cy/cat/computers-and-software/laptop-accessories/baseis-docking-stations-laptop
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptop-accessories/baseis-docking-stations-laptop
+  Found 2 product links on https://www.public.cy/cat/computers-and-software/laptop-accessories/baseis-docking-stations-laptop
+  Extracted 1 products
+  Total products so far: 55
+
+[21/200] Processing: https://www.public.cy/cat/computers-and-software/laptops/f/proteinomenh-xrhsh:epaggelmatikh
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops/f/proteinomenh-xrhsh:epaggelmatikh
+  Found 0 product links on https://www.public.cy/cat/computers-and-software/laptops/f/proteinomenh-xrhsh:epaggelmatikh
+  Extracted 0 products
+  Total products so far: 55
+
+[22/200] Processing: https://www.public.cy/cat/computers-and-software/laptop-accessories/baseis-coolers
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptop-accessories/baseis-coolers
+  Found 32 product links on https://www.public.cy/cat/computers-and-software/laptop-accessories/baseis-coolers
+  Extracted 16 products
+  Total products so far: 71
+
+[23/200] Processing: https://www.public.cy/cat/computers-and-software/laptops/f/ai-powered:nai
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops/f/ai-powered:nai
+  Found 72 product links on https://www.public.cy/cat/computers-and-software/laptops/f/ai-powered:nai
+  Extracted 31 products
+  Total products so far: 102
+
+[24/200] Processing: https://www.public.cy/cat/computers-and-software/laptops
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops
+  Found 1 product links on https://www.public.cy/cat/computers-and-software/laptops
+  Extracted 0 products
+  Total products so far: 102
+
+[25/200] Processing: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/apothikeush
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/apothikeush
+  Found 0 product links on https://www.public.cy/cat/prosfores/laptop-and-perifereiaka/apothikeush
+  Extracted 0 products
+  Total products so far: 102
+
+[26/200] Processing: https://www.public.cy/cat/ekptoseis/gaming/gaming-laptops
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/ekptoseis/gaming/gaming-laptops
+  Found 2 product links on https://www.public.cy/cat/ekptoseis/gaming/gaming-laptops
+  Extracted 0 products
+  Total products so far: 102
+
+[27/200] Processing: https://www.public.cy/cat/computers-and-software/laptops/f/kataskeyasths:lenovo
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops/f/kataskeyasths:lenovo
+  Found 68 product links on https://www.public.cy/cat/computers-and-software/laptops/f/kataskeyasths:lenovo
+  Extracted 23 products
+  Total products so far: 125
+
+[28/200] Processing: https://www.public.cy/cat/computers-and-software/laptops/f/proteinomenh-xrhsh:2-se-1
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptops/f/proteinomenh-xrhsh:2-se-1
+  Found 0 product links on https://www.public.cy/cat/computers-and-software/laptops/f/proteinomenh-xrhsh:2-se-1
+  Extracted 0 products
+  Total products so far: 125
+
+[29/200] Processing: https://www.public.cy/cat/computers-and-software/laptop-accessories/diafora-axesouar-laptop
+  Type: Product Listing Page (/cat/)
+[OK] Fetched: https://www.public.cy/cat/computers-and-software/laptop-accessories/diafora-axesouar-laptop
+  Found 44 product links on https://www.public.cy/cat/computers-and-software/laptop-accessories/diafora-axesouar-laptop
+  Extracted 22 products
+  Total products so far: 147
+
+
+Step 5: Fetching missing product prices...
+  147 products need price information
+  [1/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m416gb256gb-ssdmacos-midnight/2004536
+      [OK] Price: 1049.0 EUR
+  [2/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m416gb256gb-ssdmacos-sky-blue/2004533
+      [OK] Price: 1049.0 EUR
+  [3/147] Fetching price for: Lenovo 2 In 1 Ideapad 5 14Ahp9 14 Wuxga Oled Ryzen...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-2-in-1-ideapad-5-14ahp9-14-wuxga-oled-ryzen-5-8645hs16gb512gb-ssdradeon-760m-graphicswin11home-laptop/1967994
+      [OK] Price: 799.0 EUR
+  [4/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m416gb256gb-ssdmacos-silver/2004534
+      [OK] Price: 1049.0 EUR
+  [5/147] Fetching price for: Lenovo Ideapad Slim 3 15Abr8 156 Fhd Ips Ryzen 7 7...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15abr8-156-fhd-ips-ryzen-7-7730u16gb512gb-ssdradeon-graphicswin11home-laptop/1994319
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15abr8-156-fhd-ips-ryzen-7-7730u16gb512gb-ssdradeon-graphicswin11home-laptop/1994319
+      [OK] Price: 629.0 EUR
+  [6/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m416gb512gb-ssdmacos-midnight/2004540
+      [OK] Price: 1299.0 EUR
+  [7/147] Fetching price for: Hp Omen 16 Am0037Nv C21K5Ea 16 Fhd Ips Intel Core ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/hp-omen-16-am0037nv-c21k5ea-16-fhd-ips-intel-core-i7-14650hx16-gb1-tb-ssdgeforce-rtx-5060win11home-laptop/2056517
+      [OK] Price: 1529.0 EUR
+  [8/147] Fetching price for: Lenovo Ideapad Slim 3 15Abr8 156 Fhd Ips Ryzen 7 5...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15abr8-156-fhd-ips-ryzen-7-5825u16-gb1-tb-ssdradeon-graphicswindows-11-home-laptop/2013278
+      [OK] Price: 649.0 EUR
+  [9/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb256gb-ssdmacos-silver/2004546
+      [OK] Price: 1349.0 EUR
+  [10/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb256gb-ssdmacos-midnight/2004548
+      [OK] Price: 1349.0 EUR
+  [11/147] Fetching price for: Asus Vivobook Go 15 E1504Fa Bq2335W 156 Fhd Anti G...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-vivobook-go-15-e1504fa-bq2335w-156-fhd-anti-glare-amd-ryzen-5-7520u16-gb512-gb-ssdradeon-graphicswin11home-laptop/2033824
+      [OK] Price: 579.99 EUR
+  [12/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M424Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m424gb512gb-ssdmacos-midnight/2004556
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m424gb512gb-ssdmacos-midnight/2004556
+      [WARN] Could not fetch price
+  [13/147] Fetching price for: Lenovo Ideapad Slim 3 15Irh10 151 Qhd Oled Core I5...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15irh10-151-qhd-oled-core-i5-13420h16-gb1-tb-ssduhd-graphicswindows-11-home-laptop/2013277
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15irh10-151-qhd-oled-core-i5-13420h16-gb1-tb-ssduhd-graphicswindows-11-home-laptop/2013277
+      [WARN] Could not fetch price
+  [14/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb512gb-ssdmacos-sky-blue/2004549
+      [OK] Price: 1599.0 EUR
+  [15/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb512gb-ssdmacos-midnight/2004552
+      [OK] Price: 1599.0 EUR
+  [16/147] Fetching price for: Acer Aspire 16 Ai A16 52M 56G1 Copilot Pc 16 Wuxga...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/acer-aspire-16-ai-a16-52m-56g1-copilot-pc-16-wuxga-oled-intel-core-ultra-5-226v16-gb512-gb-ssdarc-graphicswin11home-laptop/2063596
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/acer-aspire-16-ai-a16-52m-56g1-copilot-pc-16-wuxga-oled-intel-core-ultra-5-226v16-gb512-gb-ssdarc-graphicswin11home-laptop/2063596
+      [OK] Price: 851.0 EUR
+  [17/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M424Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m424gb512gb-ssdmacos-midnight/2004544
+      [OK] Price: 1549.0 EUR
+  [18/147] Fetching price for: Hp 15 Fc0071Nv 156 Fhd Ips Amd Ryzen 7 5825U16 Gb1...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/hp-15-fc0071nv-156-fhd-ips-amd-ryzen-7-5825u16-gb1tb-ssdradeon-graphicswindows-11-home-laptop/2035045
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/hp-15-fc0071nv-156-fhd-ips-amd-ryzen-7-5825u16-gb1tb-ssdradeon-graphicswindows-11-home-laptop/2035045
+      [OK] Price: 589.0 EUR
+  [19/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M424Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m424gb512gb-ssdmacos-silver/2004554
+      [OK] Price: 1849.0 EUR
+  [20/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb512gb-ssdmacos-starlight/2004551
+      [OK] Price: 1599.0 EUR
+  [21/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M424Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m424gb512gb-ssdmacos-starlight/2004543
+      [OK] Price: 1549.0 EUR
+  [22/147] Fetching price for: Laptop Lenovo Ideapad Slim 5 16Abr8 16 Wuxga Ips R...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/laptop-lenovo-ideapad-slim-5-16abr8-16-wuxga-ips-ryzen-7-7730u16gb1tb-ssdradeon-graphicswin11home/1983582
+      [OK] Price: 829.0 EUR
+  [23/147] Fetching price for: Lenovo Ideapad Slim 3 15Iru9 156 Fhd Ips Core 5 12...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15iru9-156-fhd-ips-core-5-120u16gb512gb-ssduhd-graphicswin11homes-laptop/1957417
+      [OK] Price: 698.99 EUR
+  [24/147] Fetching price for: Lenovo Ideapad 5 2 In 1 14Q8X9 14 Wuxga Oled Snapd...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-5-2-in-1-14q8x9-14-wuxga-oled-snapdragon-x-plus16gb1tb-ssdqualcomm-adrenowin11home-laptop/1994325
+      [OK] Price: 849.01 EUR
+  [25/147] Fetching price for: Asus Vivobook 16 X1607Qa Mb046W 16 Wuxga Ips Snapd...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-vivobook-16-x1607qa-mb046w-16-wuxga-ips-snapdragon-x-x1-26-10016gb512gb-ssdqualcomm-adrenowin11home-laptop/1993371
+      [OK] Price: 698.99 EUR
+  [26/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M424Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m424gb512gb-ssdmacos-sky-blue/2004553
+      [OK] Price: 1849.0 EUR
+  [27/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb512gb-ssdmacos-silver/2004550
+      [OK] Price: 1599.0 EUR
+  [28/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M424Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m424gb512gb-ssdmacos-sky-blue/2004541
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m424gb512gb-ssdmacos-sky-blue/2004541
+      [OK] Price: 1549.0 EUR
+  [29/147] Fetching price for: Laptop Lenovo Ideapad Slim 3 15Iah8 Intel Core I5 ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/laptop-lenovo-ideapad-slim-3-15iah8-intel-core-i5-12450h16gb512gb-ssduhd-graphicswin11homes/1954283
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/laptop-lenovo-ideapad-slim-3-15iah8-intel-core-i5-12450h16gb512gb-ssduhd-graphicswin11homes/1954283
+      [OK] Price: 599.0 EUR
+  [30/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m416gb256gb-ssdmacos-starlight/2004535
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m416gb256gb-ssdmacos-starlight/2004535
+      [OK] Price: 1049.0 EUR
+  [31/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M424Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m424gb512gb-ssdmacos-starlight/2004555
+      [OK] Price: 1849.0 EUR
+  [32/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M424Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m424gb512gb-ssdmacos-silver/2004542
+      [OK] Price: 1549.0 EUR
+  [33/147] Fetching price for: Apple Macbook Air With M3 Chip 136Qhd Apple M316Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m3-chip-136qhd-apple-m316gb512gb-ssdmacos-space-grey/1913039
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m3-chip-136qhd-apple-m316gb512gb-ssdmacos-space-grey/1913039
+      [OK] Price: 1299.0 EUR
+  [34/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb256gb-ssdmacos-starlight/2004547
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb256gb-ssdmacos-starlight/2004547
+      [OK] Price: 1349.0 EUR
+  [35/147] Fetching price for: Apple Macbook Air With M4 Chip 136Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m416gb512gb-ssdmacos-silver/2004538
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-136qhd-apple-m416gb512gb-ssdmacos-silver/2004538
+      [OK] Price: 1299.0 EUR
+  [36/147] Fetching price for: Apple Macbook Air With M4 Chip 153Qhd Apple M416Gb...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb256gb-ssdmacos-sky-blue/2004545
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-air-with-m4-chip-153qhd-apple-m416gb256gb-ssdmacos-sky-blue/2004545
+      [OK] Price: 1349.0 EUR
+  [37/147] Fetching price for: Epson Ecotank L6270 Egxromo Polumixanima Inkjet A4...
+[OK] Fetched: https://www.public.cy/product/perifereiaka/printers/multifuction-inkjet/epson-ecotank-l6270-egxromo-polumixanima-inkjet-a4-me-wifi-ethernet-adf-duplex-print-c11cj61403/1638393
+      [OK] Price: 439.0 EUR
+  [38/147] Fetching price for: Epson Ecotank M2170 Aspromauro Polumixanima Inkjet...
+[OK] Fetched: https://www.public.cy/product/perifereiaka/printers/multifuction-inkjet/epson-ecotank-m2170-aspromauro-polumixanima-inkjet-a4-me-wifi-ethernet-duplex-print-c11ch43402/1391180
+      [OK] Price: 309.0 EUR
+  [39/147] Fetching price for: Epson Ecotank M1120 Aspromauros Ektupotis Inkjet A...
+[OK] Fetched: https://www.public.cy/product/perifereiaka/printers/ektypotes/epson-ecotank-m1120-aspromauros-ektupotis-inkjet-a4-me-wifi-c11cg96403/1391176
+      [OK] Price: 209.0 EUR
+  [40/147] Fetching price for: Microsoft Surface Pro Copilot Pc 12 Pixelsense Sna...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-pro-copilot-pc-12-pixelsense-snapdragon-x-plus16-gb256-gb-ufsqualcomm-adrenowindows-11-home-platinum-laptop/2032853
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-pro-copilot-pc-12-pixelsense-snapdragon-x-plus16-gb256-gb-ufsqualcomm-adrenowindows-11-home-platinum-laptop/2032853
+      [OK] Price: 999.01 EUR
+  [41/147] Fetching price for: Microsoft Surface Copilot Pc 13 Snapdragon X Plus1...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-copilot-pc-13-snapdragon-x-plus16gb512gb-ssdqualcomm-adrenowin11home-black-laptop/1950801
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-copilot-pc-13-snapdragon-x-plus16gb512gb-ssdqualcomm-adrenowin11home-black-laptop/1950801
+      [OK] Price: 1339.0 EUR
+  [42/147] Fetching price for: Microsoft Surface Copilot Pc 15 Snapdragon X Elite...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-copilot-pc-15-snapdragon-x-elite16gb512gb-ssdqualcomm-adrenowin11home-black-laptop/1950805
+      [OK] Price: 1640.0 EUR
+  [43/147] Fetching price for: Microsoft Surface Pro Copilot Pc13 Lcd Snapdragon ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-pro-copilot-pc13-lcd-snapdragon-x-plus16gb512gbssdqualcomm-adrenowin11home-platinum-laptop/1950807
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-pro-copilot-pc13-lcd-snapdragon-x-plus16gb512gbssdqualcomm-adrenowin11home-platinum-laptop/1950807
+      [OK] Price: 1344.0 EUR
+  [44/147] Fetching price for: Microsoft Surface Copilot Pc 13 Snapdragon X Elite...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-copilot-pc-13-snapdragon-x-elite16gb512gb-ssdqualcomm-adrenowin11home-platinum-laptop/1950802
+      [OK] Price: 1699.0 EUR
+  [45/147] Fetching price for: Microsoft Surface Copilot Pc 15 Snapdragon X Elite...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-copilot-pc-15-snapdragon-x-elite16gb256gb-ssdqualcomm-adrenowin11home-platinum-laptop/1950804
+      [OK] Price: 1669.0 EUR
+  [46/147] Fetching price for: Microsoft Surface Copilot Pc 13 Snapdragon X Elite...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-copilot-pc-13-snapdragon-x-elite16gb512gb-ssdqualcomm-adrenowin11home-black-laptop/1950803
+      [OK] Price: 1469.0 EUR
+  [47/147] Fetching price for: Microsoft Surface Copilot Pc 13 Snapdragon X Plus1...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-copilot-pc-13-snapdragon-x-plus16gb256gb-ssdqualcomm-adrenowin11home-platinum-laptop/1950800
+      [OK] Price: 1299.0 EUR
+  [48/147] Fetching price for: Microsoft Surface Laptop Copilot Pc 13 Pixelsense ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-laptop-copilot-pc-13-pixelsense-snapdragon-x-plus16-gb256-gb-ufsqualcomm-adrenowindows-11-home-platinum-laptop/2032851
+      [OK] Price: 1198.0 EUR
+  [49/147] Fetching price for: Microsoft Surface Pro Copilot Pc 12 Pixelsense Sna...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-pro-copilot-pc-12-pixelsense-snapdragon-x-plus16-gb512-gb-ufsqualcomm-adrenowindows-11-home-platinum-laptop/2032854
+      [OK] Price: 1209.0 EUR
+  [50/147] Fetching price for: Microsoft Surface Laptop Copilot Pc 13 Pixelsense ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-laptop-copilot-pc-13-pixelsense-snapdragon-x-plus16-gb512-gb-ufsqualcomm-adrenowindows-11-home-platinum-laptop/2032852
+      [OK] Price: 1328.0 EUR
+  [51/147] Fetching price for: Microsoft Surface Pro Copilot Pc 13 Oled Snapdrago...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-pro-copilot-pc-13-oled-snapdragon-x-elite16gb512gbssdqualcomm-adrenowin11home-black-laptop/2023580
+      [OK] Price: 1838.0 EUR
+  [52/147] Fetching price for: Microsoft Surface Pro Copilot Pc13 Lcd Snapdragon ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-pro-copilot-pc13-lcd-snapdragon-x-plus16gb512gbssdqualcomm-adrenowin11home-platinum-laptop/2023577
+      [OK] Price: 1508.0 EUR
+  [53/147] Fetching price for: Microsoft Surface Pro Copilot Pc13 Lcd Snapdragon ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-pro-copilot-pc13-lcd-snapdragon-x-plus16gb256gbssdqualcomm-adrenowin11home-platinum-laptop/2023576
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-pro-copilot-pc13-lcd-snapdragon-x-plus16gb256gbssdqualcomm-adrenowin11home-platinum-laptop/2023576
+      [OK] Price: 1279.0 EUR
+  [54/147] Fetching price for: Microsoft Surface Copilot Pc 13 Snapdragon X Plus1...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/microsoft-surface-copilot-pc-13-snapdragon-x-plus16gb512gb-ssdqualcomm-adrenowin11home-platinum-laptop/1973696
+      [OK] Price: 1549.0 EUR
+  [55/147] Fetching price for: Docking Station Asus Simpro Dock 2 Display 14Usb C...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-docking-stations-laptop/docking-station-asus-simpro-dock-2-display-14usb-c-pollaples-thures/2088018
+      [OK] Price: 149.0 EUR
+  [56/147] Fetching price for: Basi Laptop Cooler Trust 16 Exto  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-trust-16-exto--mauro/1736729
+      [OK] Price: 34.9 EUR
+  [57/147] Fetching price for: Basi Laptop Cooler Nod 173 Tempest  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-nod-173-tempest--mauro/1674449
+      [OK] Price: 20.9 EUR
+  [58/147] Fetching price for: Basi Laptop Cooler Nod Ef5 156  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-nod-ef5-156--mauro/1674448
+      [OK] Price: 15.99 EUR
+  [59/147] Fetching price for: Basi Laptop Nod Vortex Rgb 173  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-nod-vortex-rgb-173--mauro/1674450
+      [OK] Price: 31.9 EUR
+  [60/147] Fetching price for: Basi Laptop Cooler Nod Cold Core Rgb 173  Asimi...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-nod-cold-core-rgb-173--asimi/1674451
+      [OK] Price: 36.9 EUR
+  [61/147] Fetching price for: Basi Laptop Cooler Deepcool U Pal 156  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-deepcool-u-pal-156--mauro/1057888
+      [OK] Price: 21.9 EUR
+  [62/147] Fetching price for: Basi Laptop Cooler Deepcool Wind Pal Fs 17  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-deepcool-wind-pal-fs-17--mauro/1057884
+      [OK] Price: 28.89 EUR
+  [63/147] Fetching price for: Basi Laptop Cooler Deepcool 156 Wind Pal Mini Maur...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-deepcool-156-wind-pal-mini-mauro/1178277
+      [OK] Price: 14.99 EUR
+  [64/147] Fetching price for: Basi Laptop Cooler Nod 156 Stormcloud  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-nod-156-stormcloud--mauro/1674447
+      [OK] Price: 10.98 EUR
+  [65/147] Fetching price for: Basi Laptop Cooler Deepcool 156 Multi Core X6 Maur...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-deepcool-156-multi-core-x6-mauro/1057890
+      [OK] Price: 25.89 EUR
+  [66/147] Fetching price for: Basi Laptop Ugreen Lp258 Silver...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-ugreen-lp258-silver/1773686
+      [OK] Price: 25.89 EUR
+  [67/147] Fetching price for: Basi Laptop Rivacase 5555 Gia 156  Asimi...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-rivacase-5555-gia-156--asimi/1619297
+      [OK] Price: 28.89 EUR
+  [68/147] Fetching price for: Basi Laptop Rivacase 5557 Gia 173  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-rivacase-5557-gia-173--mauro/1619298
+      [OK] Price: 29.9 EUR
+  [69/147] Fetching price for: Basi Laptop Cooler 173 Hama 53070 Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-cooler-173-hama-53070-mauro/0874171
+      [OK] Price: 19.99 EUR
+  [70/147] Fetching price for: Basi Laptop Fellowes Smart Suites Laptop Riser 802...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/basi-laptop-fellowes-smart-suites-laptop-riser-8020201-17--mauro/1200037
+      [OK] Price: 44.99 EUR
+  [71/147] Fetching price for: Ptussomeni Basi Laptop Sbox Cp 31 360 17 Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/ptussomeni-basi-laptop-sbox-cp-31-360-17-mauro/1852113
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/baseis-coolers/ptussomeni-basi-laptop-sbox-cp-31-360-17-mauro/1852113
+      [OK] Price: 49.9 EUR
+  [72/147] Fetching price for: Asus Rog Strix G16 16 Fhd Ips Amd Ryzen 9 8940Hx32...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-rog-strix-g16-16-fhd-ips-amd-ryzen-9-8940hx32-gb1tb-ssdgeforce-rtx-5060win11home-laptop/2011424
+      [OK] Price: 2098.01 EUR
+  [73/147] Fetching price for: Apple Macbook Pro 14 M5 Chip Qhd Apple M5 10 Cores...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m5-chip-qhd-apple-m5-10-cores16gb512gb-ssd10-cores-gpumacos-space-black/2073364
+      [OK] Price: 1797.0 EUR
+  [74/147] Fetching price for: Asus Tuf Gaming A18 18 Fhd Ips Amd Ryzen 7 26032 G...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-tuf-gaming-a18-18-fhd-ips-amd-ryzen-7-26032-gb1tb-ssdgeforce-rtx-5070win11home-laptop/2011423
+      [OK] Price: 1699.0 EUR
+  [75/147] Fetching price for: Apple Macbook Pro 14 M4 Chip Qhd Apple M4 10 Cores...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m4-chip-qhd-apple-m4-10-cores16gb512gb-ssd10-cores-gpumacos-space-black/1950011
+      [OK] Price: 1899.0 EUR
+  [76/147] Fetching price for: Apple Macbook Pro 16 M4 Max Chip Qhd Apple M4 Max ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-16-m4-max-chip-qhd-apple-m4-max-14-cores36gb1tb-ssd32-cores-gpumacos-space-black/1950054
+      [OK] Price: 4148.99 EUR
+  [77/147] Fetching price for: Asus Tuf Gaming A16 16 Fhd Ips Amd Ryzen 7 26016 G...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-tuf-gaming-a16-16-fhd-ips-amd-ryzen-7-26016-gb1tb-ssdgeforce-rtx-5060win11home-laptop/2011422
+      [OK] Price: 1898.0 EUR
+  [78/147] Fetching price for: Apple Macbook Pro 16 M4 Pro Chip Qhd Apple M4 Pro ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-16-m4-pro-chip-qhd-apple-m4-pro-14-cores48gb512gb-ssd20-cores-gpumacos-silver/1950047
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-16-m4-pro-chip-qhd-apple-m4-pro-14-cores48gb512gb-ssd20-cores-gpumacos-silver/1950047
+      [OK] Price: 3359.0 EUR
+  [79/147] Fetching price for: Acer Nitro V 17 Anv17 41 R2A0 173 Fhd Ips Amd Ryze...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/acer-nitro-v-17-anv17-41-r2a0-173-fhd-ips-amd-ryzen-7-26016-gb1-tb-ssdgeforce-rtx-5060win11home-laptop/2063597
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/acer-nitro-v-17-anv17-41-r2a0-173-fhd-ips-amd-ryzen-7-26016-gb1-tb-ssdgeforce-rtx-5060win11home-laptop/2063597
+      [OK] Price: 1598.0 EUR
+  [80/147] Fetching price for: Asus Vivobook Rtx V3607Vu Rp038W 16 Fhd Anti Glare...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-vivobook-rtx-v3607vu-rp038w-16-fhd-anti-glare-intel-core-5-210h16gb512-gb-ssdgeforce-rtx-4050win11home-laptop/2033828
+      [OK] Price: 999.01 EUR
+  [81/147] Fetching price for: Apple Macbook Pro 16 M4 Max Chip Qhd Apple M4 Max ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-16-m4-max-chip-qhd-apple-m4-max-14-cores36gb1tb-ssd32-cores-gpumacos-silver/1950052
+      [OK] Price: 4148.99 EUR
+  [82/147] Fetching price for: Apple Macbook Pro 14 M5 Chip Qhd Apple M5 10 Cores...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m5-chip-qhd-apple-m5-10-cores16gb1tb-ssd10-cores-gpumacos-space-black/2073366
+      [OK] Price: 2071.0 EUR
+  [83/147] Fetching price for: Apple Macbook Pro 16 M4 Pro Chip Qhd Apple M4 Pro ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-16-m4-pro-chip-qhd-apple-m4-pro-14-cores-cpu24gb512gb-ssd20-cores-gpumacos-space-black/1950045
+      [OK] Price: 2879.0 EUR
+  [84/147] Fetching price for: Asus Vivobook S 14 Oled S5406Sa Oled Qd029W 14 Wux...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-vivobook-s-14-oled-s5406sa-oled-qd029w-14-wuxga-oled-core-ultra-5-226v16gb1tb-ssdarc-graphicswin11home-laptop/1976567
+      [OK] Price: 1198.0 EUR
+  [85/147] Fetching price for: Apple Macbook Pro 14 M4 Pro Chip Qhd Apple M4 Pro ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m4-pro-chip-qhd-apple-m4-pro-12-cores24gb512gb-ssd16-cores-gpumacos-space-black/1950030
+      [OK] Price: 2349.0 EUR
+  [86/147] Fetching price for: Asus Tuf Gaming A15 156 Fhd Ips Ryzen 5 7535Hs16 G...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-tuf-gaming-a15-156-fhd-ips-ryzen-5-7535hs16-gb512gb-ssdgeforce-rtx-3050win11home-laptop/2030243
+      [OK] Price: 859.0 EUR
+  [87/147] Fetching price for: Apple Macbook Pro 14 M4 Chip Qhd Apple M4 10 Cores...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m4-chip-qhd-apple-m4-10-cores-cpu16gb512gb-ssd10-cores-gpumacos-silver/1950016
+      [OK] Price: 1899.0 EUR
+  [88/147] Fetching price for: Lenovo Yoga Book 9 13Imu9 33 28K Oled Core Ultra 7...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-yoga-book-9-13imu9-33-28k-oled-core-ultra-7-155u16gb1tb-ssdwin11home-laptop/1908811
+      [OK] Price: 2399.0 EUR
+  [89/147] Fetching price for: Acer Aspire 14 Ai A14 52M 75Bh Copilot Pc 14 Fhd O...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/acer-aspire-14-ai-a14-52m-75bh-copilot-pc-14-fhd-oled-intel-core-ultra-7--256v16-gb512-gbarc-graphicswindows-11-home-laptop/2032959
+      [OK] Price: 899.0 EUR
+  [90/147] Fetching price for: Apple Macbook Pro 14 M4 Chip Qhd Apple M4 10 Cores...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m4-chip-qhd-apple-m4-10-cores24gb1tb-ssd10-cores-gpumacos-space-black/1950023
+      [OK] Price: 2419.0 EUR
+  [91/147] Fetching price for: Apple Macbook Pro 14 M4 Chip Qhd Apple M4 10 Cores...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m4-chip-qhd-apple-m4-10-cores16gb1tb-ssd10-cores-gpumacos-space-black/1950018
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m4-chip-qhd-apple-m4-10-cores16gb1tb-ssd10-cores-gpumacos-space-black/1950018
+      [OK] Price: 2150.0 EUR
+  [92/147] Fetching price for: Apple Macbook Pro 14 M5 Chip Qhd Apple M5 10 Cores...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m5-chip-qhd-apple-m5-10-cores16gb512gb-ssd10-cores-gpumacos-silver/2073365
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-14-m5-chip-qhd-apple-m5-10-cores16gb512gb-ssd10-cores-gpumacos-silver/2073365
+      [OK] Price: 1797.0 EUR
+  [93/147] Fetching price for: Hp Victus 15 15 Fb2000Nv 156 Fhd Ips Ryzen 7 8845H...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/hp-victus-15-15-fb2000nv-156-fhd-ips-ryzen-7-8845hs16gb512gb-ssdgeforce-rtx-4060win11home-laptop/1958872
+      [OK] Price: 1449.0 EUR
+  [94/147] Fetching price for: Asus Vivobook 16 Flip Tp3607Sa Oled Rj027W 16 3K O...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-vivobook-16-flip-tp3607sa-oled-rj027w-16-3k-oled-core-ultra-7-258v32gb1tb-ssdarc-graphicswin11home-laptop/1993363
+      [OK] Price: 1699.0 EUR
+  [95/147] Fetching price for: Asus Zenbook A14 Ux3407Ra Oled Qd010W 14 Wuxga Ole...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-zenbook-a14-ux3407ra-oled-qd010w-14-wuxga-oled-snapdragon-x-elite-x1e-78-10032gb1tb-ssdqualcomm-adrenowin11home-laptop/1993364
+      [OK] Price: 1599.0 EUR
+  [96/147] Fetching price for: Hp Omnibook 16 Ba1000Nv C0Du4Ea Copilot 16 Fhd Ole...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/hp-omnibook-16-ba1000nv-c0du4ea-copilot-16-fhd-oled-intel-core-i5-1334u16-gb512-gb-ssdiris-xe-graphicswin11home-laptop/2035046
+      [OK] Price: 899.0 EUR
+  [97/147] Fetching price for: Asus Proart P16 H7606Wp 16 Qhd Oled Ryzen Ai 9 Hx ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-proart-p16-h7606wp-16-qhd-oled-ryzen-ai-9-hx-37064-gb4tb-ssdgeforce-rtx-5070win11home-laptop/2011420
+      [OK] Price: 3197.99 EUR
+  [98/147] Fetching price for: Acer Aspire 14 Ai A14 52M 52A4 Copilot Pc 14 Fhd O...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/acer-aspire-14-ai-a14-52m-52a4-copilot-pc-14-fhd-oled-core-ultra-5--226v16-gb512-gbarc-graphicswindows-11-home-laptop/2032954
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/acer-aspire-14-ai-a14-52m-52a4-copilot-pc-14-fhd-oled-core-ultra-5--226v16-gb512-gbarc-graphicswindows-11-home-laptop/2032954
+      [OK] Price: 899.0 EUR
+  [99/147] Fetching price for: Asus Expertbook P5 P5405Csa Nz0369X 14 25K Anti Gl...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/asus-expertbook-p5-p5405csa-nz0369x-14-25k-anti-glare-core-ultra-5--226v16gb512gb-ssdarc-graphicswin11procopilot-ready-laptop/1976569
+      [OK] Price: 999.01 EUR
+  [100/147] Fetching price for: Apple Macbook Pro 16 M4 Pro Chip Qhd Apple M4 Pro ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/apple-macbook-pro-16-m4-pro-chip-qhd-apple-m4-pro-14-cores48gb512gb-ssd20-cores-gpumacos-space-black/1950050
+      [OK] Price: 3359.0 EUR
+  [101/147] Fetching price for: Lenovo Ideapad Slim 5 14Ahp9 14 Wuxga Oled Ryzen 7...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-5-14ahp9-14-wuxga-oled-ryzen-7-8845hs16gb1tb-ssdradeon-780m-graphicswin11home-laptop/1994320
+      [OK] Price: 929.0 EUR
+  [102/147] Fetching price for: Lenovo Loq 15Arp9 156 Fhd Ips Ryzen 7 7435Hs24Gb1T...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-loq-15arp9-156-fhd-ips-ryzen-7-7435hs24gb1tb-ssdgeforce-rtx-4070win11home-laptop/1967990
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-loq-15arp9-156-fhd-ips-ryzen-7-7435hs24gb1tb-ssdgeforce-rtx-4070win11home-laptop/1967990
+      [WARN] Could not fetch price
+  [103/147] Fetching price for: Lenovo Ideapad 1 15Amn7 156 Fhd Ips Ryzen 5 7520U8...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-1-15amn7-156-fhd-ips-ryzen-5-7520u8gb512gb-ssdradeon-610m-graphicswin11home-laptop/1994318
+      [OK] Price: 479.0 EUR
+  [104/147] Fetching price for: Lenovo Ideapad 1 15Amn7 156 Fhd Ips Ryzen 3 7320U8...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-1-15amn7-156-fhd-ips-ryzen-3-7320u8gb512gb-ssdradeon-610m-graphicswin11homes-laptop/1979106
+      [OK] Price: 464.0 EUR
+  [105/147] Fetching price for: Lenovo Ideapad 1 15Amn7 156 Fhd Ips Amd Ryzen 5 75...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-1-15amn7-156-fhd-ips-amd-ryzen-5-7520u16gb512gb-ssdradeon-610m-graphicswin11homes-laptop/1967987
+      [OK] Price: 649.0 EUR
+  [106/147] Fetching price for: Lenovo Ideapad Slim 3 15Irh10 153 Fhd Ips Intel Co...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15irh10-153-fhd-ips-intel-core-i7-13620h16-gb1-tb-ssduhd-graphicswin11home-s-laptop/2077375
+      [OK] Price: 929.0 EUR
+  [107/147] Fetching price for: Lenovo Ideapad Slim 3 15Arp10 153 Fhd Ips Amd Ryze...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15arp10-153-fhd-ips-amd-ryzen-7-7735hs16-gb1-tb-ssdradeon-680m-graphicswin11home-s-laptop/2077373
+      [OK] Price: 851.0 EUR
+  [108/147] Fetching price for: Lenovo Loqe 15Iax9E 156 Fhd Ips Intel Core I5 1245...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-loqe-15iax9e-156-fhd-ips-intel-core-i5-12450hx16gb512gb-ssdgeforce-rtx-2050win11home-laptop/2077376
+      [OK] Price: 829.0 EUR
+  [109/147] Fetching price for: Lenovo Loq 15Arp9 156 Fhd Ips Amd Ryzen 7 7435Hs16...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-loq-15arp9-156-fhd-ips-amd-ryzen-7-7435hs16gb512gb-ssdgeforce-rtx-4050win11home-laptop/1954929
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-loq-15arp9-156-fhd-ips-amd-ryzen-7-7435hs16gb512gb-ssdgeforce-rtx-4050win11home-laptop/1954929
+      [OK] Price: 1099.0 EUR
+  [110/147] Fetching price for: Lenovo Ideapad 1 15Amn7 156 Fhd Ips Amd Ryzen 3 73...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-1-15amn7-156-fhd-ips-amd-ryzen-3-7320u16-gb512-gb-ssdradeon-610m-graphicswin11home-s-laptop/2076613
+      [OK] Price: 599.0 EUR
+  [111/147] Fetching price for: Lenovo Yoga Slim 9 14Ill10 Copilot Pc 14 Uhd Oled ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-yoga-slim-9-14ill10-copilot-pc-14-uhd-oled-intel-core-ultra-7-258v32-gb1-tb-ssdarc-graphicswin11home-laptop/2076616
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-yoga-slim-9-14ill10-copilot-pc-14-uhd-oled-intel-core-ultra-7-258v32-gb1-tb-ssdarc-graphicswin11home-laptop/2076616
+      [OK] Price: 1999.0 EUR
+  [112/147] Fetching price for: Lenovo Legion 9 18Iax10 18 Uhd Ips Intel Core Ultr...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-legion-9-18iax10-18-uhd-ips-intel-core-ultra-9-275hx192-gb2tb-ssdgeforce-rtx-5090win11pro-laptop/2076617
+      [OK] Price: 6498.99 EUR
+  [113/147] Fetching price for: Lenovo Loq 15Ahp10 156 Fhd Ips Amd Ryzen 7 25016 G...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-loq-15ahp10-156-fhd-ips-amd-ryzen-7-25016-gb1-tb-ssdgeforce-rtx-5050win11home-laptop/2076618
+      [OK] Price: 1349.0 EUR
+  [114/147] Fetching price for: Lenovo Ideapad Slim 3 15Ian8 156 Fhd Ips Intel N10...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15ian8-156-fhd-ips-intel-n1004-gb128-gb-ssduhd-graphicswin11home-s-laptop/2076615
+      [OK] Price: 299.0 EUR
+  [115/147] Fetching price for: Lenovo Ideapad Slim 3 15Irh10 153 Fhd Ips Intel Co...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15irh10-153-fhd-ips-intel-core-i5-13420h16-gb512-gb-ssduhd-graphicswin11home-s-laptop/2077372
+      [OK] Price: 649.0 EUR
+  [116/147] Fetching price for: Lenovo Loq 15Arp9 156 Fhd Ips Amd Ryzen 5 7235Hs16...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-loq-15arp9-156-fhd-ips-amd-ryzen-5-7235hs16-gb512-gb-ssdgeforce-rtx-3050win11home-laptop/2077377
+      [OK] Price: 880.01 EUR
+  [117/147] Fetching price for: Lenovo Legion 5 15Iax10 151 Qhd Oled Intel Core Ul...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-legion-5-15iax10-151-qhd-oled-intel-core-ultra-7-255hx32-gb1-tb-ssdgeforce-rtx-5070win11home-laptop/2077417
+      [OK] Price: 1999.0 EUR
+  [118/147] Fetching price for: Lenovo Loq 15Ahp10 156 Fhd Ips Amd Ryzen 7 25032 G...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-loq-15ahp10-156-fhd-ips-amd-ryzen-7-25032-gb1-tb-ssdgeforce-rtx-5050win11home-laptop/2032929
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-loq-15ahp10-156-fhd-ips-amd-ryzen-7-25032-gb1-tb-ssdgeforce-rtx-5050win11home-laptop/2032929
+      [OK] Price: 1599.0 EUR
+  [119/147] Fetching price for: Lenovo Ideapad Slim 3 15Irh10 151 Qhd Oled Core I7...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15irh10-151-qhd-oled-core-i7-13620h16-gb1-tb-ssduhd-graphicswindows-11-home-laptop/2032922
+      [OK] Price: 929.0 EUR
+  [120/147] Fetching price for: Lenovo Ideapad Slim 3 15Arp10 151 Qhd Oled Amd Ryz...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15arp10-151-qhd-oled-amd-ryzen-7-7735hs16-gb1-tb-ssdradeon-680m-graphicswin11home-s-laptop/2077374
+      [OK] Price: 899.0 EUR
+  [121/147] Fetching price for: Lenovo Ideapad 5 2 In 1 14Akp10 Copilot Pc 14 Fhd ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-5-2-in-1-14akp10-copilot-pc-14-fhd-ips-amd-ryzen-ai-7-35016-gb1-tb-ssdradeon-860m-graphicswin11home-laptop/2077379
+      [OK] Price: 1049.0 EUR
+  [122/147] Fetching price for: Lenovo Yoga 7 2 In 1 14Akp10 Copilot Pc 14 Qhd Ole...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-yoga-7-2-in-1-14akp10-copilot-pc-14-qhd-oled-amd-ryzen-ai-7-35024-gb1-tb-ssdradeon-860m-graphicswin11home-laptop/2076619
+      [OK] Price: 1299.0 EUR
+  [123/147] Fetching price for: Lenovo Ideapad Slim 3 15Arp10 151 Qhd Oled Amd Ryz...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15arp10-151-qhd-oled-amd-ryzen-5-7533hs16-gb512gb-ssdradeon-660m-graphicswindows-11-home-s-laptop/2076587
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-ideapad-slim-3-15arp10-151-qhd-oled-amd-ryzen-5-7533hs16-gb512gb-ssdradeon-660m-graphicswindows-11-home-s-laptop/2076587
+      [OK] Price: 781.0 EUR
+  [124/147] Fetching price for: Lenovo Yoga Pro 9I Aura Edition 16 Qhd Oled Intel ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-yoga-pro-9i-aura-edition-16-qhd-oled-intel-core-ultra-9-285h32-gb1-tb-ssdgeforce-rtx-5060win11home-laptop/2032926
+      [OK] Price: 2548.0 EUR
+  [125/147] Fetching price for: Lenovo Thinkpad X12 Detachable Gen 2 123 Fhd Ips T...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-thinkpad-x12-detachable-gen-2-123-fhd-ips-touch-core-ultra-5-155u16gb512gb-ssduhd-graphicswin11pro-laptop-lenovo-digital-pen/1983904
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptops/lenovo-thinkpad-x12-detachable-gen-2-123-fhd-ips-touch-core-ultra-5-155u16gb512gb-ssduhd-graphicswin11pro-laptop-lenovo-digital-pen/1983904
+      [OK] Price: 2519.0 EUR
+  [126/147] Fetching price for: Mini Lampa Gembird Led Usb  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/mini-lampa-gembird-led-usb--mauro/1516866
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/mini-lampa-gembird-led-usb--mauro/1516866
+      [OK] Price: 2.99 EUR
+  [127/147] Fetching price for: Monitor Stand Satechi Slim Alumin Silver...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/monitor-stand-satechi-slim-alumin-silver/1632106
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/monitor-stand-satechi-slim-alumin-silver/1632106
+      [OK] Price: 44.9 EUR
+  [128/147] Fetching price for: Monitor Stand Satechi Slim Aluminium Grey...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/monitor-stand-satechi-slim-aluminium-grey/1632107
+      [OK] Price: 45.9 EUR
+  [129/147] Fetching price for: Dell Qlid 2331  Eksoteriko Kalumma  Kokkino...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/dell-qlid-2331--eksoteriko-kalumma--kokkino/0609215
+      [OK] Price: 1.0 EUR
+  [130/147] Fetching price for: Mini Anemistiras Powerbank Platinet 4000 Mah  Leuk...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/mini-anemistiras-powerbank-platinet-4000-mah--leuko/1614155
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/mini-anemistiras-powerbank-platinet-4000-mah--leuko/1614155
+      [OK] Price: 24.89 EUR
+  [131/147] Fetching price for: Kalodio Satechi Usb C Se Lightning  25 Ek...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/kalodio-satechi-usb-c-se-lightning--25-ek/1686229
+      [OK] Price: 19.99 EUR
+  [132/147] Fetching price for: Mini Lampa Hama Bulb Light 12148  Usb  Leuko...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/mini-lampa-hama-bulb-light-12148--usb--leuko/0754996
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/mini-lampa-hama-bulb-light-12148--usb--leuko/0754996
+      [OK] Price: 2.99 EUR
+  [133/147] Fetching price for: Anemistiras Auxena Jisulife Life3 55W  Green...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-auxena-jisulife-life3-55w--green/2040641
+      [OK] Price: 40.9 EUR
+  [134/147] Fetching price for: Anemistiras Platinet Usb Fan  Leuko...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-platinet-usb-fan--leuko/2062901
+      [OK] Price: 20.88 EUR
+  [135/147] Fetching price for: Anemistiras Xeiros Jisulife Life9 7W  Coral Pink...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-xeiros-jisulife-life9-7w--coral-pink/2040638
+      [OK] Price: 40.9 EUR
+  [136/147] Fetching price for: Anemistiras Xeiros Jisulife Life5 Plus  White...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-xeiros-jisulife-life5-plus--white/2040635
+      [OK] Price: 26.91 EUR
+  [137/147] Fetching price for: Anemistiras Xeiros Jisulife Life5 Plus  Brown...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-xeiros-jisulife-life5-plus--brown/2040634
+      [OK] Price: 26.91 EUR
+  [138/147] Fetching price for: Anemistiras Xeiros Jisulife Life8 Plus 12W  Mint G...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-xeiros-jisulife-life8-plus-12w--mint-green/2040633
+      [OK] Price: 23.9 EUR
+  [139/147] Fetching price for: Anemistiras Xeiros Jisulife Life8 Plus 12W  Chocol...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-xeiros-jisulife-life8-plus-12w--chocolate/2040632
+      [OK] Price: 23.9 EUR
+  [140/147] Fetching price for: Anemistiras Xeiros Jisulife Life8 Plus 12W  Pink...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-xeiros-jisulife-life8-plus-12w--pink/2040631
+      [OK] Price: 23.9 EUR
+  [141/147] Fetching price for: Anemistiras Xeiros Jisulife Life8 Plus 12W  White...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-xeiros-jisulife-life8-plus-12w--white/2040630
+      [OK] Price: 23.9 EUR
+  [142/147] Fetching price for: Anemistiras Morris Mdf 15241 Mini Usb Fan 4W  Whit...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-morris-mdf-15241-mini-usb-fan-4w--white/2025751
+      [OK] Price: 29.9 EUR
+  [143/147] Fetching price for: Anemistiras Xeiros Morris Mhf 14102 Foldable Hand ...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-xeiros-morris-mhf-14102-foldable-hand-held-usb-fan--white/2025750
+      [OK] Price: 24.89 EUR
+  [144/147] Fetching price for: Anemistiras Epanafortizomenos Life Aella 3W  Mauro...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/anemistiras-epanafortizomenos-life-aella-3w--mauro/2013265
+      [OK] Price: 7.98 EUR
+  [145/147] Fetching price for: Life Anemistiras Super 4 Usb 25W 10 Cm  Leuko...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/life-anemistiras-super-4-usb-25w-10-cm--leuko/2013264
+      [OK] Price: 8.98 EUR
+  [146/147] Fetching price for: Kalodio Usb A  Type C Ducky  18 M Premicord Joker...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/kalodio-usb-a--type-c-ducky--18-m-premicord-joker/1686251
+      [OK] Price: 14.99 EUR
+  [147/147] Fetching price for: Platinet Anemistiras Usb 5W 19Cm...
+[OK] Fetched: https://www.public.cy/product/computers-and-software/laptop-accessories/diafora-axesouar-laptop/platinet-anemistiras-usb-5w-19cm/1522237
+      [OK] Price: 29.9 EUR
+
+
+============================================================
+SCRAPING COMPLETE
+============================================================
+Total URLs processed: 29
+Total products found: 147
+Products with prices: 144
+============================================================
+
+[OK] Browser closed for public
+[OK] public: 147 products scraped
+
+
+============================================================
+Scraping STEPHANIS
+============================================================
+
+Category Filter: laptops
+[OK] Loaded robots.txt for www.stephanis.com.cy
+[OK] Browser initialized for stephanis with anti-detection
+Skipping main page scraping (category filter active)
+[OK] Fetched: https://www.stephanis.com.cy/
+  Looking for category links...
+  Found 10 category pages to scrape (after filter)
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies/
+    Found 6 page(s) in https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/power-and-protection/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/cleaning-accessories/
+    Found 1 page(s) in https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/cleaning-accessories/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/cleaning-accessories/
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases/
+    Found 16 page(s) in https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers/
+    Found 21 page(s) in https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=17
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=17
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=18
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=18
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=19
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=19
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=20
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=20
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=21
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/usb-chargers?view=thumbnails&recordsPerPage=12&sortBy=newest&page=21
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases/
+    Found 16 page(s) in https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/school-supplies/laptop-cases?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops/
+    Found 36 page(s) in https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=17
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=17
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=18
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=18
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=19
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=19
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=20
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=20
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=21
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=21
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=22
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=22
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=23
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=23
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=24
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=24
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=25
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=25
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=26
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=26
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=27
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=27
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=28
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=28
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=29
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=29
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=30
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=30
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=31
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=31
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=32
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=32
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=33
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=33
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=34
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=34
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=35
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=35
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=36
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=36
+[OK] Fetched: https://www.stephanis.com.cy/el/products/last-pieces/last-pieces-information-technology/laptops/
+    Found 3 page(s) in https://www.stephanis.com.cy/el/products/last-pieces/last-pieces-information-technology/laptops/
+    Fetching page: https://www.stephanis.com.cy/el/products/last-pieces/last-pieces-information-technology/laptops/
+    Fetching page: https://www.stephanis.com.cy/el/products/last-pieces/last-pieces-information-technology/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Fetched: https://www.stephanis.com.cy/el/products/last-pieces/last-pieces-information-technology/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+    Fetching page: https://www.stephanis.com.cy/el/products/last-pieces/last-pieces-information-technology/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Fetched: https://www.stephanis.com.cy/el/products/last-pieces/last-pieces-information-technology/laptops?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-accessories/
+    Found 1 page(s) in https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-accessories/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/laptop-accessories/
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/cooling-pads/
+    Found 2 page(s) in https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/cooling-pads/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/cooling-pads/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/cooling-pads?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/cooling-pads?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies/
+    Found 6 page(s) in https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies/
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+    Fetching page: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+[OK] Fetched: https://www.stephanis.com.cy/el/products/information-technology/laptops-and-accessories/notebooks-pc-power-supplies?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+Scraping category: laptops
+[OK] Fetched: https://www.stephanis.com.cy/laptops
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/laptops
+[OK] Fetched: https://www.stephanis.com.cy/category/laptops
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/category/laptops
+[OK] Fetched: https://www.stephanis.com.cy/products/laptops
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/products/laptops
+[OK] Fetched: https://www.stephanis.com.cy/shop/laptops
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/shop/laptops
+[OK] Fetched: https://www.stephanis.com.cy/el/laptops
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/el/laptops
+  Found 0 products
+
+
+Fetching prices from product pages...
+  0 products need price information
+
+[OK] Total products found: 1249
+[OK] Browser closed for stephanis
+[OK] stephanis: 1249 products scraped
+
+============================================================
+Saving products to database...
+[OK] Created: 1105 products
+[OK] Updated: 291 products
+[OK] Total processed: 1396 products
+============================================================
+
+
+============================================================
+RUNNING PRODUCT MATCHING
+============================================================
+
+Matching 1105 unmatched products...
+  Progress: 10/1105
+  Progress: 20/1105
+  Progress: 30/1105
+  Progress: 40/1105
+  Progress: 50/1105
+  Progress: 60/1105
+  Progress: 70/1105
+  Progress: 80/1105
+  Progress: 90/1105
+  Progress: 100/1105
+  Progress: 110/1105
+  Progress: 120/1105
+  Progress: 130/1105
+  Progress: 140/1105
+  Progress: 150/1105
+  Progress: 160/1105
+  Progress: 170/1105
+  Progress: 180/1105
+  Progress: 190/1105
+  Progress: 200/1105
+  Progress: 210/1105
+  Progress: 220/1105
+  Progress: 230/1105
+  Progress: 240/1105
+  Progress: 250/1105
+  Progress: 260/1105
+  Progress: 270/1105
+  Progress: 280/1105
+  Progress: 290/1105
+  Progress: 300/1105
+  Progress: 310/1105
+  Progress: 320/1105
+  Progress: 330/1105
+  Progress: 340/1105
+  Progress: 350/1105
+  Progress: 360/1105
+  Progress: 370/1105
+  Progress: 380/1105
+  Progress: 390/1105
+  Progress: 400/1105
+  Progress: 410/1105
+  Progress: 420/1105
+  Progress: 430/1105
+  Progress: 440/1105
+  Progress: 450/1105
+  Progress: 460/1105
+  Progress: 470/1105
+  Progress: 480/1105
+  Progress: 490/1105
+  Progress: 500/1105
+  Progress: 510/1105
+  Progress: 520/1105
+  Progress: 530/1105
+  Progress: 540/1105
+  Progress: 550/1105
+  Progress: 560/1105
+  Progress: 570/1105
+  Progress: 580/1105
+  Progress: 590/1105
+  Progress: 600/1105
+  Progress: 610/1105
+  Progress: 620/1105
+  Progress: 630/1105
+  Progress: 640/1105
+  Progress: 650/1105
+  Progress: 660/1105
+  Progress: 670/1105
+  Progress: 680/1105
+  Progress: 690/1105
+  Progress: 700/1105
+  Progress: 710/1105
+  Progress: 720/1105
+  Progress: 730/1105
+  Progress: 740/1105
+  Progress: 750/1105
+  Progress: 760/1105
+  Progress: 770/1105
+  Progress: 780/1105
+  Progress: 790/1105
+  Progress: 800/1105
+  Progress: 810/1105
+  Progress: 820/1105
+  Progress: 830/1105
+  Progress: 840/1105
+  Progress: 850/1105
+  Progress: 860/1105
+  Progress: 870/1105
+  Progress: 880/1105
+  Progress: 890/1105
+  Progress: 900/1105
+  Progress: 910/1105
+  Progress: 920/1105
+  Progress: 930/1105
+  Progress: 940/1105
+  Progress: 950/1105
+  Progress: 960/1105
+  Progress: 970/1105
+  Progress: 980/1105
+  Progress: 990/1105
+  Progress: 1000/1105
+  Progress: 1010/1105
+  Progress: 1020/1105
+  Progress: 1030/1105
+  Progress: 1040/1105
+  Progress: 1050/1105
+  Progress: 1060/1105
+  Progress: 1070/1105
+  Progress: 1080/1105
+  Progress: 1090/1105
+  Progress: 1100/1105
+
+============================================================
+PRODUCT MATCHING RESULTS
+============================================================
+Total products processed: 1105
+Matched to existing masters: 346
+New master products created: 759
+Already matched: 0
+============================================================
+
+
+Database Summary:
+  Total products: 1105
+  Matched products: 1105
+  Master products: 759
+  Stores: public, stephanis
+  Average products per master: 1.5

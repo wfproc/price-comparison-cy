@@ -47,9 +47,9 @@ PUBLIC_CATEGORY_KEYWORDS = {
 # Category keywords for Stephanis (based on their URL structure)
 # Stephanis uses /el/products/{category}/{subcategory}/ pattern
 STEPHANIS_CATEGORY_KEYWORDS = {
-    "smartphones": ["telecommunications/mobile-phones", "mobile-phone", "smartphone"],
-    "laptops": ["information-technology/laptops", "laptop", "notebook"],
-    "tablets": ["information-technology/tablets", "tablet", "ipad"],
+    "smartphones": ["smartphones-and-feature-phones", "telecommunications/mobile-phones", "mobile-phone", "smartphone"],
+    "laptops": ["laptops-and-accessories", "information-technology/laptops", "laptop", "notebook"],
+    "tablets": ["tablets-and-ereaders", "information-technology/tablets", "tablet", "ipad"],
     "computers": ["information-technology/computers", "desktop", "pc"],
     "televisions": ["image-and-sound/televisions", "tv", "television"],
     "gaming": ["gaming/gaming-consoles", "gaming/", "playstation", "xbox", "nintendo"],

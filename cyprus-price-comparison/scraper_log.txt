@@ -1,0 +1,1651 @@
+============================================================
+CYPRUS PRICE COMPARISON PIPELINE
+============================================================
+Database: sqlite:///products.db
+Rate Limit: 1.0 req/sec
+Cache: Enabled
+Categories: smartphones
+============================================================
+
+Initializing database...
+Database initialized at sqlite:///products.db
+
+[INFO] Category filter set: smartphones
+[INFO] Stephanis category filter set: smartphones
+
+============================================================
+Scraping PUBLIC
+============================================================
+
+Category Filter: smartphones
+[WARNING] robots.txt not found for www.public.cy (status 403)
+[OK] Browser initialized for public with anti-detection
+Step 1: Fetching sitemap...
+[WARNING] Sitemap fetch failed with status 403, will try with browser
+[INFO] Fetching sitemap using browser...
+[WARNING] Could not parse sitemap XML: not well-formed (invalid token): line 3, column 6
+[WARNING] No URLs found in sitemap, using fallback strategy
+[OK] Using cached: https://www.public.cy/
+  Discovered 1142 URLs from homepage
+  Example discovered URLs:
+    - https://www.public.cy/root/dora/technologia
+    - https://www.public.cy/cat/fotografia/photo-brands/nikon
+    - https://www.public.cy/cat/ekptoseis/ypologistes/monitors
+    - https://www.public.cy/cat/thermansi-klimatismos/air-condition/klimatistika/btu/18000btu
+    - https://www.public.cy/cat/fotografia/aksesoyar-fotografikon/tripoda
+    - https://www.public.cy/root/comics/foreign-comics-and-manga
+    - https://www.public.cy/root/thermansi-klimatismos/air-condition/klimatistika/btu
+    - https://www.public.cy/cat/thermansi-klimatismos/air-condition/klimatistika/brand/daikin
+    - https://www.public.cy/cat/books/greek-books/natural-science/texnika
+    - https://www.public.cy/cat/prosopiki-frontida-and-omorfia/brands-proswpikis-frontidas/therabody
+
+Step 2: Organizing and filtering URLs...
+  Found 155 /root/ category pages (before filter)
+  Found 975 /cat/ listing pages (before filter)
+
+  Applying filter for keywords: {'smartphones': ['tilefonia', 'kinita-smartphones'], 'laptops': ['laptop', 'notebooks', 'portable-computers'], 'tablets': ['tablet', 'ipad'], 'computers': ['computers-and-software', 'perifereiaka', 'desktop'], 'televisions': ['tileoraseis', 'tv'], 'gaming': ['gaming', 'playstation', 'xbox', 'nintendo', 'board-games'], 'audio': ['ihos', 'audio', 'headphones', 'speakers'], 'cameras': ['fotografia', 'camera', 'photo', 'fotografikes'], 'accessories': ['aksesoyar', 'kiniton'], 'appliances': ['oikiakes-syskeyes', 'oikiakes-mikrosyskeyes', 'thermansi-klimatismos'], 'books': ['books', 'greek-books', 'english'], 'stationery': ['xartika'], 'kids': ['kids-and-toys', 'paidika', 'hobbies'], 'home': ['home', 'prosopiki-frontida-and-omorfia']}
+  Example /root/ URLs before filter:
+    - https://www.public.cy/root/dora/technologia
+    - https://www.public.cy/root/comics/foreign-comics-and-manga
+    - https://www.public.cy/root/thermansi-klimatismos/air-condition/klimatistika/btu
+    - https://www.public.cy/root/oikiakes-mikrosyskeyes/skeyi-mageirikis
+    - https://www.public.cy/root/ihos/hxeia
+
+  Matched /root/ URLs:
+    - https://www.public.cy/root/tilefonia
+    - https://www.public.cy/root/tilefonia/wearables
+
+  After category filter:
+  - 2 /root/ pages match
+  - 24 /cat/ pages match
+
+Step 3: Processing 26 URLs from queue...
+
+[1/200] Processing: https://www.public.cy/root/tilefonia
+  Type: Category Landing Page (/root/)
+[OK] Using cached: https://www.public.cy/root/tilefonia
+  Discovered 1410 sub-pages
+  Total products so far: 0
+
+[2/200] Processing: https://www.public.cy/root/tilefonia/wearables
+  Type: Category Landing Page (/root/)
+[OK] Using cached: https://www.public.cy/root/tilefonia/wearables
+  Discovered 1409 sub-pages
+  Total products so far: 0
+
+[3/200] Processing: https://www.public.cy/cat/tilefonia/wearables/huawei
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/huawei
+  Found 40 product links on https://www.public.cy/cat/tilefonia/wearables/huawei
+  Extracted 20 products
+  Total products so far: 20
+
+[4/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/motorola
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/motorola
+  Found 8 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/motorola
+  Extracted 4 products
+  Total products so far: 24
+
+[5/200] Processing: https://www.public.cy/cat/tilefonia/wearables/prostasia-othonis-wearables
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/prostasia-othonis-wearables
+  Found 0 product links on https://www.public.cy/cat/tilefonia/wearables/prostasia-othonis-wearables
+  Extracted 0 products
+  Total products so far: 24
+
+[6/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/xiaomi/f/apothhkeytikos-xwros:128-gb/f/montelo:redmi-note-14-5g/f/ribbons:cy-in-sale
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/xiaomi/f/apothhkeytikos-xwros:128-gb/f/montelo:redmi-note-14-5g/f/ribbons:cy-in-sale
+  Found 4 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/xiaomi/f/apothhkeytikos-xwros:128-gb/f/montelo:redmi-note-14-5g/f/ribbons:cy-in-sale
+  Extracted 2 products
+  Total products so far: 26
+
+[7/200] Processing: https://www.public.cy/cat/tilefonia/wearables/activity-trackers
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/activity-trackers
+  Found 36 product links on https://www.public.cy/cat/tilefonia/wearables/activity-trackers
+  Extracted 15 products
+  Total products so far: 41
+
+[8/200] Processing: https://www.public.cy/cat/tilefonia/wearables/garmin
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/garmin
+  Found 14 product links on https://www.public.cy/cat/tilefonia/wearables/garmin
+  Extracted 7 products
+  Total products so far: 48
+
+[9/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones
+  Found 0 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones
+  Extracted 0 products
+  Total products so far: 48
+
+[10/200] Processing: https://www.public.cy/cat/tilefonia/wearables/wearable-accessories
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/wearable-accessories
+  Found 30 product links on https://www.public.cy/cat/tilefonia/wearables/wearable-accessories
+  Extracted 15 products
+  Total products so far: 63
+
+[11/200] Processing: https://www.public.cy/cat/tilefonia/wearables/lourakia-wearables
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/lourakia-wearables
+  Found 72 product links on https://www.public.cy/cat/tilefonia/wearables/lourakia-wearables
+  Extracted 29 products
+  Total products so far: 92
+
+[12/200] Processing: https://www.public.cy/cat/tilefonia/wearables/smartwatches
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/smartwatches
+  Found 72 product links on https://www.public.cy/cat/tilefonia/wearables/smartwatches
+  Extracted 32 products
+  Total products so far: 124
+
+[13/200] Processing: https://www.public.cy/cat/tilefonia/wearables/samsung
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/samsung
+  Found 0 product links on https://www.public.cy/cat/tilefonia/wearables/samsung
+  Extracted 0 products
+  Total products so far: 124
+
+[14/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/samsung-smartphones/galaxy-s25
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/samsung-smartphones/galaxy-s25
+  Found 52 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/samsung-smartphones/galaxy-s25
+  Extracted 26 products
+  Total products so far: 150
+
+[15/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/f/montelo:galaxy-s24~galaxy-s24-plus~galaxy-s24-ultra
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/f/montelo:galaxy-s24~galaxy-s24-plus~galaxy-s24-ultra
+  Found 0 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/f/montelo:galaxy-s24~galaxy-s24-plus~galaxy-s24-ultra
+  Extracted 0 products
+  Total products so far: 150
+
+[16/200] Processing: https://www.public.cy/cat/tilefonia/wearables/xiaomi
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/xiaomi
+  Found 44 product links on https://www.public.cy/cat/tilefonia/wearables/xiaomi
+  Extracted 10 products
+  Total products so far: 160
+
+[17/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/xiaomi
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/xiaomi
+  Found 72 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/xiaomi
+  Extracted 34 products
+  Total products so far: 194
+
+[18/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/samsung-smartphones
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/samsung-smartphones
+  Found 72 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/samsung-smartphones
+  Extracted 25 products
+  Total products so far: 219
+
+[19/200] Processing: https://www.public.cy/cat/tilefonia/fixed-telephony/asyrmata-tilefona
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/fixed-telephony/asyrmata-tilefona
+  Found 0 product links on https://www.public.cy/cat/tilefonia/fixed-telephony/asyrmata-tilefona
+  Extracted 0 products
+  Total products so far: 219
+
+[20/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/f/extra-xarakthristika:ai-powered
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/f/extra-xarakthristika:ai-powered
+  Found 72 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/f/extra-xarakthristika:ai-powered
+  Extracted 7 products
+  Total products so far: 226
+
+[21/200] Processing: https://www.public.cy/cat/tilefonia/wearables/smart-rings
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/smart-rings
+  Found 34 product links on https://www.public.cy/cat/tilefonia/wearables/smart-rings
+  Extracted 17 products
+  Total products so far: 243
+
+[22/200] Processing: https://www.public.cy/cat/tilefonia/fixed-telephony
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/fixed-telephony
+  Found 72 product links on https://www.public.cy/cat/tilefonia/fixed-telephony
+  Extracted 36 products
+  Total products so far: 279
+
+[23/200] Processing: https://www.public.cy/cat/tilefonia/fixed-telephony/ensyrmata-tilefona
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/fixed-telephony/ensyrmata-tilefona
+  Found 10 product links on https://www.public.cy/cat/tilefonia/fixed-telephony/ensyrmata-tilefona
+  Extracted 0 products
+  Total products so far: 279
+
+[24/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/samsung-smartphones/galaxy-z
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/samsung-smartphones/galaxy-z
+  Found 32 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/samsung-smartphones/galaxy-z
+  Extracted 9 products
+  Total products so far: 288
+
+[25/200] Processing: https://www.public.cy/cat/tilefonia/wearables/fortistes-wearables
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/fortistes-wearables
+  Found 6 product links on https://www.public.cy/cat/tilefonia/wearables/fortistes-wearables
+  Extracted 3 products
+  Total products so far: 291
+
+[26/200] Processing: https://www.public.cy/cat/tilefonia/fixed-telephony/aksesouar-statheris-tilefwnias
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/fixed-telephony/aksesouar-statheris-tilefwnias
+  Found 2 product links on https://www.public.cy/cat/tilefonia/fixed-telephony/aksesouar-statheris-tilefwnias
+  Extracted 1 products
+  Total products so far: 292
+
+[27/200] Processing: https://www.public.cy/cat/tilefonia/kinita-aplis-hrisis
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-aplis-hrisis
+  Found 12 product links on https://www.public.cy/cat/tilefonia/kinita-aplis-hrisis
+  Extracted 6 products
+  Total products so far: 298
+
+[28/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/f/ribbons:public-cy-epilogi
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/f/ribbons:public-cy-epilogi
+  Found 4 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/f/ribbons:public-cy-epilogi
+  Extracted 1 products
+  Total products so far: 299
+
+[29/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/huawei
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/huawei
+  Found 0 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/huawei
+  Extracted 0 products
+  Total products so far: 299
+
+[30/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/realme
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/realme
+  Found 24 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/realme
+  Extracted 12 products
+  Total products so far: 311
+
+[31/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/oppo
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/oppo
+  Found 48 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/oppo
+  Extracted 24 products
+  Total products so far: 335
+
+[32/200] Processing: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/poco
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/poco
+  Found 34 product links on https://www.public.cy/cat/tilefonia/kinita-smartphones/smartphone-brands/poco
+  Extracted 16 products
+  Total products so far: 351
+
+[33/200] Processing: https://www.public.cy/cat/tilefonia/wearables/thikes-wearables
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/thikes-wearables
+  Found 2 product links on https://www.public.cy/cat/tilefonia/wearables/thikes-wearables
+  Extracted 1 products
+  Total products so far: 352
+
+[34/200] Processing: https://www.public.cy/cat/tilefonia/wearables/smartwatches/f/montelo:redmi-watch-5-lite
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/smartwatches/f/montelo:redmi-watch-5-lite
+  Found 0 product links on https://www.public.cy/cat/tilefonia/wearables/smartwatches/f/montelo:redmi-watch-5-lite
+  Extracted 0 products
+  Total products so far: 352
+
+[35/200] Processing: https://www.public.cy/cat/tilefonia/wearables/ar-glasses
+  Type: Product Listing Page (/cat/)
+[OK] Using cached: https://www.public.cy/cat/tilefonia/wearables/ar-glasses
+  Found 0 product links on https://www.public.cy/cat/tilefonia/wearables/ar-glasses
+  Extracted 0 products
+  Total products so far: 352
+
+
+Step 5: Fetching missing product prices...
+  352 products need price information
+  [1/352] Fetching price for: Activity Tracker Huawei Band 10  Pink...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-huawei-band-10--pink/2013868
+      [OK] Price: 38.9 EUR
+  [2/352] Fetching price for: Activity Tracker Huawei Band 10  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-huawei-band-10--black/2013867
+      [OK] Price: 38.9 EUR
+  [3/352] Fetching price for: Activity Tracker Huawei Band 10  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-huawei-band-10--white/2013869
+      [OK] Price: 48.9 EUR
+  [4/352] Fetching price for: Smartwatch Huawei Watch Fit Special Edition 46Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-fit-special-edition-46mm--starry-black/1841393
+      [OK] Price: 69.9 EUR
+  [5/352] Fetching price for: Smartwatch Huawei Watch Fit 3 46Mm  Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-fit-3-46mm--green/1925976
+      [OK] Price: 109.0 EUR
+  [6/352] Fetching price for: Smartwatch Huawei Watch Fit 3 46Mm  Pink...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-fit-3-46mm--pink/1925975
+      [OK] Price: 119.0 EUR
+  [7/352] Fetching price for: Smartwatch Huawei Watch Fit 3 46Mm  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-fit-3-46mm--white/1925964
+      [OK] Price: 139.0 EUR
+  [8/352] Fetching price for: Smartwatch Huawei Watch Fit 3 46Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-fit-3-46mm--black/1925963
+      [OK] Price: 180.0 EUR
+  [9/352] Fetching price for: Smartwatch Huawei Watch Gt 5 46Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-5-46mm--black/1964635
+      [OK] Price: 188.0 EUR
+  [10/352] Fetching price for: Smartwatch Huawei Watch Gt 5 41Mm  Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-5-41mm--blue/1964637
+      [OK] Price: 189.0 EUR
+  [11/352] Fetching price for: Smartwatch Huawei Watch Gt 4 46Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-4-46mm--black/1844995
+      [OK] Price: 192.99 EUR
+  [12/352] Fetching price for: Smartwatch Huawei Watch Gt 5 41Mm  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-5-41mm--white/1964638
+      [OK] Price: 201.0 EUR
+  [13/352] Fetching price for: Smartwatch Huawei Watch Gt 5 46Mm  Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-5-46mm--blue/1964636
+      [OK] Price: 211.0 EUR
+  [14/352] Fetching price for: Smartwatch Huawei Watch Gt 6 46Mm  Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-6-46mm--green/2072303
+      [OK] Price: 239.0 EUR
+  [15/352] Fetching price for: Smartwatch Huawei Watch Gt 6 46Mm  Grey Leather...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-6-46mm--grey-leather/2072302
+      [OK] Price: 239.0 EUR
+  [16/352] Fetching price for: Smartwatch Huawei Watch Gt 6 46Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-6-46mm--black/2072301
+      [OK] Price: 239.0 EUR
+  [17/352] Fetching price for: Smartwatch Huawei Watch Gt 5 Pro 46Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-5-pro-46mm--black/1964640
+      [OK] Price: 299.0 EUR
+  [18/352] Fetching price for: Smartwatch Huawei Watch 4 Lte 46Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-4-lte-46mm--black/1829023
+      [OK] Price: 467.0 EUR
+  [19/352] Fetching price for: Smartwatch Huawei Watch Gt 6 Pro 46Mm  Titanium...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-gt-6-pro-46mm--titanium/2072430
+      [OK] Price: 479.0 EUR
+  [20/352] Fetching price for: Smartwatch Huawei Watch 4 Pro Space Edition 49Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-huawei-watch-4-pro-space-edition-49mm--titanium/1925961
+      [OK] Price: 649.0 EUR
+  [21/352] Fetching price for: Motorola Moto E14 64Gb  Graphite Gray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/motorola-moto-e14-64gb--graphite-gray/2013761
+      [OK] Price: 99.89 EUR
+  [22/352] Fetching price for: Motorola Edge 50 Pro 5G 512Gb  Black Beauty...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/motorola-edge-50-pro-5g-512gb--black-beauty/1924772
+      [OK] Price: 598.0 EUR
+  [23/352] Fetching price for: Motorola Edge 50 Ultra 1Tb  Forest Grey...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/motorola-edge-50-ultra-1tb--forest-grey/1938115
+      [OK] Price: 799.0 EUR
+  [24/352] Fetching price for: Motorola Moto G14 256Gb  Butter Cream...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/motorola-moto-g14-256gb--butter-cream/1903544
+      [OK] Price: 169.0 EUR
+  [25/352] Fetching price for: Xiaomi Redmi Note 14 5G 128Gb  Purple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-5g-128gb--purple/1993556
+      [OK] Price: 219.9 EUR
+  [26/352] Fetching price for: Xiaomi Redmi Note 14 5G 128Gb  Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-5g-128gb--green/1993555
+      [OK] Price: 219.9 EUR
+  [27/352] Fetching price for: Activity Tracker Samsung Galaxy Fit 3  Gray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-samsung-galaxy-fit-3--gray/1906471
+      [OK] Price: 59.9 EUR
+  [28/352] Fetching price for: Activity Tracker Samsung Galaxy Fit 3  Pink Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-samsung-galaxy-fit-3--pink-gold/1906470
+      [OK] Price: 59.9 EUR
+  [29/352] Fetching price for: Activity Tracker Samsung Galaxy Fit 3  Leuko...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-samsung-galaxy-fit-3--leuko/1906472
+      [OK] Price: 59.9 EUR
+  [30/352] Fetching price for: Activity Tracker Hifuture Evo2  Sophisticated Beig...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-hifuture-evo2--sophisticated-beige/1961329
+      [OK] Price: 19.99 EUR
+  [31/352] Fetching price for: Activity Tracker Hifuture Evo2  Elegant Pink...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-hifuture-evo2--elegant-pink/1961328
+[OK] Fetched: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-hifuture-evo2--elegant-pink/1961328
+      [WARN] Could not fetch price
+  [32/352] Fetching price for: Smart Band Kiddoboo  Roz...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/smart-band-kiddoboo--roz/1652406
+      [OK] Price: 29.9 EUR
+  [33/352] Fetching price for: Activity Tracker Xiaomi Smart Band 9 Active  Pink...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-xiaomi-smart-band-9-active--pink/1987306
+      [OK] Price: 29.9 EUR
+  [34/352] Fetching price for: Smart Band Kiddoboo  Mple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/smart-band-kiddoboo--mple/1651027
+      [OK] Price: 29.9 EUR
+  [35/352] Fetching price for: Activity Tracker Xiaomi Smart Band 9 Active  Purpl...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-xiaomi-smart-band-9-active--purple/2071675
+      [OK] Price: 29.89 EUR
+  [36/352] Fetching price for: Activity Tracker Xiaomi Smart Band 9 Active  Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-xiaomi-smart-band-9-active--green/2071554
+      [OK] Price: 29.89 EUR
+  [37/352] Fetching price for: Activity Tracker Xiaomi Smart Band 9 Active  Beige...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-xiaomi-smart-band-9-active--beige-white/1987305
+      [OK] Price: 29.9 EUR
+  [38/352] Fetching price for: Activity Tracker Xiaomi Smart Band 10  Mystic Rose...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-xiaomi-smart-band-10--mystic-rose/2057038
+      [OK] Price: 49.9 EUR
+  [39/352] Fetching price for: Activity Tracker Xiaomi Smart Band 10  Glacier Sil...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-xiaomi-smart-band-10--glacier-silver/2057039
+      [OK] Price: 49.9 EUR
+  [40/352] Fetching price for: Activity Tracker Xiaomi Smart Band 10  Midnight Bl...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-xiaomi-smart-band-10--midnight-black/2057040
+      [OK] Price: 49.9 EUR
+  [41/352] Fetching price for: Activity Tracker Xiaomi Smart Band 9 Active  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/activity-trackers/activity-tracker-xiaomi-smart-band-9-active--black/1987304
+      [OK] Price: 19.99 EUR
+  [42/352] Fetching price for: Smartwatch Garmin Vivoactive 6 42Mm  Slate With Bl...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-garmin-vivoactive-6-42mm--slate-with-black/2024818
+      [OK] Price: 329.0 EUR
+  [43/352] Fetching price for: Smartwatch Garmin Instinct 3 Amoled 45Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-garmin-instinct-3-amoled-45mm--black/1995305
+      [OK] Price: 449.0 EUR
+  [44/352] Fetching price for: Smartwatch Garmin Epix Pro 42Mm  Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-garmin-epix-pro-42mm--silver/1828298
+      [OK] Price: 658.0 EUR
+  [45/352] Fetching price for: Smartwatch Garmin Venu X1 41Mm  Black With Slate T...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-garmin-venu-x1-41mm--black-with-slate-titanium/2044172
+      [OK] Price: 799.0 EUR
+  [46/352] Fetching price for: Smartwatch Garmin Epix Pro Gen 2 Sapphire Edition ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-garmin-epix-pro-gen-2-sapphire-edition-47mm--whitestone-titanium/1828303
+      [OK] Price: 1049.0 EUR
+  [47/352] Fetching price for: Smartwatch Garmin Epix Pro Sapphire Edition 42Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-garmin-epix-pro-sapphire-edition-42mm--soft-gold/1828299
+      [OK] Price: 1049.0 EUR
+  [48/352] Fetching price for: Smartwatch Garmin Epix Pro Gen 2 Sapphire Edition ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-garmin-epix-pro-gen-2-sapphire-edition-51mm--whitestone-titanium/1828306
+      [OK] Price: 1149.0 EUR
+  [49/352] Fetching price for: Louraki Gia Apple Watch 41Mm Nike Sport Loop  Summ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-gia-apple-watch-41mm-nike-sport-loop--summit-whiteblack/1720258
+      [OK] Price: 29.9 EUR
+  [50/352] Fetching price for: Louraki Gia Apple Watch 41Mm Nike Sport Loop  Sequ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-gia-apple-watch-41mm-nike-sport-loop--sequoiapure-platinum/1720260
+      [OK] Price: 29.9 EUR
+  [51/352] Fetching price for: Louraki Gia Apple Watch 41Mm Sport Loop  Kokkino...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-gia-apple-watch-41mm-sport-loop--kokkino/1720250
+      [OK] Price: 54.89 EUR
+  [52/352] Fetching price for: Louraki Epektasis Gia Apple Watch 49Mm Loop  Yello...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-epektasis-gia-apple-watch-49mm-loop--yellow-ocean-band-extension/1720298
+      [OK] Price: 29.9 EUR
+  [53/352] Fetching price for: Louraki Epektasis Gia Apple Watch 49Mm Loop  Midni...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-epektasis-gia-apple-watch-49mm-loop--midnight-ocean-band-extension/1720300
+      [OK] Price: 29.9 EUR
+  [54/352] Fetching price for: Louraki Apple Nike Sport Band Gia Apple Watch 41Mm...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-apple-nike-sport-band-gia-apple-watch-41mm--xakimauro/1720233
+      [OK] Price: 38.9 EUR
+  [55/352] Fetching price for: Louraki Epektasis Gia Apple Watch 49Mm Loop  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-epektasis-gia-apple-watch-49mm-loop--white-ocean-band-extension/1720296
+      [OK] Price: 29.9 EUR
+  [56/352] Fetching price for: Louraki Apple Nike Sport Band Gia Apple Watch 41Mm...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-apple-nike-sport-band-gia-apple-watch-41mm--kokkino/1720234
+      [OK] Price: 29.9 EUR
+  [57/352] Fetching price for: Apple Watch Band 4244Mm Laut Steel Loop  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/apple-watch-band-4244mm-laut-steel-loop--black/1345508
+      [OK] Price: 39.9 EUR
+  [58/352] Fetching price for: Band Sport Apple Watch 41Mm Ab Blue Rgl...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/band-sport-apple-watch-41mm-ab-blue-rgl/1645626
+      [OK] Price: 9.0 EUR
+  [59/352] Fetching price for: Louraki Samsung Hybrid Eco Leather Normal Sm Gia S...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-samsung-hybrid-eco-leather-normal-sm-gia-samsung-galaxy-watch6--mauro/1838888
+      [OK] Price: 79.9 EUR
+  [60/352] Fetching price for: Louraki Garmin Quickfit 26 Silicone Band Gia Garmi...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-garmin-quickfit-26-silicone-band-gia-garmin-quickfit-26mm--black/1966840
+      [OK] Price: 51.9 EUR
+  [61/352] Fetching price for: Louraki Xiaomi Bhr9916Gl Gia Xiaomi Watch S3S4  Bl...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-xiaomi-bhr9916gl-gia-xiaomi-watch-s3s4--bluegray/2028114
+      [OK] Price: 59.9 EUR
+  [62/352] Fetching price for: Louraki Xiaomi Bhr9914Gl Gia Xiaomi Watch S3S4  Pi...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/louraki-xiaomi-bhr9914gl-gia-xiaomi-watch-s3s4--pine-green/2028113
+      [OK] Price: 39.9 EUR
+  [63/352] Fetching price for: Band Buckle Apwatch 40Mm Large Pink Ctrs...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/band-buckle-apwatch-40mm-large-pink-ctrs/1626673
+[OK] Fetched: https://www.public.cy/product/tilefonia/wearables/wearable-accessories/band-buckle-apwatch-40mm-large-pink-ctrs/1626673
+      [WARN] Could not fetch price
+  [64/352] Fetching price for: Puro Icon Apple Watch 4442Mm  Anallaktiko Louraki ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/puro-icon-apple-watch-4442mm--anallaktiko-louraki-mple/1416129
+      [OK] Price: 1.0 EUR
+  [65/352] Fetching price for: Louraki Puro Sm Ml Gia Apple Watch 424445Mm  Koral...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-puro-sm-ml-gia-apple-watch-424445mm--korali/1416128
+      [OK] Price: 1.0 EUR
+  [66/352] Fetching price for: Louraki Galaxy Fit E Gia Samsung Galaxy Fit E  Leu...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-galaxy-fit-e-gia-samsung-galaxy-fit-e--leuko/1388029
+      [OK] Price: 1.0 EUR
+  [67/352] Fetching price for: Louraki Xiaomi Tpu Strap Gia Xiaomi Smart Band 8  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-xiaomi-tpu-strap-gia-xiaomi-smart-band-8--portokali/1866878
+      [OK] Price: 7.98 EUR
+  [68/352] Fetching price for: Louraki Xiaomi Tpu Strap Gia Xiaomi Smart Band 8  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-xiaomi-tpu-strap-gia-xiaomi-smart-band-8--mple/1866877
+      [OK] Price: 7.98 EUR
+  [69/352] Fetching price for: Louraki Xiaomi Silicone Strap Gia Xiaomi Redmi Wat...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-xiaomi-silicone-strap-gia-xiaomi-redmi-watch-3--lime-green/1835648
+      [OK] Price: 8.98 EUR
+  [70/352] Fetching price for: Louraki Xiaomi Silicone Strap Gia Xiaomi Redmi Wat...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-xiaomi-silicone-strap-gia-xiaomi-redmi-watch-3--aqua-blue/1835647
+      [OK] Price: 8.98 EUR
+  [71/352] Fetching price for: Louraki Xiaomi Running Clip Gia Xiaomi Smart Band ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-xiaomi-running-clip-gia-xiaomi-smart-band-8--prasino/1866879
+      [OK] Price: 9.98 EUR
+  [72/352] Fetching price for: Louraki Celly Silicone Band Gia Apple Watch 384041...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-celly-silicone-band-gia-apple-watch-384041mm--black/1925112
+      [OK] Price: 12.98 EUR
+  [73/352] Fetching price for: Louraki Celly Silicone Band Gia Apple Watch 424445...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-celly-silicone-band-gia-apple-watch-424445mm--pink/1925109
+      [OK] Price: 12.98 EUR
+  [74/352] Fetching price for: Louraki Uniq Revix Reversible Magnetic Gia Apple W...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-uniq-revix-reversible-magnetic-gia-apple-watch-424445mm--charcoal-greyorange/1651896
+      [OK] Price: 24.89 EUR
+  [75/352] Fetching price for: Louraki Apple Sport Band Ml Gia Apple Watch 45Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-ml-gia-apple-watch-45mm--pink/1858170
+      [OK] Price: 28.89 EUR
+  [76/352] Fetching price for: Louraki Apple Sport Band Sm Gia Apple Watch 41Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-sm-gia-apple-watch-41mm--storm-blue/1858139
+      [OK] Price: 28.89 EUR
+  [77/352] Fetching price for: Louraki Apple Sport Band Sm Gia Apple Watch 41Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-sm-gia-apple-watch-41mm--clay/1858098
+      [OK] Price: 28.89 EUR
+  [78/352] Fetching price for: Louraki Uniq Revix Gia Apple Watch 38Mm  Lilac Whi...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-uniq-revix-gia-apple-watch-38mm--lilac-white/1866865
+      [OK] Price: 29.9 EUR
+  [79/352] Fetching price for: Louraki Apple Leather Link Ml Gia Apple Watch 41Mm...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-leather-link-ml-gia-apple-watch-41mm--mob/1720242
+      [OK] Price: 29.9 EUR
+  [80/352] Fetching price for: Louraki Uniq Aspen Strap Braided Gia Apple Watch 4...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-uniq-aspen-strap-braided-gia-apple-watch-4244mm--oxford-blue/1636589
+      [OK] Price: 29.9 EUR
+  [81/352] Fetching price for: Strap Uniq Apple Watch 4442Mm Grey...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/strap-uniq-apple-watch-4442mm-grey/1636588
+      [OK] Price: 29.9 EUR
+  [82/352] Fetching price for: Strap Uniq Apple Watch 4442Mm Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/strap-uniq-apple-watch-4442mm-green/1636587
+      [OK] Price: 29.9 EUR
+  [83/352] Fetching price for: Strap Uniq Apple Watch 4038Mm Grey...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/strap-uniq-apple-watch-4038mm-grey/1636584
+      [OK] Price: 29.9 EUR
+  [84/352] Fetching price for: Laut Active Strap 4244Mm Mple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/laut-active-strap-4244mm-mple/1489154
+      [OK] Price: 29.9 EUR
+  [85/352] Fetching price for: Louraki Apple Sport Band Ml Gia Apple Watch 45Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-ml-gia-apple-watch-45mm--sunshine/2004074
+      [OK] Price: 34.9 EUR
+  [86/352] Fetching price for: Louraki Apple Sport Band Sm Gia Apple Watch 45Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-sm-gia-apple-watch-45mm--soft-mint/2004073
+      [OK] Price: 34.9 EUR
+  [87/352] Fetching price for: Louraki Apple Sport Band Ml Gia Apple Watch 45Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-ml-gia-apple-watch-45mm--soft-mint/2004072
+      [OK] Price: 34.9 EUR
+  [88/352] Fetching price for: Louraki Apple Sport Band Sm Gia Apple Watch 45Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-sm-gia-apple-watch-45mm--light-blue/2004069
+      [OK] Price: 34.9 EUR
+  [89/352] Fetching price for: Louraki Apple Sport Band Ml Gia Apple Watch 45Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-ml-gia-apple-watch-45mm--light-blue/2004068
+      [OK] Price: 34.9 EUR
+  [90/352] Fetching price for: Louraki Apple Sport Band Ml Gia Apple Watch 41Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-ml-gia-apple-watch-41mm--sunshine/2004067
+      [OK] Price: 34.9 EUR
+  [91/352] Fetching price for: Louraki Apple Sport Band Ml Gia Apple Watch 41Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-ml-gia-apple-watch-41mm--soft-mint/2004065
+      [OK] Price: 34.9 EUR
+  [92/352] Fetching price for: Louraki Apple Sport Band Sm Gia Apple Watch 41Mm  ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/lourakia-wearables/louraki-apple-sport-band-sm-gia-apple-watch-41mm--light-blue/2004052
+      [OK] Price: 34.9 EUR
+  [93/352] Fetching price for: Apple Watch Ultra 3Gps Cellular49Mmblack Titanium ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-ultra-3gps-cellular49mmblack-titanium-case-with-black-ocean-band/2072047
+      [OK] Price: 880.01 EUR
+  [94/352] Fetching price for: Apple Watch Se 3Gps44Mmmidnight Aluminum Case With...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-se-3gps44mmmidnight-aluminum-case-with-midnight-sport-band--ml/2071995
+      [OK] Price: 299.0 EUR
+  [95/352] Fetching price for: Apple Watch Series 11Gps46Mmspace Grey Aluminum Ca...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-series-11gps46mmspace-grey-aluminum-case-with-black-sport-band--ml/2071919
+      [OK] Price: 479.0 EUR
+  [96/352] Fetching price for: Apple Watch Series 11Gps46Mmjet Black Aluminum Cas...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-series-11gps46mmjet-black-aluminum-case-with-black-sport-band--ml/2071917
+      [OK] Price: 479.0 EUR
+  [97/352] Fetching price for: Apple Watch Ultra 3Gps Cellular49Mmnatural Titaniu...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-ultra-3gps-cellular49mmnatural-titanium-case-with-anchor-blue-ocean-band/2072038
+      [OK] Price: 880.01 EUR
+  [98/352] Fetching price for: Apple Watch Se 3Gps44Mmstarlight Aluminum Case Wit...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-se-3gps44mmstarlight-aluminum-case-with-starlight-sport-band--ml/2071993
+      [OK] Price: 299.0 EUR
+  [99/352] Fetching price for: Apple Watch Series 11Gps42Mmspace Grey Aluminum Ca...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-series-11gps42mmspace-grey-aluminum-case-with-black-sport-band--sm/2071910
+      [OK] Price: 449.0 EUR
+  [100/352] Fetching price for: Apple Watch Ultra 3Gps Cellular49Mmblack Titanium ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-ultra-3gps-cellular49mmblack-titanium-case-with-blackcharcoal-trail-loop--ml/2072052
+      [OK] Price: 880.01 EUR
+  [101/352] Fetching price for: Apple Watch Ultra 3Gps Cellular49Mmnatural Titaniu...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-ultra-3gps-cellular49mmnatural-titanium-case-with-light-blue-alpine-loop--m/2072040
+      [OK] Price: 880.01 EUR
+  [102/352] Fetching price for: Smartwatch Samsung Galaxy Watch8 40Mm  Graphite...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-samsung-galaxy-watch8-40mm--graphite/2044156
+      [OK] Price: 299.9 EUR
+  [103/352] Fetching price for: Smartwatch Xiaomi Redmi Watch 5 47Mm  Silver Gray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-redmi-watch-5-47mm--silver-gray/1993505
+      [OK] Price: 129.0 EUR
+  [104/352] Fetching price for: Smartwatch Xiaomi Redmi Watch 5 Active 49Mm  Matte...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-redmi-watch-5-active-49mm--matte-silver/1973684
+      [OK] Price: 39.9 EUR
+  [105/352] Fetching price for: Apple Watch Se 3Gps44Mmmidnight Aluminum Case With...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-se-3gps44mmmidnight-aluminum-case-with-midnight-sport-band--sm/2071994
+      [OK] Price: 299.0 EUR
+  [106/352] Fetching price for: Smartwatch Samsung Galaxy Watch8 44Mm  Graphite...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-samsung-galaxy-watch8-44mm--graphite/2044160
+      [OK] Price: 329.9 EUR
+  [107/352] Fetching price for: Apple Watch Series 11Gps42Mmsilver Aluminum Case W...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-series-11gps42mmsilver-aluminum-case-with-purple-fog-sport-band--sm/2071914
+      [OK] Price: 449.0 EUR
+  [108/352] Fetching price for: Apple Watch Series 11Gps46Mmspace Grey Aluminum Ca...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-series-11gps46mmspace-grey-aluminum-case-with-black-sport-band--sm/2071918
+      [OK] Price: 479.0 EUR
+  [109/352] Fetching price for: Apple Watch Series 11Gps42Mmjet Black Aluminum Cas...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-series-11gps42mmjet-black-aluminum-case-with-black-sport-band--sm/2071908
+      [OK] Price: 449.0 EUR
+  [110/352] Fetching price for: Smartwatch Samsung Galaxy Watch Ultra 2025 47Mm  T...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-samsung-galaxy-watch-ultra-2025-47mm--titanium-silver/2044171
+      [OK] Price: 599.0 EUR
+  [111/352] Fetching price for: Apple Watch Series 11Gps Cellular 42Mmnatural Tita...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-series-11gps-cellular-42mmnatural-titanium-case-with-natural-milanese-loop/2071934
+      [OK] Price: 829.0 EUR
+  [112/352] Fetching price for: Smartwatch Samsung Galaxy Watch8 Classic 46Mm  Bla...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-samsung-galaxy-watch8-classic-46mm--black/2044164
+      [OK] Price: 429.9 EUR
+  [113/352] Fetching price for: Apple Watch Ultra 3Gps Cellular49Mmblack Titanium ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-ultra-3gps-cellular49mmblack-titanium-case-with-black-alpine-loop--m/2072049
+      [OK] Price: 880.01 EUR
+  [114/352] Fetching price for: Smartwatch Xiaomi Watch S4 47Mm  Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-watch-s4-47mm--silver/2010133
+      [OK] Price: 189.0 EUR
+  [115/352] Fetching price for: Apple Watch Ultra 3Gps Cellular49Mmblack Titanium ...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-ultra-3gps-cellular49mmblack-titanium-case-with-black-alpine-loop--l/2072050
+      [OK] Price: 880.01 EUR
+  [116/352] Fetching price for: Apple Watch Ultra 3Gps Cellular49Mmnatural Titaniu...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-ultra-3gps-cellular49mmnatural-titanium-case-with-bluebright-blue-trail-loop--ml/2072043
+      [OK] Price: 880.01 EUR
+  [117/352] Fetching price for: Apple Watch Se 3Gps Cellular 40Mmmidnight Aluminum...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-se-3gps-cellular-40mmmidnight-aluminum-case-with-midnight-sport-band--sm/2071998
+      [OK] Price: 299.0 EUR
+  [118/352] Fetching price for: Apple Watch Series 11Gps46Mmjet Black Aluminum Cas...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-series-11gps46mmjet-black-aluminum-case-with-black-sport-band--sm/2071916
+      [OK] Price: 479.0 EUR
+  [119/352] Fetching price for: Smartwatch Xiaomi Watch S4 47Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-watch-s4-47mm--black/2010132
+[OK] Fetched: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-watch-s4-47mm--black/2010132
+      [WARN] Could not fetch price
+  [120/352] Fetching price for: Smartwatch Samsung Galaxy Watch8 40Mm  Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-samsung-galaxy-watch8-40mm--silver/2044157
+      [OK] Price: 299.9 EUR
+  [121/352] Fetching price for: Apple Watch Se 3Gps Cellular 40Mmmidnight Aluminum...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-se-3gps-cellular-40mmmidnight-aluminum-case-with-midnight-sport-band--ml/2071999
+      [OK] Price: 299.0 EUR
+  [122/352] Fetching price for: Apple Watch Se 3Gps44Mmstarlight Aluminum Case Wit...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-se-3gps44mmstarlight-aluminum-case-with-starlight-sport-band--sm/2071992
+      [OK] Price: 299.0 EUR
+  [123/352] Fetching price for: Apple Watch Series 11Gps46Mmsilver Aluminum Case W...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/apple-watch-series-11gps46mmsilver-aluminum-case-with-purple-fog-sport-band--ml/2071923
+      [OK] Price: 479.0 EUR
+  [124/352] Fetching price for: Smartwatch Samsung Galaxy Watch8 40Mm Lte  Graphit...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-samsung-galaxy-watch8-40mm-lte--graphite/2044158
+      [OK] Price: 379.0 EUR
+  [125/352] Fetching price for: Samsung Galaxy S25 Ultra 1Tb  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-ultra-1tb--titanium-black/1993981
+      [OK] Price: 1699.0 EUR
+  [126/352] Fetching price for: Samsung Galaxy S25 Ultra 512Gb  Titanium Gray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-ultra-512gb--titanium-gray/1993979
+      [OK] Price: 1439.0 EUR
+  [127/352] Fetching price for: Samsung Galaxy S25 Ultra 512Gb  Titanium Whitesilv...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-ultra-512gb--titanium-whitesilver/1993980
+      [OK] Price: 1439.0 EUR
+  [128/352] Fetching price for: Samsung Galaxy S25 Ultra 512Gb  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-ultra-512gb--titanium-black/1993977
+      [OK] Price: 1439.0 EUR
+  [129/352] Fetching price for: Samsung Galaxy S25 Ultra 512Gb  Titanium Silverblu...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-ultra-512gb--titanium-silverblue/1993978
+      [OK] Price: 1439.0 EUR
+  [130/352] Fetching price for: Samsung Galaxy S25 Ultra 256Gb  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-ultra-256gb--titanium-black/1993973
+      [OK] Price: 1339.0 EUR
+  [131/352] Fetching price for: Samsung Galaxy S25 512Gb  Navy...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-512gb--navy/1993971
+      [OK] Price: 1209.0 EUR
+  [132/352] Fetching price for: Samsung Galaxy S25 Ultra 256Gb  Titanium Silverblu...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-ultra-256gb--titanium-silverblue/1993974
+      [OK] Price: 1339.0 EUR
+  [133/352] Fetching price for: Samsung Galaxy S25 Ultra 256Gb  Titanium Gray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-ultra-256gb--titanium-gray/1993975
+      [OK] Price: 1339.0 EUR
+  [134/352] Fetching price for: Samsung Galaxy S25 Ultra 256Gb  Titanium Whitesilv...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-ultra-256gb--titanium-whitesilver/1993976
+      [OK] Price: 1339.0 EUR
+  [135/352] Fetching price for: Samsung Galaxy S25 512Gb  Mint...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-512gb--mint/1993972
+      [OK] Price: 1209.0 EUR
+  [136/352] Fetching price for: Samsung Galaxy S25 512Gb  Icyblue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-512gb--icyblue/1993970
+      [OK] Price: 1209.0 EUR
+  [137/352] Fetching price for: Samsung Galaxy S25 256Gb  Silver Shadow...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-256gb--silver-shadow/1993965
+      [OK] Price: 1099.0 EUR
+  [138/352] Fetching price for: Samsung Galaxy S25 512Gb  Navy...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-512gb--navy/1993964
+      [OK] Price: 999.01 EUR
+  [139/352] Fetching price for: Samsung Galaxy S25 512Gb  Silver Shadow...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-512gb--silver-shadow/1993969
+      [OK] Price: 1209.0 EUR
+  [140/352] Fetching price for: Samsung Galaxy S25 256Gb  Mint...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-256gb--mint/1993968
+      [OK] Price: 1099.0 EUR
+  [141/352] Fetching price for: Samsung Galaxy S25 256Gb  Navy...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-256gb--navy/1993967
+      [OK] Price: 1099.0 EUR
+  [142/352] Fetching price for: Samsung Galaxy S25 256Gb  Icyblue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-256gb--icyblue/1993966
+      [OK] Price: 1099.0 EUR
+  [143/352] Fetching price for: Samsung Galaxy S25 256Gb  Navy...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-256gb--navy/1993962
+      [OK] Price: 949.0 EUR
+  [144/352] Fetching price for: Samsung Galaxy S25 256Gb  Silver Shadow...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-256gb--silver-shadow/1993960
+      [OK] Price: 949.0 EUR
+  [145/352] Fetching price for: Samsung Galaxy S25 256Gb  Mint...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-256gb--mint/1993963
+      [OK] Price: 949.0 EUR
+  [146/352] Fetching price for: Samsung Galaxy S25 256Gb  Icyblue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-256gb--icyblue/1993961
+      [OK] Price: 949.0 EUR
+  [147/352] Fetching price for: Samsung Galaxy S25 128Gb  Navy...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-128gb--navy/1993958
+      [OK] Price: 919.0 EUR
+  [148/352] Fetching price for: Samsung Galaxy S25 128Gb  Silver Shadow...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-128gb--silver-shadow/1993956
+      [OK] Price: 919.0 EUR
+  [149/352] Fetching price for: Samsung Galaxy S25 128Gb  Mint...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-128gb--mint/1993959
+      [OK] Price: 919.0 EUR
+  [150/352] Fetching price for: Samsung Galaxy S25 128Gb  Icyblue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-128gb--icyblue/1993957
+      [OK] Price: 919.0 EUR
+  [151/352] Fetching price for: Smartwatch Xiaomi Redmi Watch 5 Active 49Mm  Midni...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-redmi-watch-5-active-49mm--midnight-black/1973683
+      [OK] Price: 39.9 EUR
+  [152/352] Fetching price for: Smartwatch Xiaomi Redmi Watch 5 Lite 48Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-redmi-watch-5-lite-48mm--black/1973685
+      [OK] Price: 49.9 EUR
+  [153/352] Fetching price for: Smartwatch Xiaomi Redmi Watch 5 Lite 48Mm  Light G...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-redmi-watch-5-lite-48mm--light-gold/1973686
+      [OK] Price: 59.9 EUR
+  [154/352] Fetching price for: Smartwatch Xiaomi Redmi Watch 5 47Mm  Obsidian Bla...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-redmi-watch-5-47mm--obsidian-black/1993503
+      [OK] Price: 129.0 EUR
+  [155/352] Fetching price for: Smartwatch Xiaomi Watch 2 46Mm  Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-watch-2-46mm--silver/1910283
+      [OK] Price: 176.0 EUR
+  [156/352] Fetching price for: Smartwatch Xiaomi Watch S4 41Mm  Mint Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-watch-s4-41mm--mint-green/2076351
+      [OK] Price: 189.0 EUR
+  [157/352] Fetching price for: Smartwatch Xiaomi Watch S4 41Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-watch-s4-41mm--black/2076350
+      [OK] Price: 189.0 EUR
+  [158/352] Fetching price for: Smartwatch Xiaomi Watch S4 41Mm  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-watch-s4-41mm--white/2076352
+      [OK] Price: 199.0 EUR
+  [159/352] Fetching price for: Smartwatch Xiaomi Watch S4 41Mm  Sunset Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-watch-s4-41mm--sunset-gold/2076353
+      [OK] Price: 249.0 EUR
+  [160/352] Fetching price for: Smartwatch Xiaomi Watch 2 Pro 46Mm  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smartwatches/smartwatch-xiaomi-watch-2-pro-46mm--black/1873379
+      [OK] Price: 249.0 EUR
+  [161/352] Fetching price for: Xiaomi Redmi Note 14 4G 256Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-4g-256gb--black/1993551
+      [OK] Price: 199.9 EUR
+  [162/352] Fetching price for: Xiaomi Redmi 15C 128Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-15c-128gb--midnight-black/2071432
+      [OK] Price: 139.0 EUR
+  [163/352] Fetching price for: Xiaomi Redmi Note 14 4G 128Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-4g-128gb--black/1993548
+      [OK] Price: 179.0 EUR
+  [164/352] Fetching price for: Xiaomi 15T 256Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15t-256gb--black/2073966
+      [OK] Price: 549.99 EUR
+  [165/352] Fetching price for: Xiaomi Redmi Note 14 Pro 5G 256Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-pro-5g-256gb--midnight-black/1993563
+      [OK] Price: 319.9 EUR
+  [166/352] Fetching price for: Xiaomi 15T 512Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15t-512gb--black/2073969
+      [OK] Price: 599.9 EUR
+  [167/352] Fetching price for: Xiaomi Redmi Note 14 Pro 5G 512Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-pro-5g-512gb--midnight-black/1993569
+      [OK] Price: 449.0 EUR
+  [168/352] Fetching price for: Xiaomi Redmi A5 64Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-a5-64gb--midnight-black/2026201
+      [OK] Price: 99.9 EUR
+  [169/352] Fetching price for: Xiaomi 15T Pro 512Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15t-pro-512gb--black/2073972
+      [OK] Price: 799.0 EUR
+  [170/352] Fetching price for: Xiaomi Redmi Note 14 5G 256Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-5g-256gb--black/1993557
+      [OK] Price: 249.9 EUR
+  [171/352] Fetching price for: Xiaomi Redmi 15 5G 128Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-15-5g-128gb--midnight-black/2064266
+      [OK] Price: 179.0 EUR
+  [172/352] Fetching price for: Xiaomi 15T Pro 512Gb  Gray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15t-pro-512gb--gray/2073973
+      [OK] Price: 799.0 EUR
+  [173/352] Fetching price for: Xiaomi Redmi 15C 128Gb  Moonlight Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-15c-128gb--moonlight-blue/2071433
+      [OK] Price: 139.0 EUR
+  [174/352] Fetching price for: Xiaomi 15T 256Gb  Gray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15t-256gb--gray/2073967
+      [OK] Price: 549.99 EUR
+  [175/352] Fetching price for: Xiaomi Redmi 15C 5G 256Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-15c-5g-256gb--midnight-black/2071757
+      [OK] Price: 169.0 EUR
+  [176/352] Fetching price for: Xiaomi Redmi Note 14 Pro 4G 256Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-pro-4g-256gb--black/1993560
+      [OK] Price: 289.0 EUR
+  [177/352] Fetching price for: Xiaomi Redmi Note 14 4G 128Gb  Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-4g-128gb--blue/1993549
+      [OK] Price: 179.0 EUR
+  [178/352] Fetching price for: Xiaomi Redmi Note 14 Pro 5G 256Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-pro-5g-256gb--midnight-black/1993566
+      [OK] Price: 399.0 EUR
+  [179/352] Fetching price for: Xiaomi Redmi Note 14 Pro 4G 256Gb  Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-pro-4g-256gb--blue/1993561
+      [OK] Price: 289.0 EUR
+  [180/352] Fetching price for: Xiaomi Redmi A5 64Gb  Sandy Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-a5-64gb--sandy-gold/2026203
+      [OK] Price: 99.9 EUR
+  [181/352] Fetching price for: Xiaomi Redmi 15 5G 256Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-15-5g-256gb--midnight-black/2064278
+      [OK] Price: 229.0 EUR
+  [182/352] Fetching price for: Xiaomi 15T 256Gb  Rose Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15t-256gb--rose-gold/2073968
+      [OK] Price: 549.99 EUR
+  [183/352] Fetching price for: Xiaomi Redmi Note 14 5G 128Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-5g-128gb--black/1993554
+      [OK] Price: 235.0 EUR
+  [184/352] Fetching price for: Xiaomi 15 512Gb  Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15-512gb--green/2010888
+      [OK] Price: 799.89 EUR
+  [185/352] Fetching price for: Xiaomi 15T Pro 512Gb  Mocha Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15t-pro-512gb--mocha-gold/2073974
+      [OK] Price: 799.0 EUR
+  [186/352] Fetching price for: Xiaomi 15T 512Gb  Rose Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15t-512gb--rose-gold/2073971
+      [OK] Price: 599.0 EUR
+  [187/352] Fetching price for: Xiaomi Redmi Note 14 Pro 5G 256Gb  Frost Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-pro-5g-256gb--frost-blue/1993567
+      [OK] Price: 399.0 EUR
+  [188/352] Fetching price for: Xiaomi Redmi 15C 5G 128Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-15c-5g-128gb--midnight-black/2071754
+      [OK] Price: 149.0 EUR
+  [189/352] Fetching price for: Xiaomi 15T 512Gb  Gray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-15t-512gb--gray/2073970
+      [OK] Price: 599.0 EUR
+  [190/352] Fetching price for: Xiaomi Redmi 15C 256Gb  Midnight Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-15c-256gb--midnight-black/2071435
+      [OK] Price: 169.0 EUR
+  [191/352] Fetching price for: Xiaomi Redmi Note 14 Pro 5G 512Gb  Lavender Purple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-pro-5g-512gb--lavender-purple/1993571
+      [OK] Price: 449.0 EUR
+  [192/352] Fetching price for: Xiaomi Redmi Note 14 Pro 5G 256Gb  Lavender Purple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-pro-5g-256gb--lavender-purple/1993568
+      [OK] Price: 499.0 EUR
+  [193/352] Fetching price for: Xiaomi Redmi Note 14 Pro 4G 256Gb  Purple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-note-14-pro-4g-256gb--purple/1993562
+      [OK] Price: 289.0 EUR
+  [194/352] Fetching price for: Xiaomi Redmi A5 64Gb  Ocean Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/xiaomi-redmi-a5-64gb--ocean-blue/2026202
+      [OK] Price: 99.9 EUR
+  [195/352] Fetching price for: Samsung Galaxy A56 5G 256Gb  Awesome Graphite...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a56-5g-256gb--awesome-graphite/2014374
+      [OK] Price: 449.0 EUR
+  [196/352] Fetching price for: Smartphone Samsung Galaxy Z Fold7 512Gb  Jetblack...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-fold7-512gb--jetblack/2054598
+      [OK] Price: 2299.0 EUR
+  [197/352] Fetching price for: Samsung Galaxy A36 5G 256Gb  Awesome Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a36-5g-256gb--awesome-black/2014366
+      [OK] Price: 339.0 EUR
+  [198/352] Fetching price for: Samsung Galaxy A17 5G 128Gb  Gray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a17-5g-128gb--gray/2066441
+      [OK] Price: 159.0 EUR
+  [199/352] Fetching price for: Samsung Galaxy A56 5G 256Gb  Awesome Lightgray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a56-5g-256gb--awesome-lightgray/2014375
+      [OK] Price: 449.0 EUR
+  [200/352] Fetching price for: Smartphone Samsung Galaxy Z Flip7 256Gb  Jetblack...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-flip7-256gb--jetblack/2054608
+      [OK] Price: 1249.0 EUR
+  [201/352] Fetching price for: Samsung Galaxy A36 5G 128Gb  Awesome Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a36-5g-128gb--awesome-black/2014362
+      [OK] Price: 299.0 EUR
+  [202/352] Fetching price for: Smartphone Samsung Galaxy Z Fold7 256Gb  Jetblack...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-fold7-256gb--jetblack/2054601
+      [OK] Price: 2199.0 EUR
+  [203/352] Fetching price for: Samsung Galaxy A36 5G 256Gb  Awesome Lavender...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a36-5g-256gb--awesome-lavender/2014369
+      [OK] Price: 339.0 EUR
+  [204/352] Fetching price for: Samsung Galaxy S25 Fe 256Gb  Navy...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-fe-256gb--navy/2066455
+      [OK] Price: 839.0 EUR
+  [205/352] Fetching price for: Samsung Galaxy A36 5G 128Gb  Awesome White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a36-5g-128gb--awesome-white/2014363
+      [OK] Price: 299.0 EUR
+  [206/352] Fetching price for: Samsung Galaxy A36 5G 128Gb  Awesome Lavender...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a36-5g-128gb--awesome-lavender/2014365
+      [OK] Price: 299.0 EUR
+  [207/352] Fetching price for: Samsung Galaxy S25 Fe 512Gb  Jetblack...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-fe-512gb--jetblack/2066440
+      [OK] Price: 959.0 EUR
+  [208/352] Fetching price for: Samsung Galaxy S25 128Gb  Blueblack...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-128gb--blueblack/2066273
+      [OK] Price: 949.0 EUR
+  [209/352] Fetching price for: Smartphone Samsung Galaxy Z Flip7 512Gb  Jetblack...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-flip7-512gb--jetblack/2054605
+      [OK] Price: 1369.0 EUR
+  [210/352] Fetching price for: Smartphone Samsung Galaxy Z Fold7 512Gb  Blue Shad...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-fold7-512gb--blue-shadow/2054600
+      [OK] Price: 2299.0 EUR
+  [211/352] Fetching price for: Samsung Galaxy S25 Fe 128Gb  Jetblack...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-fe-128gb--jetblack/2066437
+      [OK] Price: 779.0 EUR
+  [212/352] Fetching price for: Samsung Galaxy A26 5G 256Gb  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a26-5g-256gb--white/2014360
+      [OK] Price: 299.0 EUR
+  [213/352] Fetching price for: Samsung Galaxy A56 5G 128Gb  Awesome Lightgray...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a56-5g-128gb--awesome-lightgray/2014371
+      [OK] Price: 389.0 EUR
+  [214/352] Fetching price for: Samsung Galaxy A56 5G 256Gb  Awesome Olive...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a56-5g-256gb--awesome-olive/2014376
+      [OK] Price: 449.0 EUR
+  [215/352] Fetching price for: Smartphone Samsung Galaxy Z Fold7 512Gb  Silver Sh...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-fold7-512gb--silver-shadow/2054599
+      [OK] Price: 2299.0 EUR
+  [216/352] Fetching price for: Samsung Galaxy S25 Fe 128Gb  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-s25-fe-128gb--white/2066436
+      [OK] Price: 779.0 EUR
+  [217/352] Fetching price for: Smartphone Samsung Galaxy Z Fold7 256Gb  Blue Shad...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-fold7-256gb--blue-shadow/2054602
+      [OK] Price: 2199.0 EUR
+  [218/352] Fetching price for: Samsung Galaxy A26 5G 256Gb  Mint...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a26-5g-256gb--mint/2014361
+      [OK] Price: 299.0 EUR
+  [219/352] Fetching price for: Samsung Galaxy A56 5G 256Gb  Awesome Pink...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/samsung-galaxy-a56-5g-256gb--awesome-pink/2014377
+      [OK] Price: 449.0 EUR
+  [220/352] Fetching price for: Apple Iphone 16 128Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/apple-iphone-16-128gb--black/1966492
+      [OK] Price: 799.0 EUR
+  [221/352] Fetching price for: Apple Iphone 16E 128Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/apple-iphone-16e-128gb--black/2004611
+      [OK] Price: 578.99 EUR
+  [222/352] Fetching price for: Apple Iphone 16E 128Gb  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/apple-iphone-16e-128gb--white/2004612
+      [OK] Price: 578.99 EUR
+  [223/352] Fetching price for: Apple Iphone 16 128Gb  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/apple-iphone-16-128gb--white/1966493
+      [OK] Price: 799.0 EUR
+  [224/352] Fetching price for: Poco X7 512Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-x7-512gb--black/1994774
+      [OK] Price: 399.0 EUR
+  [225/352] Fetching price for: Apple Iphone 16 128Gb  Ultramarine...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/apple-iphone-16-128gb--ultramarine/1966496
+      [OK] Price: 799.0 EUR
+  [226/352] Fetching price for: Apple Iphone 16 128Gb  Teal...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/apple-iphone-16-128gb--teal/1966494
+      [OK] Price: 799.0 EUR
+  [227/352] Fetching price for: Samsung Galaxy Ring Size 14  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-14--titanium-black/2015774
+      [OK] Price: 329.9 EUR
+  [228/352] Fetching price for: Samsung Galaxy Ring Size 10  Titanium Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-10--titanium-gold/2015763
+      [OK] Price: 329.9 EUR
+  [229/352] Fetching price for: Samsung Galaxy Ring Size 7  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-7--titanium-black/2015753
+      [OK] Price: 329.9 EUR
+  [230/352] Fetching price for: Samsung Galaxy Ring Size 8  Titanium Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-8--titanium-gold/2015757
+      [OK] Price: 329.9 EUR
+  [231/352] Fetching price for: Samsung Galaxy Ring Size 9  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-9--titanium-black/2015759
+      [OK] Price: 329.9 EUR
+  [232/352] Fetching price for: Samsung Galaxy Ring Size 11  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-11--titanium-black/2015765
+      [OK] Price: 329.9 EUR
+  [233/352] Fetching price for: Samsung Galaxy Ring Size 11  Titanium Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-11--titanium-silver/2015767
+      [OK] Price: 329.9 EUR
+  [234/352] Fetching price for: Samsung Galaxy Ring Size 12  Titanium Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-12--titanium-silver/2015770
+      [OK] Price: 329.9 EUR
+  [235/352] Fetching price for: Samsung Galaxy Ring Size 13  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-13--titanium-black/2015771
+      [OK] Price: 329.9 EUR
+  [236/352] Fetching price for: Samsung Galaxy Ring Size 7  Titanium Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-7--titanium-gold/2015754
+      [OK] Price: 329.9 EUR
+  [237/352] Fetching price for: Samsung Galaxy Ring Size 8  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-8--titanium-black/2015756
+      [OK] Price: 329.9 EUR
+  [238/352] Fetching price for: Samsung Galaxy Ring Size 8  Titanium Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-8--titanium-silver/2015758
+      [OK] Price: 329.9 EUR
+  [239/352] Fetching price for: Samsung Galaxy Ring Size 9  Titanium Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-9--titanium-gold/2015760
+      [OK] Price: 329.9 EUR
+  [240/352] Fetching price for: Samsung Galaxy Ring Size 9  Titanium Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-9--titanium-silver/2015761
+      [OK] Price: 329.9 EUR
+  [241/352] Fetching price for: Samsung Galaxy Ring Size 10  Titanium Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-10--titanium-silver/2015764
+      [OK] Price: 329.9 EUR
+  [242/352] Fetching price for: Samsung Galaxy Ring Size 12  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-12--titanium-black/2015768
+      [OK] Price: 329.9 EUR
+  [243/352] Fetching price for: Samsung Galaxy Ring Size 10  Titanium Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/smart-rings/samsung-galaxy-ring-size-10--titanium-black/2015762
+      [OK] Price: 329.9 EUR
+  [244/352] Fetching price for: Asurmato Tilefono Motorola C4201 Duo  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-c4201-duo--mauro/1164582
+      [OK] Price: 68.98 EUR
+  [245/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tg2511  Asimi...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tg2511--asimi/0542906
+      [OK] Price: 39.9 EUR
+  [246/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tg2511  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tg2511--mauro/0542905
+      [OK] Price: 39.9 EUR
+  [247/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tg6851  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tg6851--mauro/1636989
+      [OK] Price: 58.91 EUR
+  [248/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tgc250Grb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tgc250grb--black/1772333
+      [OK] Price: 34.9 EUR
+  [249/352] Fetching price for: Asurmato Tilefono Motorola S3001  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-s3001--mauro/1102919
+      [OK] Price: 39.9 EUR
+  [250/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tgb610  Kokkino...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tgb610--kokkino/1552400
+      [OK] Price: 31.9 EUR
+  [251/352] Fetching price for: Asurmato Tilefono Philips Xl4901Sgrs Aspro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-philips-xl4901sgrs-aspro/1696167
+      [OK] Price: 58.91 EUR
+  [252/352] Fetching price for: Asurmato Tilefono Motorola T301 Mple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-t301-mple/1164580
+      [OK] Price: 29.99 EUR
+  [253/352] Fetching price for: Asurmato Tilefono Motorola T301  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-t301--mauro/1131808
+      [OK] Price: 29.99 EUR
+  [254/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tg1611  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tg1611--mauro/0618052
+      [OK] Price: 34.9 EUR
+  [255/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tgd310  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tgd310--mauro/1106245
+      [OK] Price: 58.99 EUR
+  [256/352] Fetching price for: Asurmato Tilefono Gigaset As690  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-gigaset-as690--mauro/1588843
+      [OK] Price: 48.9 EUR
+  [257/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tgd310  Gkri...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tgd310--gkri/1106246
+      [OK] Price: 49.0 EUR
+  [258/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tgb610  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tgb610--mauro/1552399
+      [OK] Price: 31.9 EUR
+  [259/352] Fetching price for: Asurmato Tilefono Motorola T301  Kitrino...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-t301--kitrino/1164578
+      [OK] Price: 29.99 EUR
+  [260/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tg1611  Leuko...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tg1611--leuko/0618057
+      [OK] Price: 24.89 EUR
+  [261/352] Fetching price for: Asurmato Tilefono Motorola C1001L  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-c1001l--mauro/0762674
+      [OK] Price: 19.99 EUR
+  [262/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tg1611  Mple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tg1611--mple/0618047
+      [OK] Price: 24.89 EUR
+  [263/352] Fetching price for: Asurmato Tilefono Philips D161  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-philips-d161--mauro/1690293
+      [OK] Price: 32.9 EUR
+  [264/352] Fetching price for: Asurmato Tilefono Motorola T301  Leuko...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-t301--leuko/1146600
+      [OK] Price: 29.99 EUR
+  [265/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tg6851  Gkri...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tg6851--gkri/1636990
+      [OK] Price: 58.91 EUR
+  [266/352] Fetching price for: Asurmato Tilefono Motorola C1001Lb Leuko...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-c1001lb-leuko/1032335
+      [OK] Price: 29.95 EUR
+  [267/352] Fetching price for: Asurmato Tilefono Panasonic Kx Tg1611  Mob...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-panasonic-kx-tg1611--mob/0618049
+      [OK] Price: 24.89 EUR
+  [268/352] Fetching price for: Asurmato Tilefono Motorola S3001  Leuko...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-s3001--leuko/1324788
+      [OK] Price: 39.9 EUR
+  [269/352] Fetching price for: Ensurmato Tilefono Panasonic Kx Ts580Ex2W  Leuko...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/ensyrmata-tilefona/ensurmato-tilefono-panasonic-kx-ts580ex2w--leuko/1026852
+      [OK] Price: 26.0 EUR
+  [270/352] Fetching price for: Ensurmato Tilefono Panasonic Kx Ts580Ex2B  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/ensyrmata-tilefona/ensurmato-tilefono-panasonic-kx-ts580ex2b--mauro/1026851
+      [OK] Price: 26.0 EUR
+  [271/352] Fetching price for: Ensurmato Tilefono Motorola Ct202  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/ensyrmata-tilefona/ensurmato-tilefono-motorola-ct202--mauro/1102913
+      [OK] Price: 32.9 EUR
+  [272/352] Fetching price for: Ensurmato Tilefono Motorola Ct50  Leuko...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/ensyrmata-tilefona/ensurmato-tilefono-motorola-ct50--leuko/1425775
+      [OK] Price: 16.99 EUR
+  [273/352] Fetching price for: Ensurmato Tilefono Osio Oswb 4760W  Leuko...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/ensyrmata-tilefona/ensurmato-tilefono-osio-oswb-4760w--leuko/1425807
+      [OK] Price: 24.89 EUR
+  [274/352] Fetching price for: Asurmato Tilefono Gigaset A180  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-gigaset-a180--mauro/1639554
+      [OK] Price: 34.9 EUR
+  [275/352] Fetching price for: Asurmato Tilefono Motorola T401  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-t401--mauro/1443966
+      [OK] Price: 34.9 EUR
+  [276/352] Fetching price for: Asurmato Tilefono Philips M4701Bgrs  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-philips-m4701bgrs--mauro/1886058
+      [OK] Price: 48.9 EUR
+  [277/352] Fetching price for: Asurmato Tilefono Gigaset A180  Aqua Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-gigaset-a180--aqua-blue/1639625
+      [OK] Price: 29.9 EUR
+  [278/352] Fetching price for: Asurmato Tilefono Philips Xl4901Dsgrs  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-philips-xl4901dsgrs--mauro/1696168
+      [OK] Price: 58.91 EUR
+  [279/352] Fetching price for: Asurmato Tilefono Motorola Cd5001  Blackwhite...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/asyrmata-tilefona/asurmato-tilefono-motorola-cd5001--blackwhite/1710149
+      [OK] Price: 58.91 EUR
+  [280/352] Fetching price for: Smartphone Samsung Galaxy Z Fold7 256Gb  Silver Sh...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-fold7-256gb--silver-shadow/2054603
+      [OK] Price: 2199.0 EUR
+  [281/352] Fetching price for: Smartphone Samsung Galaxy Z Flip7 512Gb  Coralred...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-flip7-512gb--coralred/2054606
+      [OK] Price: 1396.0 EUR
+  [282/352] Fetching price for: Smartphone Samsung Galaxy Z Flip7 Fe 256Gb  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-flip7-fe-256gb--white/2054610
+      [OK] Price: 1059.0 EUR
+  [283/352] Fetching price for: Smartphone Samsung Galaxy Z Flip7 Fe 256Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-flip7-fe-256gb--black/2054611
+      [OK] Price: 970.0 EUR
+  [284/352] Fetching price for: Smartphone Samsung Galaxy Z Flip7 Fe 128Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-flip7-fe-128gb--black/2054613
+      [OK] Price: 999.01 EUR
+  [285/352] Fetching price for: Smartphone Samsung Galaxy Z Fold7 1Tb  Jetblack...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-fold7-1tb--jetblack/2054617
+      [OK] Price: 2599.0 EUR
+  [286/352] Fetching price for: Smartphone Samsung Galaxy Z Flip7 512Gb  Blue Shad...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-flip7-512gb--blue-shadow/2054604
+      [OK] Price: 1369.0 EUR
+  [287/352] Fetching price for: Smartphone Samsung Galaxy Z Flip7 256Gb  Blue Shad...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-flip7-256gb--blue-shadow/2054607
+      [OK] Price: 1249.0 EUR
+  [288/352] Fetching price for: Smartphone Samsung Galaxy Z Flip7 256Gb  Coralred...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/smartphone-samsung-galaxy-z-flip7-256gb--coralred/2054609
+      [OK] Price: 1249.0 EUR
+  [289/352] Fetching price for: Fortistis Tune Harmony Wireless Se Usb C Gia Apple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/fortistes-wearables/fortistis-tune-harmony-wireless-se-usb-c-gia-apple-watch--1m/1735058
+      [OK] Price: 24.89 EUR
+  [290/352] Fetching price for: Fortistis Tune Harmony Wireless Se Usb A Gia Apple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/fortistes-wearables/fortistis-tune-harmony-wireless-se-usb-a-gia-apple-watch--1m/1735057
+      [OK] Price: 24.89 EUR
+  [291/352] Fetching price for: Fortistis Apple Watch Magnetic Charging Dock  2M...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/fortistes-wearables/fortistis-apple-watch-magnetic-charging-dock--2m/1349769
+      [OK] Price: 48.9 EUR
+  [292/352] Fetching price for: Splitter Adsl Annex A Isdn...
+[OK] Using cached: https://www.public.cy/product/tilefonia/fixed-telephony/aksesouar-statheris-tilefwnias/splitter-adsl-annex-a-isdn/0005396
+      [OK] Price: 4.49 EUR
+  [293/352] Fetching price for: Panasonic Kx Tu110 Dual Sim  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-aplis-hrisis/panasonic-kx-tu110-dual-sim--mauro/1419950
+      [OK] Price: 39.9 EUR
+  [294/352] Fetching price for: Panasonic Kx Tu250 4G  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-aplis-hrisis/panasonic-kx-tu250-4g--black/1716507
+      [OK] Price: 89.9 EUR
+  [295/352] Fetching price for: Panasonic Kx Tu110 Dual Sim  Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-aplis-hrisis/panasonic-kx-tu110-dual-sim--blue/1419951
+      [OK] Price: 39.9 EUR
+  [296/352] Fetching price for: Panasonic Kx Tu160  Gkri...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-aplis-hrisis/panasonic-kx-tu160--gkri/1646829
+      [OK] Price: 54.89 EUR
+  [297/352] Fetching price for: Panasonic Kx Tu160  Mauro...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-aplis-hrisis/panasonic-kx-tu160--mauro/1646828
+      [OK] Price: 54.89 EUR
+  [298/352] Fetching price for: Agm M6 4G Dual Sim  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-aplis-hrisis/agm-m6-4g-dual-sim--black/1886041
+      [OK] Price: 79.9 EUR
+  [299/352] Fetching price for: Apple Iphone 15 128Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/apple-iphone-15-128gb--black/1850542
+      [OK] Price: 638.99 EUR
+  [300/352] Fetching price for: Realme C75 128Gb  Storm Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-c75-128gb--storm-black/1993151
+      [OK] Price: 199.0 EUR
+  [301/352] Fetching price for: Realme 12 Pro 5G 256Gb  Submarine Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-12-pro-5g-256gb--submarine-blue/1912387
+      [OK] Price: 409.0 EUR
+  [302/352] Fetching price for: Realme 12 Pro 5G 256Gb  Navigator Beige...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-12-pro-5g-256gb--navigator-beige/1912388
+      [OK] Price: 409.0 EUR
+  [303/352] Fetching price for: Realme 12 Pro 5G 512Gb  Navigator Beige...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-12-pro-5g-512gb--navigator-beige/1912390
+      [OK] Price: 429.0 EUR
+  [304/352] Fetching price for: Realme C71 256Gb  Forest Owl...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-c71-256gb--forest-owl/2071550
+      [OK] Price: 149.0 EUR
+  [305/352] Fetching price for: Realme C71 256Gb  White Swan...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-c71-256gb--white-swan/2071549
+      [OK] Price: 149.0 EUR
+  [306/352] Fetching price for: Realme Note 70T 128Gb  Obsidian Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-note-70t-128gb--obsidian-black/2062274
+      [OK] Price: 99.89 EUR
+  [307/352] Fetching price for: Realme Note 70T 128Gb  Beach Gold...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-note-70t-128gb--beach-gold/2062273
+      [OK] Price: 99.89 EUR
+  [308/352] Fetching price for: Realme Gt 7 5G 512Gb  Icesense Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-gt-7-5g-512gb--icesense-blue/2033891
+      [OK] Price: 619.0 EUR
+  [309/352] Fetching price for: Realme 14X 5G 128Gb  Carbon Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-14x-5g-128gb--carbon-black/2025518
+      [OK] Price: 149.0 EUR
+  [310/352] Fetching price for: Realme Gt7 Pro 512 Gb  Mars Orange...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-gt7-pro-512-gb--mars-orange/1984204
+      [OK] Price: 999.01 EUR
+  [311/352] Fetching price for: Realme Note 60 128 Gb  Voyage Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/realme-note-60-128-gb--voyage-blue/1981675
+      [OK] Price: 149.0 EUR
+  [312/352] Fetching price for: Oppo Reno13F 5G 256Gb  Graphite Grey...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno13f-5g-256gb--graphite-grey/2015412
+      [OK] Price: 269.0 EUR
+  [313/352] Fetching price for: Oppo Reno13 5G 256Gb  Luminous Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno13-5g-256gb--luminous-blue/2000725
+      [OK] Price: 429.0 EUR
+  [314/352] Fetching price for: Oppo Reno13 Fs 5G 512Gb  Graphite Grey...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno13-fs-5g-512gb--graphite-grey/2000722
+      [OK] Price: 349.0 EUR
+  [315/352] Fetching price for: Oppo A40 128 Gb  Sparkle Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-a40-128-gb--sparkle-black/1964650
+      [OK] Price: 129.0 EUR
+  [316/352] Fetching price for: Oppo Reno13 Pro 5G 512Gb  Graphite Grey...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno13-pro-5g-512gb--graphite-grey/2000740
+      [OK] Price: 599.0 EUR
+  [317/352] Fetching price for: Oppo A40 128 Gb  Sparkle Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-a40-128-gb--sparkle-black/1964652
+      [OK] Price: 149.0 EUR
+  [318/352] Fetching price for: Oppo A40 128 Gb  Starry Purple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-a40-128-gb--starry-purple/1964651
+      [OK] Price: 129.0 EUR
+  [319/352] Fetching price for: Oppo Reno13 Pro 5G 512Gb  Plume Purple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno13-pro-5g-512gb--plume-purple/2000741
+      [OK] Price: 599.0 EUR
+  [320/352] Fetching price for: Oppo Reno13 5G 256Gb  Plume White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno13-5g-256gb--plume-white/2000724
+      [OK] Price: 429.0 EUR
+  [321/352] Fetching price for: Oppo Find X8 Pro 512Gb  Space Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-find-x8-pro-512gb--space-black/1984644
+      [OK] Price: 1199.0 EUR
+  [322/352] Fetching price for: Oppo A5M 256Gb  Midnight Purple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-a5m-256gb--midnight-purple/2071667
+      [OK] Price: 189.0 EUR
+  [323/352] Fetching price for: Oppo A5M 256Gb  Mist White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-a5m-256gb--mist-white/2071668
+      [OK] Price: 189.0 EUR
+  [324/352] Fetching price for: Oppo A5 128Gb  Mist White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-a5-128gb--mist-white/2071666
+      [OK] Price: 139.0 EUR
+  [325/352] Fetching price for: Oppo Find X9 512Gb  Titanium Grey...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-find-x9-512gb--titanium-grey/2090383
+      [OK] Price: 999.01 EUR
+  [326/352] Fetching price for: Oppo Find X9 512Gb  Space Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-find-x9-512gb--space-black/2090384
+      [OK] Price: 999.01 EUR
+  [327/352] Fetching price for: Oppo Reno14 F 5G 256Gb  Opal Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno14-f-5g-256gb--opal-blue/2076471
+      [OK] Price: 369.0 EUR
+  [328/352] Fetching price for: Oppo Reno14 Fs 5G 512Gb  Luminous Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno14-fs-5g-512gb--luminous-green/2076472
+      [OK] Price: 449.0 EUR
+  [329/352] Fetching price for: Oppo Reno14 5G 256Gb  Opal White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno14-5g-256gb--opal-white/2076475
+      [OK] Price: 569.0 EUR
+  [330/352] Fetching price for: Oppo Reno14 F 5G 256Gb  Luminous Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno14-f-5g-256gb--luminous-green/2076470
+      [OK] Price: 369.0 EUR
+  [331/352] Fetching price for: Oppo Reno14 Fs 5G 512Gb  Opal Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno14-fs-5g-512gb--opal-blue/2076473
+      [OK] Price: 449.0 EUR
+  [332/352] Fetching price for: Oppo Reno14 5G 256Gb  Luminous Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno14-5g-256gb--luminous-green/2076474
+      [OK] Price: 569.0 EUR
+  [333/352] Fetching price for: Oppo A6 Pro 5G 256Gb  Lunar Titanium...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-a6-pro-5g-256gb--lunar-titanium/2089357
+      [OK] Price: 279.0 EUR
+  [334/352] Fetching price for: Oppo A6 Pro 5G 256Gb  Stellar Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-a6-pro-5g-256gb--stellar-blue/2089356
+      [OK] Price: 279.0 EUR
+  [335/352] Fetching price for: Oppo Reno13 Fs 5G 512Gb  Luminous Blue...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/oppo-reno13-fs-5g-512gb--luminous-blue/2000723
+      [OK] Price: 349.0 EUR
+  [336/352] Fetching price for: Poco F7 512Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-f7-512gb--black/2043767
+      [OK] Price: 499.0 EUR
+  [337/352] Fetching price for: Poco M8 Pro 5G 256Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-m8-pro-5g-256gb--black/2098738
+      [OK] Price: 349.0 EUR
+  [338/352] Fetching price for: Poco M8 5G 256Gb  Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-m8-5g-256gb--silver/2098745
+      [OK] Price: 269.0 EUR
+  [339/352] Fetching price for: Poco M8 Pro 5G 512Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-m8-pro-5g-512gb--black/2098741
+      [OK] Price: 429.0 EUR
+  [340/352] Fetching price for: Poco M8 5G 256Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-m8-5g-256gb--black/2098744
+      [OK] Price: 269.0 EUR
+  [341/352] Fetching price for: Poco M8 5G 512Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-m8-5g-512gb--black/2098747
+      [OK] Price: 319.0 EUR
+  [342/352] Fetching price for: Poco C85 256Gb  Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-c85-256gb--green/2073235
+      [OK] Price: 159.0 EUR
+  [343/352] Fetching price for: Poco C85 128Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-c85-128gb--black/2073231
+      [OK] Price: 129.0 EUR
+  [344/352] Fetching price for: Poco C85 128Gb  Green...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-c85-128gb--green/2073232
+      [OK] Price: 129.0 EUR
+  [345/352] Fetching price for: Poco C85 256Gb  Purple...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-c85-256gb--purple/2073236
+      [OK] Price: 159.0 EUR
+  [346/352] Fetching price for: Poco F8 Pro 512Gb  Titanium Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-f8-pro-512gb--titanium-silver/2094951
+      [OK] Price: 649.0 EUR
+  [347/352] Fetching price for: Poco F8 Pro 512Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-f8-pro-512gb--black/2094950
+      [OK] Price: 649.0 EUR
+  [348/352] Fetching price for: Poco F6 Pro 512Gb  White...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-f6-pro-512gb--white/1940252
+      [OK] Price: 697.99 EUR
+  [349/352] Fetching price for: Poco F6 Pro 1Tb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-f6-pro-1tb--black/1940253
+      [OK] Price: 799.0 EUR
+  [350/352] Fetching price for: Poco F7 512Gb  Silver...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-f7-512gb--silver/2043768
+      [OK] Price: 499.9 EUR
+  [351/352] Fetching price for: Poco F6 Pro 512Gb  Black...
+[OK] Using cached: https://www.public.cy/product/tilefonia/kinita-smartphones/poco-f6-pro-512gb--black/1940251
+      [OK] Price: 553.0 EUR
+  [352/352] Fetching price for: Adiabroxi Thiki Catalyst Airpods Korali...
+[OK] Using cached: https://www.public.cy/product/tilefonia/wearables/thikes-wearables/adiabroxi-thiki-catalyst-airpods-korali/1402589
+[OK] Fetched: https://www.public.cy/product/tilefonia/wearables/thikes-wearables/adiabroxi-thiki-catalyst-airpods-korali/1402589
+      [WARN] Could not fetch price
+
+
+============================================================
+SCRAPING COMPLETE
+============================================================
+Total URLs processed: 35
+Total products found: 352
+Products with prices: 348
+============================================================
+
+[OK] Browser closed for public
+[OK] public: 352 products scraped
+
+
+============================================================
+Scraping STEPHANIS
+============================================================
+
+Category Filter: smartphones
+[OK] Loaded robots.txt for www.stephanis.com.cy
+[OK] Browser initialized for stephanis with anti-detection
+Skipping main page scraping (category filter active)
+[OK] Fetched: https://www.stephanis.com.cy/
+  Looking for category links...
+  Found 3 category pages to scrape (after filter)
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones/
+    Found 44 page(s) in https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones/
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones/
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=8
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=9
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=10
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=11
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=12
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=13
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=14
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=15
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=16
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=17
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=17
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=18
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=18
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=19
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=19
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=20
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=20
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=21
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=21
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=22
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=22
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=23
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=23
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=24
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=24
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=25
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=25
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=26
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=26
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=27
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=27
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=28
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=28
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=29
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=29
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=30
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=30
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=31
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=31
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=32
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=32
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=33
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=33
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=34
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=34
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=35
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=35
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=36
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=36
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=37
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=37
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=38
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=38
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=39
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=39
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=40
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=40
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=41
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=41
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=42
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=42
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=43
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=43
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=44
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/smartphones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=44
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/
+    Found 1 page(s) in https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones/
+    Found 7 page(s) in https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones/
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones/
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=2
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=3
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=4
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=5
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=6
+    Fetching page: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+[OK] Using cached: https://www.stephanis.com.cy/el/products/telecommunications/smartphones-and-feature-phones/feature-phones?view=thumbnails&recordsPerPage=12&sortBy=newest&page=7
+Scraping category: smartphones
+[OK] Using cached: https://www.stephanis.com.cy/smartphones
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/smartphones
+[OK] Using cached: https://www.stephanis.com.cy/category/smartphones
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/category/smartphones
+[OK] Using cached: https://www.stephanis.com.cy/products/smartphones
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/products/smartphones
+[OK] Using cached: https://www.stephanis.com.cy/shop/smartphones
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/shop/smartphones
+[OK] Using cached: https://www.stephanis.com.cy/el/smartphones
+  Found 1 page(s) for category listing
+  Fetching page: https://www.stephanis.com.cy/el/smartphones
+  Found 0 products
+
+
+Fetching prices from product pages...
+  0 products need price information
+
+[OK] Total products found: 597
+[OK] Browser closed for stephanis
+[OK] stephanis: 597 products scraped
+
+============================================================
+Saving products to database...
+[OK] Created: 949 products
+[OK] Updated: 0 products
+[OK] Total processed: 949 products
+============================================================
+
+
+============================================================
+RUNNING PRODUCT MATCHING
+============================================================
+
+Matching 949 unmatched products...
+  Progress: 10/949
+  Progress: 20/949
+  Progress: 30/949
+  Progress: 40/949
+  Progress: 50/949
+  Progress: 60/949
+  Progress: 70/949
+  Progress: 80/949
+  Progress: 90/949
+  Progress: 100/949
+  Progress: 110/949
+  Progress: 120/949
+  Progress: 130/949
+  Progress: 140/949
+  Progress: 150/949
+  Progress: 160/949
+  Progress: 170/949
+  Progress: 180/949
+  Progress: 190/949
+  Progress: 200/949
+  Progress: 210/949
+  Progress: 220/949
+  Progress: 230/949
+  Progress: 240/949
+  Progress: 250/949
+  Progress: 260/949
+  Progress: 270/949
+  Progress: 280/949
+  Progress: 290/949
+  Progress: 300/949
+  Progress: 310/949
+  Progress: 320/949
+  Progress: 330/949
+  Progress: 340/949
+  Progress: 350/949
+  Progress: 360/949
+  Progress: 370/949
+  Progress: 380/949
+  Progress: 390/949
+  Progress: 400/949
+  Progress: 410/949
+  Progress: 420/949
+  Progress: 430/949
+  Progress: 440/949
+  Progress: 450/949
+  Progress: 460/949
+  Progress: 470/949
+  Progress: 480/949
+  Progress: 490/949
+  Progress: 500/949
+  Progress: 510/949
+  Progress: 520/949
+  Progress: 530/949
+  Progress: 540/949
+  Progress: 550/949
+  Progress: 560/949
+  Progress: 570/949
+  Progress: 580/949
+  Progress: 590/949
+  Progress: 600/949
+  Progress: 610/949
+  Progress: 620/949
+  Progress: 630/949
+  Progress: 640/949
+  Progress: 650/949
+  Progress: 660/949
+  Progress: 670/949
+  Progress: 680/949
+  Progress: 690/949
+  Progress: 700/949
+  Progress: 710/949
+  Progress: 720/949
+  Progress: 730/949
+  Progress: 740/949
+  Progress: 750/949
+  Progress: 760/949
+  Progress: 770/949
+  Progress: 780/949
+  Progress: 790/949
+  Progress: 800/949
+  Progress: 810/949
+  Progress: 820/949
+  Progress: 830/949
+  Progress: 840/949
+  Progress: 850/949
+  Progress: 860/949
+  Progress: 870/949
+  Progress: 880/949
+  Progress: 890/949
+  Progress: 900/949
+  Progress: 910/949
+  Progress: 920/949
+  Progress: 930/949
+  Progress: 940/949
+
+============================================================
+PRODUCT MATCHING RESULTS
+============================================================
+Total products processed: 949
+Matched to existing masters: 596
+New master products created: 353
+Already matched: 0
+============================================================
+
+
+Database Summary:
+  Total products: 949
+  Matched products: 949
+  Master products: 353
+  Stores: public, stephanis
+  Average products per master: 2.7
