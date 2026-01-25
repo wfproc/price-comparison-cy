@@ -1,0 +1,540 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results for "{{ query }}" - Cyprus Price Comparison{% endblock %}
+
+{% block content %}
+<section class="search-page">
+    <div class="container">
+        <!-- Search Header -->
+        <div class="search-header">
+            <div class="breadcrumb">
+                <a href="/">Home</a>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+                <span>Search Results</span>
+            </div>
+
+            <h1 class="page-title">
+                {% if query %}
+                    Search Results for <span class="query-highlight">"{{ query }}"</span>
+                {% else %}
+                    All Products
+                {% endif %}
+            </h1>
+
+            {% if results %}
+            <div class="results-meta">
+                <span class="results-count">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                    Found {{ results|length }} product{{ 's' if results|length != 1 else '' }}
+                </span>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Results -->
+        {% if results %}
+        <div class="search-results">
+            {% for result in results %}
+            <div class="result-card">
+                <div class="result-main">
+                    <div class="result-header">
+                        <div class="result-title-section">
+                            <h2 class="result-title">
+                                <a href="/product/{{ result.master_id }}">{{ result.name }}</a>
+                            </h2>
+                            {% if result.brand %}
+                            <span class="brand-badge">{{ result.brand }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    {% if result.model %}
+                    <p class="result-model">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                        </svg>
+                        Model: {{ result.model }}
+                    </p>
+                    {% endif %}
+
+                    <div class="result-stats">
+                        <div class="price-range">
+                            <span class="price-label">Best Price:</span>
+                            <span class="price-min">€{{ "%.2f"|format(result.cheapest_price) }}</span>
+                            {% if result.most_expensive and result.most_expensive > result.cheapest_price %}
+                            <span class="price-separator">-</span>
+                            <span class="price-max">€{{ "%.2f"|format(result.most_expensive) }}</span>
+                            {% endif %}
+                        </div>
+
+                        {% if result.price_difference and result.price_difference > 0 %}
+                        <div class="savings-badge">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                                <path d="M7 14A7 7 0 1 1 7 0a7 7 0 0 1 0 14zm0-2A5 5 0 1 0 7 2a5 5 0 0 0 0 10z"/>
+                                <path d="M6 10h2V6H6v4zm0-6h2V2H6v2z"/>
+                            </svg>
+                            Save up to €{{ "%.2f"|format(result.price_difference) }}
+                        </div>
+                        {% endif %}
+
+                        <div class="store-count">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
+                                <path d="M3 2h8l2 3v7a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V5l2-3z"/>
+                                <path d="M1 5h12"/>
+                            </svg>
+                            {{ result.store_count }} store{{ 's' if result.store_count != 1 else '' }}
+                        </div>
+                    </div>
+
+                    {% if result.stores %}
+                    <div class="store-prices">
+                        {% for store in result.stores[:3] %}
+                        <div class="store-price-item {% if loop.first %}cheapest{% endif %}">
+                            <div class="store-info">
+                                <span class="store-name">{{ store.store|upper }}</span>
+                                {% if loop.first %}
+                                <span class="cheapest-tag">
+                                    <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                        <path d="M6 1l1.545 3.13L11 4.635 8.5 7.07l.59 3.435L6 8.885l-3.09 1.62.59-3.435L1 4.635l3.455-.505L6 1z"/>
+                                    </svg>
+                                    Best Price
+                                </span>
+                                {% endif %}
+                            </div>
+
+                            <div class="price-info">
+                                <span class="price">€{{ "%.2f"|format(store.price) }}</span>
+                            </div>
+
+                            <a href="{{ store.url }}" target="_blank" rel="noopener" class="btn-store">
+                                <span>View</span>
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+                                    <path d="M10.5 1.5h-9v9h9v-9zM11 0a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h10z"/>
+                                    <path d="M3.5 6L5 7.5 8.5 4"/>
+                                </svg>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-results">
+            <div class="no-results-icon">
+                <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                    <circle cx="26" cy="26" r="18" stroke="currentColor" stroke-width="4"/>
+                    <path d="M40 40l16 16" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M26 18v16M18 26h16" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h2 class="no-results-title">No products found</h2>
+            <p class="no-results-description">
+                {% if query %}
+                    We couldn't find any products matching "{{ query }}". Try different keywords or browse our categories.
+                {% else %}
+                    Start searching for products to compare prices across Cyprus retailers.
+                {% endif %}
+            </p>
+            <div class="no-results-actions">
+                <a href="/" class="btn-primary">Back to Home</a>
+                <a href="/deals" class="btn-secondary">View Best Deals</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+.search-page {
+    padding: 40px 0 80px;
+    min-height: 80vh;
+}
+
+.search-header {
+    margin-bottom: 40px;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.breadcrumb a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+    color: var(--primary-500);
+}
+
+.breadcrumb svg {
+    width: 16px;
+    height: 16px;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.query-highlight {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.results-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.results-count {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+.results-count svg {
+    width: 16px;
+    height: 16px;
+    color: var(--primary-500);
+}
+
+.search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.result-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    transition: all var(--transition-base);
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-500);
+}
+
+.result-header {
+    margin-bottom: 16px;
+}
+
+.result-title-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.result-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex: 1;
+}
+
+.result-title a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.result-title a:hover {
+    color: var(--primary-500);
+}
+
+.brand-badge {
+    padding: 6px 12px;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 6px;
+    color: var(--purple-500);
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.result-model {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    margin-bottom: 20px;
+}
+
+.result-model svg {
+    width: 14px;
+    height: 14px;
+}
+
+.result-stats {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding: 16px 0;
+    border-top: 1px solid var(--border-color-light);
+    border-bottom: 1px solid var(--border-color-light);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.price-range {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.price-min {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--green-500);
+}
+
+.price-separator {
+    color: var(--text-tertiary);
+}
+
+.price-max {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+}
+
+.savings-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 8px;
+    color: var(--green-500);
+    font-size: 0.875rem;
+    font-weight: 700;
+}
+
+.savings-badge svg {
+    width: 14px;
+    height: 14px;
+}
+
+.store-count {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+}
+
+.store-count svg {
+    width: 14px;
+    height: 14px;
+}
+
+.store-prices {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.store-price-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 16px;
+    align-items: center;
+    padding: 16px;
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all var(--transition-base);
+}
+
+.store-price-item.cheapest {
+    background: rgba(16, 185, 129, 0.05);
+    border-color: var(--green-500);
+}
+
+.store-price-item:hover {
+    transform: translateX(4px);
+}
+
+.store-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.store-name {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.cheapest-tag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: var(--green-500);
+    color: white;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.cheapest-tag svg {
+    width: 12px;
+    height: 12px;
+}
+
+.price-info .price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.btn-store {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    background: var(--gradient-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+}
+
+.btn-store:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-store svg {
+    width: 12px;
+    height: 12px;
+}
+
+.no-results {
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin: 40px 0;
+}
+
+.no-results-icon {
+    margin-bottom: 24px;
+    color: var(--text-tertiary);
+}
+
+.no-results-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.no-results-description {
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.no-results-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all var(--transition-base);
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary-500);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .result-stats {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .store-price-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .store-info {
+        justify-content: center;
+    }
+}
+</style>
+{% endblock %}
