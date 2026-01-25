@@ -45,7 +45,7 @@ PUBLIC_CATEGORY_KEYWORDS = {
 }
 
 # Category keywords for Stephanis (based on their URL structure)
-# Stephanis uses /el/products/{category}/{subcategory}/ pattern
+# Stephanis uses /en/products/{category}/{subcategory}/ pattern
 STEPHANIS_CATEGORY_KEYWORDS = {
     "smartphones": ["smartphones-and-feature-phones", "telecommunications/mobile-phones", "mobile-phone", "smartphone"],
     "laptops": ["laptops-and-accessories", "information-technology/laptops", "laptop", "notebook"],

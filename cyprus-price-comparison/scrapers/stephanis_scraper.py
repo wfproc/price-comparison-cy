@@ -13,7 +13,7 @@ class StephanisScraper(BaseScraper):
     def __init__(self):
         super().__init__(
             store_name="stephanis",
-            base_url="https://www.stephanis.com.cy/"
+            base_url="https://www.stephanis.com.cy/en/"
         )
         self.categories = [
             "smartphones",
@@ -339,7 +339,7 @@ class StephanisScraper(BaseScraper):
             urljoin(self.base_url, f"/category/{category}"),
             urljoin(self.base_url, f"/products/{category}"),
             urljoin(self.base_url, f"/shop/{category}"),
-            urljoin(self.base_url, f"/el/{category}"),  # Greek language prefix
+            urljoin(self.base_url, f"/en/{category}"),  # English language prefix
         ]
         
         for category_url in category_urls:
