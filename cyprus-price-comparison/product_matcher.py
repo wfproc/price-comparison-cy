@@ -1,8 +1,40 @@
 """Product matching system to group products across stores."""
 import re
-from typing import List, Dict, Optional, Tuple
+from typing import List, Dict, Optional, Tuple, Set
 from difflib import SequenceMatcher
 from models import Product, MasterProduct, MasterProductVariant, get_session
+
+try:
+    import webcolors
+    # Get all CSS3 color names (140+ colors)
+    ALL_COLORS = set(webcolors.names('css3'))
+    # Add common product color variations and modifiers not in CSS3
+    ALL_COLORS.update({
+        # Apple product colors
+        'midnight', 'starlight', 'sierra', 'graphite', 'titanium',
+        'ultramarine',
+        # Color modifiers/descriptors (treated as colors to remove them)
+        'cosmic', 'cosmos', 'deep', 'light', 'dark', 'pale', 'bright',
+        'mist', 'misty', 'sky', 'space', 'natural', 'jet', 'stone',
+        'sage', 'cloud', 'ocean', 'forest', 'desert', 'arctic', 'alpine'
+    })
+except (ImportError, Exception) as e:
+    # Fallback to a comprehensive color list if webcolors is not available
+    print(f"Warning: webcolors library error ({e}). Using fallback color list.")
+    ALL_COLORS = {
+        'mist','black', 'white', 'silver', 'gold', 'blue', 'red', 'green', 'yellow',
+        'pink', 'purple', 'gray', 'grey', 'orange', 'titanium', 'bronze',
+        'midnight', 'starlight', 'sierra', 'graphite', 'rose', 'space', 'natural',
+        'cosmic', 'cosmos', 'brown', 'beige', 'cream', 'navy', 'teal', 'turquoise',
+        'violet', 'indigo', 'magenta', 'cyan', 'lime', 'olive', 'maroon', 'aqua',
+        'tan', 'ivory', 'pearl', 'slate', 'charcoal', 'jet', 'crimson', 'scarlet',
+        'coral', 'salmon', 'peach', 'amber', 'khaki', 'mint', 'jade', 'emerald',
+        'cobalt', 'sapphire', 'azure', 'cerulean', 'lavender', 'plum', 'mauve',
+        'fuchsia', 'burgundy', 'wine', 'rust', 'copper', 'brass', 'pewter',
+        # Color modifiers
+        'deep', 'light', 'dark', 'pale', 'bright', 'mist', 'misty', 'sky',
+        'sage', 'cloud', 'ocean', 'forest', 'ultramarine'
+    }
 
 
 class ProductMatcher:
@@ -16,11 +48,20 @@ class ProductMatcher:
         'nvidia', 'bosch', 'philips', 'panasonic', 'canon', 'nikon', 'gopro'
     ]
 
+    GENERIC_BRAND_TERMS = {
+        'smartphone', 'smartphones', 'phone', 'phones', 'mobile', 'mobiles',
+        'tablet', 'tablets', 'laptop', 'laptops', 'notebook', 'notebooks',
+        'computer', 'computers', 'gaming', 'electronics'
+    }
+
     # Words to remove during normalization (meaningless for matching)
     STOP_WORDS = [
         'smartphone', 'tablet', 'laptop', 'notebook', 'desktop', 'computer',
         'new', 'original', 'genuine', 'official', 'unlocked', 'sealed',
-        'dual', 'sim', 'wifi', 'wi-fi', 'bluetooth', 'inch', 'screen'
+        'dual', 'sim', 'esim', 'wifi', 'wi-fi', 'bluetooth', 'inch', 'screen',
+        '5g', '4g', '3g', 'lte', 'e',
+        # Marketing terms that don't distinguish products
+        'awesome', 'amazing', 'premium', 'ultimate', 'special'
     ]
 
     # Unit conversions and normalizations
@@ -34,14 +75,10 @@ class ProductMatcher:
 
     CAPACITY_PATTERN = r'\b\d+(?:gb|tb|mb)\b'
 
-    COLOR_WORDS = [
-        'black', 'white', 'silver', 'gold', 'blue', 'red', 'green', 'yellow',
-        'pink', 'purple', 'gray', 'grey', 'orange', 'titanium', 'bronze',
-        'midnight', 'starlight', 'sierra', 'graphite', 'rose', 'space', 'natural'
-    ]
-
     def __init__(self):
         self.session = get_session()
+        # Use the comprehensive color list
+        self.color_words = ALL_COLORS
 
     def normalize_text(self, text: str) -> str:
         """Normalize text for matching: lowercase, remove special chars, standardize units."""
@@ -64,10 +101,13 @@ class ProductMatcher:
         return text
 
     def normalize_text_base(self, text: str) -> str:
-        """Normalize text for master matching by removing capacity and color tokens."""
+        """Normalize text for master matching by removing capacity, colors, and stop words."""
         normalized = self.normalize_text(text)
+        # Remove capacity patterns (e.g., "128gb", "256gb")
         normalized = re.sub(self.CAPACITY_PATTERN, '', normalized)
-        tokens = [t for t in normalized.split() if t not in self.COLOR_WORDS]
+        # Remove colors and stop words
+        tokens = [t for t in normalized.split()
+                 if t not in self.color_words and t not in self.STOP_WORDS]
         return ' '.join(tokens)
 
     def extract_base_tokens(self, text: str) -> List[str]:
@@ -114,29 +154,58 @@ class ProductMatcher:
 
         return None
 
+    def _normalize_brand(self, brand: Optional[str]) -> Optional[str]:
+        """Normalize brand value, dropping generic/unknown labels."""
+        if not brand:
+            return None
+        normalized = self.normalize_text(brand)
+        tokens = normalized.split()
+        for token in tokens:
+            if token in self.BRANDS:
+                return token
+        for token in tokens:
+            if token in self.GENERIC_BRAND_TERMS:
+                return None
+        # If not a known brand, treat as missing to avoid false mismatches
+        return None
+
     def extract_model(self, name: str, brand: Optional[str]) -> Optional[str]:
-        """Extract model identifier from product name."""
+        """Extract model identifier from product name.
+
+        Model numbers are critical identifiers - they distinguish:
+        - iPhone 16 vs iPhone 17
+        - Galaxy A36 vs Galaxy A56
+        - Galaxy S24 vs Galaxy S25
+        """
         normalized = self.normalize_text(name)
 
         # Remove brand from name to focus on model
         if brand:
             normalized = normalized.replace(brand, '').strip()
 
-        # Look for common model patterns
-        # e.g., "iphone 16 pro", "galaxy s24", "xperia 1 v"
+        # Look for common model patterns (ordered from most specific to generic)
         model_patterns = [
-            r'(iphone\s*\d+\s*(?:pro|plus|max|mini)?)',
-            r'(galaxy\s*[a-z]\d+\s*(?:ultra|plus)?)',
-            r'(pixel\s*\d+\s*(?:pro|xl)?)',
+            # iPhone models (e.g., "iphone 16", "iphone 16 pro", "iphone se")
+            r'(iphone\s*(?:se|\d+)\s*(?:pro\s*max|pro|plus|max|mini|air|e)?)',
+            # Samsung Galaxy models (e.g., "galaxy s25", "galaxy a36", "galaxy z fold7")
+            r'(galaxy\s*(?:z\s*)?(?:fold|flip)?[a-z]?\d+\s*(?:ultra|plus|fe)?)',
+            # Google Pixel (e.g., "pixel 9", "pixel 9 pro")
+            r'(pixel\s*\d+\s*(?:pro\s*xl|pro|xl|a)?)',
+            # iPad models
             r'(ipad\s*(?:pro|air|mini)?\s*\d*)',
+            # MacBook models
             r'(macbook\s*(?:pro|air)?\s*\d*)',
-            r'([a-z]+\s*\d+\s*(?:pro|plus|max|ultra)?)',  # Generic: model + number
+            # Generic pattern: letter+number combination (e.g., "a36", "s25", "note20")
+            r'([a-z]+\s*\d+\s*(?:pro|plus|max|ultra|mini|lite|fe)?)',
         ]
 
         for pattern in model_patterns:
             match = re.search(pattern, normalized, re.IGNORECASE)
             if match:
-                return match.group(1).strip()
+                model = match.group(1).strip()
+                # Normalize spacing in model name
+                model = re.sub(r'\s+', ' ', model)
+                return model
 
         return None
 
@@ -152,25 +221,26 @@ class ProductMatcher:
         return None
 
     def extract_color(self, name: str) -> Optional[str]:
-        """Extract color from product name."""
-        colors = [
-            'black', 'white', 'silver', 'gold', 'blue', 'red', 'green', 'yellow',
-            'pink', 'purple', 'gray', 'grey', 'orange', 'titanium', 'bronze',
-            'midnight', 'starlight', 'sierra', 'graphite', 'rose'
-        ]
-
+        """Extract color from product name, including multi-word colors."""
         normalized = self.normalize_text(name)
         tokens = normalized.split()
 
-        for token in tokens:
-            if token in colors:
-                return token
-
-        # Check for multi-word colors (e.g., "space gray", "midnight blue")
+        # Check for multi-word colors first (e.g., "space gray", "midnight blue", "deep blue")
+        # This handles cases like "mist blue", "cosmic orange", "light gold"
         for i in range(len(tokens) - 1):
             two_word = f"{tokens[i]} {tokens[i+1]}"
-            if any(color in two_word for color in colors):
+            # Check if both words are color-related
+            if tokens[i] in self.color_words and tokens[i+1] in self.color_words:
                 return two_word
+            # Check if it's a known two-word color pattern
+            if two_word in {'space gray', 'space grey', 'rose gold', 'midnight blue',
+                           'sky blue', 'deep blue', 'light blue', 'dark blue'}:
+                return two_word
+
+        # Check for single-word colors
+        for token in tokens:
+            if token in self.color_words:
+                return token
 
         return None
 
@@ -205,13 +275,23 @@ class ProductMatcher:
         """
         Determine if two products are the same.
         Uses multiple matching strategies with weighted scoring.
+        Model numbers are treated as BLOCKING FACTORS - if different, products cannot match.
         """
         # Extract features
-        brand1 = product1.brand or self.extract_brand(product1.name)
-        brand2 = product2.brand or self.extract_brand(product2.name)
+        brand1 = self._normalize_brand(product1.brand) or self.extract_brand(product1.name)
+        brand2 = self._normalize_brand(product2.brand) or self.extract_brand(product2.name)
 
         # If brands are explicitly different, not a match
         if brand1 and brand2 and brand1.lower() != brand2.lower():
+            return False
+
+        # Check for matching model - THIS IS A BLOCKING FACTOR
+        # If both products have model numbers and they're different, it's NOT a match
+        # Examples: iPhone 16 != iPhone 17, Galaxy A36 != Galaxy A56
+        model1 = self.extract_model(product1.name, brand1)
+        model2 = self.extract_model(product2.name, brand2)
+        if model1 and model2 and model1 != model2:
+            # Models are different - these are different products!
             return False
 
         # Calculate various similarity scores
@@ -226,17 +306,10 @@ class ProductMatcher:
         cap2 = self.extract_capacity(product2.name)
         capacity_match = cap1 == cap2 if cap1 and cap2 else True  # If no capacity, don't penalize
 
-        # Check for matching model
-        model1 = self.extract_model(product1.name, brand1)
-        model2 = self.extract_model(product2.name, brand2)
-        model_match = model1 == model2 if model1 and model2 else True
-
-        # Weighted scoring
+        # Weighted scoring (model already checked as blocking factor above)
         score = (
-            name_similarity * 0.4 +
-            token_overlap * 0.4 +
-            (1.0 if capacity_match else 0.0) * 0.1 +
-            (1.0 if model_match else 0.0) * 0.1
+            name_similarity * 0.5 +
+            token_overlap * 0.5
         )
 
         return score >= threshold
@@ -251,8 +324,10 @@ class ProductMatcher:
 
         for master in master_products:
             # Quick filtering by brand
-            if master.brand and product.brand:
-                if master.brand.lower() != product.brand.lower():
+            master_brand = self._normalize_brand(master.brand)
+            product_brand = self._normalize_brand(product.brand)
+            if master_brand and product_brand:
+                if master_brand.lower() != product_brand.lower():
                     continue
 
             # Calculate similarity using base normalization
@@ -275,7 +350,7 @@ class ProductMatcher:
 
     def create_master_product(self, product: Product) -> MasterProduct:
         """Create a new master product from a product."""
-        brand = product.brand or self.extract_brand(product.name)
+        brand = self._normalize_brand(product.brand) or self.extract_brand(product.name)
         model = self.extract_model(product.name, brand)
         base_name = self.build_base_name(product.name)
 

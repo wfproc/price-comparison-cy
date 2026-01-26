@@ -10,6 +10,20 @@ import config
 class StephanisScraper(BaseScraper):
     """Scraper for Stephanis website."""
 
+    # Known brand list (kept in sync with product_matcher)
+    BRANDS = [
+        'apple', 'samsung', 'xiaomi', 'huawei', 'oppo', 'oneplus', 'google', 'nokia',
+        'sony', 'lg', 'lenovo', 'asus', 'acer', 'hp', 'dell', 'msi', 'razer',
+        'microsoft', 'logitech', 'corsair', 'steelseries', 'hyperx', 'intel', 'amd',
+        'nvidia', 'bosch', 'philips', 'panasonic', 'canon', 'nikon', 'gopro'
+    ]
+
+    GENERIC_BRAND_TERMS = {
+        'smartphone', 'smartphones', 'phone', 'phones', 'mobile', 'mobiles',
+        'tablet', 'tablets', 'laptop', 'laptops', 'notebook', 'notebooks',
+        'computer', 'computers', 'gaming', 'electronics'
+    }
+
     def __init__(self):
         super().__init__(
             store_name="stephanis",
@@ -23,6 +37,34 @@ class StephanisScraper(BaseScraper):
         ]
         self.category_filter: Optional[List[str]] = None
         self.category_keywords: Dict[str, List[str]] = {}
+
+    def _normalize_brand(self, brand_text: str) -> str:
+        """Normalize brand string; return empty if not a known brand."""
+        if not brand_text:
+            return ""
+        normalized = re.sub(r'[^a-z0-9\s]', ' ', brand_text.lower()).strip()
+        for token in normalized.split():
+            if token in self.BRANDS:
+                return token
+        # Some brands appear as substrings (e.g., "appleiphone")
+        for brand in self.BRANDS:
+            if brand in normalized:
+                return brand
+        return ""
+
+    def _extract_brand_from_name(self, name: str) -> str:
+        """Extract brand from product name using known brand list."""
+        if not name:
+            return ""
+        normalized = re.sub(r'[^a-z0-9\s]', ' ', name.lower()).strip()
+        tokens = normalized.split()
+        for token in tokens:
+            if token in self.BRANDS:
+                return token
+        for brand in self.BRANDS:
+            if brand in normalized:
+                return brand
+        return ""
 
     def set_category_filter(self, categories: List[str], category_keywords: Dict[str, List[str]]):
         """
@@ -221,12 +263,18 @@ class StephanisScraper(BaseScraper):
             brand = ""
             brand_elem = card_element.select_one('.brand, [class*="brand"]')
             if brand_elem:
-                brand = brand_elem.get_text(strip=True)
-            else:
-                # Try to extract from name (first word often brand)
+                brand = self._normalize_brand(brand_elem.get_text(strip=True))
+
+            if not brand:
+                brand = self._extract_brand_from_name(name)
+
+            if not brand:
+                # Fallback to first word only if it's not a generic product type
                 name_parts = name.split()
                 if name_parts:
-                    brand = name_parts[0]
+                    candidate = re.sub(r'[^a-z0-9]', '', name_parts[0].lower())
+                    if candidate and candidate not in self.GENERIC_BRAND_TERMS:
+                        brand = candidate
 
             # Availability - use select_one for CSS selectors
             availability = "unknown"
