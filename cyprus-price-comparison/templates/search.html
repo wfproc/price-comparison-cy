@@ -108,10 +108,14 @@
                             </div>
 
                             <div class="price-info">
+                                {% if store.availability == 'out_of_stock' %}
+                                <span class="out-of-stock-label">Out of Stock</span>
+                                {% else %}
                                 <span class="price">€{{ "%.2f"|format(store.price) }}</span>
+                                {% endif %}
                             </div>
 
-                            <a href="{{ store.url }}" target="_blank" rel="noopener" class="btn-store">
+                            <a href="{{ store.url }}" target="_blank" rel="noopener" class="btn-store {% if store.availability == 'out_of_stock' %}btn-store-unavailable{% endif %}">
                                 <span>View</span>
                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
                                     <path d="M10.5 1.5h-9v9h9v-9zM11 0a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h10z"/>
@@ -425,6 +429,17 @@
     color: var(--text-primary);
 }
 
+.out-of-stock-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 6px;
+    color: #ef4444;
+    white-space: nowrap;
+}
+
 .btn-store {
     display: flex;
     align-items: center;
@@ -448,6 +463,17 @@
 .btn-store svg {
     width: 12px;
     height: 12px;
+}
+
+.btn-store-unavailable {
+    background: var(--surface-elevated);
+    border: 2px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.btn-store-unavailable:hover {
+    background: var(--surface);
+    border-color: var(--text-tertiary);
 }
 
 .no-results {

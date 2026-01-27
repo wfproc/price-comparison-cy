@@ -70,7 +70,7 @@ def search_products(query: str, limit: int = 20) -> List[Dict]:
                 ).all()
                 if not products:
                     continue
-                prices = [p.price for p in products if p.price > 0]
+                prices = [p.price for p in products if p.price > 0 and p.availability != 'out_of_stock']
                 cheapest_price = min(prices) if prices else 0
                 most_expensive = max(prices) if prices else 0
 
@@ -112,7 +112,7 @@ def search_products(query: str, limit: int = 20) -> List[Dict]:
                 if not products:
                     continue
 
-                prices = [p.price for p in products if p.price > 0]
+                prices = [p.price for p in products if p.price > 0 and p.availability != 'out_of_stock']
                 cheapest_price = min(prices) if prices else 0
                 most_expensive = max(prices) if prices else 0
 

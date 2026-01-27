@@ -51,7 +51,7 @@ STEPHANIS_CATEGORY_KEYWORDS = {
     "laptops": ["laptops-and-accessories", "information-technology/laptops", "laptop", "notebook"],
     "tablets": ["tablets-and-ereaders", "information-technology/tablets", "tablet", "ipad"],
     "computers": ["information-technology/computers", "desktop", "pc"],
-    "televisions": ["image-and-sound/televisions", "tv", "television"],
+    "televisions": ["sound-and-vision/television", "image-and-sound/television", "tv", "television-and-accessories"],
     "gaming": ["gaming/gaming-consoles", "gaming/", "playstation", "xbox", "nintendo"],
     "audio": ["image-and-sound/sound", "audio", "headphones", "speakers"],
     "cameras": ["image-and-sound/photography", "camera", "photo"],

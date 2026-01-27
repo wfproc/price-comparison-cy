@@ -315,19 +315,32 @@ class ProductMatcher:
         return score >= threshold
 
     def find_matching_master_product(self, product: Product) -> Optional[MasterProduct]:
-        """Find existing master product that matches this product."""
+        """Find existing master product that matches this product.
+
+        Uses MODEL NUMBER as a BLOCKING FACTOR - if models differ, no match.
+        """
         # Get all master products (in production, you'd want pagination/filtering)
         master_products = self.session.query(MasterProduct).all()
 
         best_match = None
         best_score = 0.0
 
+        # Extract product model for blocking checks
+        product_brand = self._normalize_brand(product.brand) or self.extract_brand(product.name)
+        product_model = self.extract_model(product.name, product_brand)
+
         for master in master_products:
             # Quick filtering by brand
             master_brand = self._normalize_brand(master.brand)
-            product_brand = self._normalize_brand(product.brand)
             if master_brand and product_brand:
                 if master_brand.lower() != product_brand.lower():
+                    continue
+
+            # BLOCKING FACTOR: Check model numbers
+            # If both have models and they differ, skip this master
+            if product_model and master.model:
+                if product_model != master.model:
+                    # Different models - cannot match (e.g., A36 != A56, iPhone 16 != 17)
                     continue
 
             # Calculate similarity using base normalization

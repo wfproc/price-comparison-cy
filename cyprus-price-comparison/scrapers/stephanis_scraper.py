@@ -1,4 +1,5 @@
 """Scraper for Stephanis (stephanis.com.cy)."""
+import math
 import re
 from typing import Dict, List, Optional
 from bs4 import BeautifulSoup
@@ -9,6 +10,8 @@ import config
 
 class StephanisScraper(BaseScraper):
     """Scraper for Stephanis website."""
+
+    RECORDS_PER_PAGE = 100
 
     # Known brand list (kept in sync with product_matcher)
     BRANDS = [
@@ -159,8 +162,20 @@ class StephanisScraper(BaseScraper):
         parsed = urlparse(urljoin(base_url, sample_href))
         query = parse_qs(parsed.query)
 
-        paged_urls = [base_url]
-        for page_num in range(2, max_page + 1):
+        # Estimate total pages after increasing page size to avoid extra requests.
+        try:
+            current_per_page = int((query.get("recordsPerPage") or ["12"])[0])
+            if current_per_page > 0 and self.RECORDS_PER_PAGE > current_per_page:
+                total_estimate = max_page * current_per_page
+                max_page = max(1, math.ceil(total_estimate / self.RECORDS_PER_PAGE))
+        except (ValueError, TypeError):
+            pass
+
+        # Force larger page size to reduce pagination requests.
+        query["recordsPerPage"] = [str(self.RECORDS_PER_PAGE)]
+
+        paged_urls: List[str] = []
+        for page_num in range(1, max_page + 1):
             query["page"] = [str(page_num)]
             paged_query = urlencode(query, doseq=True)
             paged = parsed._replace(query=paged_query)
@@ -487,11 +502,24 @@ class StephanisScraper(BaseScraper):
             if html:
                 print("  Looking for category links...")
                 category_links = []
+
+                # Build list of keywords to search for in URLs
+                # If category filter is set, use those keywords; otherwise use all
+                search_keywords = []
+                if self.category_filter and self.category_keywords:
+                    for category in self.category_filter:
+                        search_keywords.extend(self.category_keywords.get(category, []))
+                else:
+                    # Default comprehensive list
+                    search_keywords = ['information-technology', 'telecommunications', 'laptops',
+                                     'smartphones', 'televisions', 'television', 'gaming', 'tablets',
+                                     'phones', 'computers', 'mobile', 'sound-and-vision']
+
                 for link in all_links:
                     href = link.get('href', '').lower()
                     # Look for category pages (not product pages - those end with numbers)
                     if '/products/' in href and not href.split('/')[-1].isdigit():
-                        if any(cat in href for cat in ['information-technology', 'telecommunications', 'laptops', 'smartphones', 'televisions', 'gaming', 'tablets', 'phones', 'computers', 'mobile']):
+                        if any(keyword in href for keyword in search_keywords):
                             full_url = urljoin(self.base_url, link.get('href', ''))
                             if full_url.startswith('http') and self._matches_category_filter(full_url):
                                 category_links.append(full_url)

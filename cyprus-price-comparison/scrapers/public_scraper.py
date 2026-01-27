@@ -1,6 +1,7 @@
 ﻿"""Scraper for Public Cyprus (public.cy)."""
 import re
 import gzip
+import asyncio
 import xml.etree.ElementTree as ET
 from typing import Dict, List, Optional, Set
 from bs4 import BeautifulSoup
@@ -307,8 +308,12 @@ class PublicScraper(BaseScraper):
                 return None
 
             # If no price found, set to 0 (will need to fetch product page later)
+            # or it might mean out of stock
             if not price:
                 price = 0.0
+                # If availability wasn't already determined, mark as unknown for now
+                if availability == "unknown":
+                    availability = "unknown"  # Will be updated after fetching product details
 
             return {
                 "id": product_id or product_url,
@@ -332,9 +337,35 @@ class PublicScraper(BaseScraper):
     async def _fetch_product_details(self, product_url: str) -> Optional[Dict]:
         """Fetch price and details from individual product page."""
         try:
-            html = await self._fetch_page(product_url)
-            if not html:
-                return None
+            # For Angular/dynamic sites, we need to wait for price elements to render
+            # Use browser directly instead of cached HTML
+            if not hasattr(self, 'context') or self.context is None:
+                # Fallback to regular fetch if browser not available
+                html = await self._fetch_page(product_url)
+                if not html:
+                    return None
+            else:
+                # Fetch with browser and wait for price elements
+                page = await self.context.new_page()
+                try:
+                    await page.goto(product_url, wait_until="domcontentloaded", timeout=config.TIMEOUT)
+
+                    # Wait for price element to appear (Angular app needs time to render)
+                    try:
+                        await page.wait_for_selector('.product__price', timeout=5000)
+                    except Exception:
+                        # If price selector doesn't appear, continue anyway
+                        pass
+
+                    # Additional wait for any remaining dynamic content
+                    await asyncio.sleep(2)
+
+                    html = await page.content()
+                finally:
+                    await page.close()
+
+                if not html:
+                    return None
 
             soup = BeautifulSoup(html, 'lxml')
 
@@ -700,8 +731,23 @@ class PublicScraper(BaseScraper):
                     if details.get("description"):
                         product["description"] = details["description"]
                     print(f"      [OK] Price: {product['price']} EUR")
+                    # If we got a valid price, mark as in stock
+                    if product["price"] > 0 and product.get("availability") == "unknown":
+                        product["availability"] = "in_stock"
                 else:
-                    print(f"      [WARN] Could not fetch price")
+                    # If still no price after fetching product page, mark as out of stock
+                    print(f"      [WARN] Could not fetch price - marking as out of stock")
+                    product["availability"] = "out_of_stock"
+
+            # Step 6: Mark any remaining products with price=0 as out of stock
+            print(f"\n\nStep 6: Finalizing availability status...")
+            out_of_stock_count = 0
+            for product in all_products:
+                if product.get("price", 0) == 0 or product.get("price") is None:
+                    if product.get("availability") != "out_of_stock":
+                        product["availability"] = "out_of_stock"
+                        out_of_stock_count += 1
+            print(f"  Marked {out_of_stock_count} additional products as out of stock (price = 0)")
 
             print(f"\n\n{'='*60}")
             print(f"SCRAPING COMPLETE")
@@ -709,6 +755,7 @@ class PublicScraper(BaseScraper):
             print(f"Total URLs processed: {processed_count}")
             print(f"Total products found: {len(all_products)}")
             print(f"Products with prices: {len([p for p in all_products if p.get('price', 0) > 0])}")
+            print(f"Products out of stock: {len([p for p in all_products if p.get('availability') == 'out_of_stock'])}")
             print(f"{'='*60}\n")
 
         finally:

@@ -95,8 +95,8 @@ def product_detail(master_id):
                 return render_template('error.html',
                                      error='No store listings found'), 404
 
-            # Calculate price statistics
-            prices = [p.price for p in products if p.price > 0]
+            # Calculate price statistics (exclude out-of-stock items)
+            prices = [p.price for p in products if p.price > 0 and p.availability != 'out_of_stock']
             cheapest_price = min(prices) if prices else 0
             most_expensive = max(prices) if prices else 0
             avg_price = sum(prices) / len(prices) if prices else 0
@@ -138,7 +138,7 @@ def product_detail(master_id):
             ).all()
             if not products:
                 continue
-            prices = [p.price for p in products if p.price > 0]
+            prices = [p.price for p in products if p.price > 0 and p.availability != 'out_of_stock']
             cheapest_price = min(prices) if prices else 0
             most_expensive = max(prices) if prices else 0
             variants_data.append({
@@ -193,7 +193,7 @@ def variant_detail(variant_id):
             return render_template('error.html',
                                  error='No store listings found'), 404
 
-        prices = [p.price for p in products if p.price > 0]
+        prices = [p.price for p in products if p.price > 0 and p.availability != 'out_of_stock']
         cheapest_price = min(prices) if prices else 0
         most_expensive = max(prices) if prices else 0
         avg_price = sum(prices) / len(prices) if prices else 0
@@ -299,7 +299,7 @@ def browse():
             ).all()
 
             if products:
-                prices = [p.price for p in products if p.price > 0]
+                prices = [p.price for p in products if p.price > 0 and p.availability != 'out_of_stock']
                 cheapest = min(prices) if prices else 0
 
                 # Get image from first product

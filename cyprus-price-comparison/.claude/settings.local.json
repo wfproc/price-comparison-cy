@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(while ps aux)",
+      "Bash(do sleep 5)",
+      "Bash(done)",
+      "WebFetch(domain:www.public.cy)",
+      "WebFetch(domain:www.stephanis.com.cy)"
     ]
   }
 }
